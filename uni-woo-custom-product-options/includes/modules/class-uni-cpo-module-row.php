@@ -253,7 +253,7 @@ class Uni_Cpo_Module_Row extends Uni_Cpo_Module implements Uni_Cpo_Module_Interf
 			$wrapper_attributes['style'] = 'display:none;';
 		}
 		if ( ! empty( $selectors['id_name'] ) ) {
-			array_push( $css_id, $selectors['id_name'] );
+            $css_id    = $selectors['id_name'];
 		}
 		if ( ! empty( $selectors['class_name'] ) ) {
 			array_push( $css_class, $selectors['class_name'] );

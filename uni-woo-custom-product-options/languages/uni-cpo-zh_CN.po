@@ -1,0 +1,4005 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR MooMoo Web Studio
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Uni CPO 3.1.4\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-04-15 10:06+0200\n"
+"PO-Revision-Date: 2024-06-11 14:55+0800\n"
+"Language-Team: MooMoo <sales@moomoo.agency>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 2.4.3\n"
+"X-Poedit-KeywordsList: __;_e;esc_html__;esc_html_e;esc_attr__;esc_attr_e\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Last-Translator: \n"
+"Language: zh\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: _old\n"
+"X-Poedit-SearchPathExcluded-1: node_modules\n"
+
+#: class-uni-cpo.php:75 class-uni-cpo.php:85
+msgid "Cheatin&#8217; huh?"
+msgstr "开玩笑，呵？"
+
+#: class-uni-cpo.php:476
+#, fuzzy, php-format
+msgid ""
+"Uni CPO users can use <strong>dynamic SKU</strong> functionality after "
+"installing %s add-on."
+msgstr "Uni CPO 用户可以在安装%s附加组件后使用<strong>动态 SKU</strong> 功能。"
+
+#: class-uni-cpo.php:480
+#, fuzzy
+msgid "\"Custom SKU\""
+msgstr "“自定义 SKU”"
+
+#: class-uni-cpo.php:595
+#: includes/options/class-uni-cpo-option-file-upload.php:167
+msgid "No file uploaded"
+msgstr "未上传文件"
+
+#: includes/abstracts/abstract-uni-cpo-setting.php:554
+#: includes/class-uni-cpo-templates.php:788
+#: includes/class-uni-cpo-templates.php:1462
+#: includes/class-uni-cpo-templates.php:1527
+msgid "Add/Change attachment"
+msgstr "添加/更改附件"
+
+#: includes/abstracts/abstract-uni-cpo-setting.php:563
+#: includes/class-uni-cpo-templates.php:797
+#: includes/class-uni-cpo-templates.php:1468
+#: includes/class-uni-cpo-templates.php:1533
+msgid "Remove attachment"
+msgstr "删除附件"
+
+#: includes/admin/class-uni-cpo-admin-pointers.php:56
+msgid "Product name"
+msgstr "商品名称"
+
+#: includes/admin/class-uni-cpo-admin-pointers.php:57
+msgid ""
+"It is not directly related to Uni CPO, but always remember adding product "
+"name."
+msgstr "它与 Uni CPO 没有直接关系，但始终记得添加产品名称。"
+
+#: includes/admin/class-uni-cpo-admin-pointers.php:69
+msgid "Product type"
+msgstr "商品類型"
+
+#: includes/admin/class-uni-cpo-admin-pointers.php:70
+msgid ""
+"You should choose \"simple\" or \"simple subscription\". Uni CPO does not "
+"support other types!"
+msgstr "您应该选择\"简单\"或\"简单订阅\"。Uni CPO 不支持其他类型的类型！"
+
+#: includes/admin/class-uni-cpo-admin-pointers.php:85
+msgid "Prices"
+msgstr "价格"
+
+#: includes/admin/class-uni-cpo-admin-pointers.php:86
+msgid ""
+"Next you need to give your product a price otherwise it will be considered "
+"as free and Uni CPO visual form builder will not be shown."
+msgstr ""
+"接下来，您需要给您的产品一个价格，否则它将被视为免费和 Uni CPO 视觉形式生成器"
+"将不显示。"
+
+#: includes/admin/class-uni-cpo-admin-pointers.php:97
+msgid "Create/save a product"
+msgstr "创建/保存产品"
+
+#: includes/admin/class-uni-cpo-admin-pointers.php:98
+msgid ""
+"Hit the \"Publish\" button to save changes. You may save the product as "
+"draft as well."
+msgstr "点击\"发布\"按钮以保存更改。也可以将产品另存为草稿。"
+
+#: includes/admin/class-uni-cpo-admin-pointers.php:113
+msgid "Start configuring the product"
+msgstr "开始配置产品"
+
+#: includes/admin/class-uni-cpo-admin-pointers.php:114
+msgid ""
+"Open \"CPO Form builder\" tab and click \"Go to builder\" to start "
+"configuring your product"
+msgstr "打开\"CPO 表单生成器\"选项卡，然后单击\"转到生成器\"开始配置产品"
+
+#: includes/admin/class-uni-cpo-admin-pointers.php:129
+#, fuzzy
+msgid "Go to the builder mode"
+msgstr "进入构建器模式"
+
+#: includes/admin/class-uni-cpo-admin-pointers.php:130
+#, fuzzy
+msgid ""
+"Go to builder mode to start configuring your product OR import one of ready-"
+"made configuration"
+msgstr "转到构建器模式以开始配置您的产品或导入现成的配置之一"
+
+#: includes/admin/class-uni-cpo-admin-pointers.php:175
+msgid "Dismiss"
+msgstr "忽略"
+
+#: includes/admin/class-uni-cpo-admin-pointers.php:176
+#, fuzzy
+msgid "Next"
+msgstr "隐藏上一個/下一個按鈕"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:58
+#: includes/admin/class-uni-cpo-plugin-settings.php:59
+msgid "Uni CPO Settings"
+msgstr "Uni CPO 设置"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:66
+#: includes/admin/class-uni-cpo-plugin-settings.php:67
+#: includes/admin/class-uni-cpo-plugin-settings.php:584
+msgid "Uni CPO data manager tool"
+msgstr "Uni CPO 数据管理器工具"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:74
+#, fuzzy
+msgid "Uni CPO Bulk Edit"
+msgstr "Uni CPO 批量编辑"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:75
+#: includes/admin/class-uni-cpo-plugin-settings.php:606
+#, fuzzy
+msgid "Uni CPO Bulk Edit tool"
+msgstr "Uni CPO 批量编辑工具"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:82
+#: includes/admin/class-uni-cpo-plugin-settings.php:83
+#: includes/admin/class-uni-cpo-plugin-settings.php:756
+msgid "Uni CPO Import/Export tool"
+msgstr "Uni CPO 导入/导出工具"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:98
+#: includes/class-uni-cpo-frontend-scripts.php:684
+msgid "Settings"
+msgstr "设置"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:113
+msgid "Guest (unregistered)"
+msgstr "客人（未注册）"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:114
+#, fuzzy
+msgid "Own role"
+msgstr "自己的角色"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:118
+msgid "Standard"
+msgstr "标准"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:123
+msgid "Add product to the cart via AJAX"
+msgstr "通过 AJAX 将产品添加到购物车"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:124
+msgid ""
+"This option enables adding to cart via AJAX for all the products which use "
+"custom options and price calculation."
+msgstr "此选项允许通过 AJAX 向购物车添加使用自定义选项和价格计算的所有产品。"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:130
+msgid "Custom selector (id/class) for a product price html tag"
+msgstr "产品价格 html 标签的自定义选择器（id/类）"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:131
+msgid ""
+"By default, the selector for a product price html tag is \".summary.entry-"
+"summary .price > .amount bdi, .summary.entry-summary .price ins .amount bdi"
+"\". For instance, such CSS selector works in Storefront theme. The actual "
+"html markup of price tag section may vary, it depends on the theme and you "
+"may need to adjust this CSS selector."
+msgstr ""
+"默认情况下，产品价格 html 标签的选择器为\".摘要.输入摘要.价格 >.金额 bdi，.摘"
+"要.条目汇总.价格输入.金额 bdi\"。例如，此类 CSS 选择器适用于网店主题。价格标"
+"签部分的实际 html 标记可能会有所不同，这取决于主题，您可能需要调整此 CSS 选择"
+"器。"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:134
+#: includes/admin/class-uni-cpo-plugin-settings.php:142
+#: includes/admin/class-uni-cpo-plugin-settings.php:158
+msgid "CSS selector"
+msgstr "CSS选择器"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:138
+msgid "Custom selector (id/class) for a product image wrapper html tag"
+msgstr "产品图像包装器 html 标签的自定义选择器（id/类）"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:139
+#, fuzzy
+msgid ""
+"By default, the native WooCommerce selector for a product image wrapper html "
+"tag on a single product page is \"figure.woocommerce-product-gallery__wrapper"
+"\". However, the actual html markup of the image block can change depending "
+"the theme and you may need to define yours custom selector by inspecting the "
+"main product image and determining the custom CSS used for the wrapper. "
+"Reminder: this selector is for element that wraps the main image, not the "
+"image (\"img\" tag) itself!"
+msgstr ""
+"默认情况下，单个产品页面上产品图片包装器 html 标签的原生 WooCommerce 选择器"
+"是“figure.woocommerce-product-gallery__wrapper”。但是，图像块的实际 html 标记"
+"可能会根据主题而变化，您可能需要通过检查主产品图像并确定用于包装器的自定义 "
+"CSS 来定义您的自定义选择器。提醒：此选择器适用于包装主图像的元素，而不是图像"
+"（“img”标签）本身！"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:146
+msgid "Image size that is used for single product main image"
+msgstr "用于单个产品主映像的图像大小"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:147
+msgid ""
+"By default, this is \"woocommerce_single\". However the actual thumbnail "
+"size used depends on the theme and you may need to choose the correct one. "
+"This setting works in conjuction with the previous one and it is important "
+"to choose proper image size, so it will be used whenever a customer selects "
+"new option in a dropdown option or image select option with an image added "
+"to this chosen option."
+msgstr ""
+"默认情况下，这是\"woocommerce_single\"。但是，使用的实际缩略图大小取决于主"
+"题，您可能需要选择正确的缩略图大小。此设置与上一个设置相同，选择正确的图像大"
+"小非常重要，因此每当客户在下拉选项或图像选择选项中选择新选项并将图像添加到此"
+"选项时，都会使用此设置。"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:154
+msgid "Custom selector (id/class) for a product thumbnails wrapper html tag"
+msgstr "产品缩略图包装器 html 标签的自定义选择器（id/类）"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:155
+msgid ""
+"By default, the selector for a product thumbnails wrapper html tag on a "
+"single product page is \"ol.flex-control-thumbs\". However, the actual html "
+"markup of the thumbnails block depends on the theme and you may need to "
+"define yours custom selector."
+msgstr ""
+"默认情况下，单个产品页面上的产品缩略图包装 html 标记的选择器为\"ol.flex 控制"
+"拇指\"。但是，缩略图块的实际 html 标记取决于主题，您可能需要定义自定义选择"
+"器。"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:162
+#, fuzzy
+msgid "Change product image in the cart"
+msgstr "更改购物车中的产品图片"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:163
+#, fuzzy
+msgid ""
+"This option enables changing product image in the cart when you are using "
+"\"Imagify\", \"Colorify\" or \"Image Conditional Logic\""
+msgstr "此选项允许在使用“想象”、“着色”或“图像条件逻辑”时更改购物车中的产品图像"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:166
+msgid "On"
+msgstr "开启"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:167
+msgid "Off"
+msgstr "关闭"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:173
+msgid "Display weight in the cart"
+msgstr "在购物车中显示重量"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:174
+msgid "This option enables displaying product weight in the cart."
+msgstr "此选项允许在购物车中显示产品重量。"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:180
+msgid "Display dimensions in the cart"
+msgstr "在购物车中显示尺寸"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:181
+msgid "This option enables displaying product dimensions in the cart."
+msgstr "此选项允许在购物车中显示产品尺寸。"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:187
+msgid "Style for range sliders"
+msgstr "范围滑块的样式"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:188
+msgid ""
+"Default style is \"HTML 5\". This style will be applied for all range slider "
+"option instances in the store."
+msgstr "默认样式为\"HTML 5\"。此样式将应用于存储区中的所有范围滑块选项实例。"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:191
+msgid "Flat"
+msgstr "扁平"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:192
+msgid "Modern"
+msgstr "现代"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:193
+msgid "HTML5"
+msgstr "HTML5"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:194
+msgid "Nice"
+msgstr "不错"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:195
+msgid "Simple"
+msgstr "简单"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:201
+msgid "Google Map API Key"
+msgstr "谷歌地图API密钥"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:202
+msgid "Add Google Map API key in order to use Google Map option"
+msgstr "添加 Google 地图 API 密钥以使用 Google 地图选项"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:209
+msgid "The delimiter usedin your CSV import files"
+msgstr "CSV 导入文件中使用的分隔符"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:210
+msgid ""
+"Default is \";\". You can export to CSV with \";\" delim in Libre Office. On "
+"macOS you are probably using Numbers, so pick \",\" as delimiter as it is "
+"the only option in this case."
+msgstr ""
+"默认值为\";\"。您可以在 Libre Office 中使用 \";\" 熟食导出到 CSV。在 macOS "
+"上，您可能正在使用数字，因此选择\"\"，作为分隔符，因为它在这种情况下是唯一的"
+"选项。"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:213
+msgid "Use \";\" as delimiter"
+msgstr "使用\";\"作为分隔符"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:214
+msgid "Use \",\" as delimiter"
+msgstr "使用\"\"作为分隔符"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:220
+msgid "User role when edit orders"
+msgstr "编辑订单时的用户角色"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:221
+msgid ""
+"This setting impacts price calculation on edit order screen. Very useful "
+"when you, as admin, would like to edit order and set price as for guests or "
+"other special role."
+msgstr ""
+"此设置会影响编辑订单屏幕上的价格计算。非常有用，当您作为管理员，希望编辑订单"
+"和设置价格，为客人或其他特殊角色。"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:230
+msgid "File upload settings"
+msgstr "文件上传设置"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:235
+#: includes/settings/class-uni-cpo-setting-cpo-max-filesize.php:21
+msgid "Upload max file size (Mb)"
+msgstr "上传最大文件大小 （Mb）"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:236
+msgid ""
+"Global option: max file size that is allowed to be uploaded through File "
+"Upload option. Default is 2Mb."
+msgstr "全局选项：允许通过文件上传选项上载的最大文件大小。默认值为 2Mb。"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:239
+msgid "2"
+msgstr "2"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:243
+#: includes/settings/class-uni-cpo-setting-cpo-mime-types.php:21
+msgid "Allowed mime types"
+msgstr "允许的mime类型"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:244
+msgid ""
+"Global option: a comma separated list of allowed mime types as extension "
+"names. Default is: \"jpg,zip\". Important: file types defined here still "
+"must comply with allowed MIME types by WP itself. More info here: https://"
+"codex.wordpress.org/Function_Reference/get_allowed_mime_types"
+msgstr ""
+"全局选项：允许的哑剧类型作为扩展名的逗号分隔列表。默认值为：\"jpg，zip\"。重"
+"要提示：此处定义的文件类型仍必须符合 WP 本身允许的 MIME 类型。更多信息此处： "
+"https://codex.wordpress.org/Function_Reference/get_allowed_mime_types"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:247
+msgid "jpg,zip"
+msgstr "jpg， zip"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:251
+msgid "Files storage"
+msgstr "文件存储"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:252
+msgid "\"Local\" is set by default"
+msgstr "默认情况下设置\"Local\""
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:255
+msgid "Local"
+msgstr "本地"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:256
+msgid "Dropbox"
+msgstr "Dropbox"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:262
+msgid "Enables custom local folder for file uploads"
+msgstr "为文件上载启用自定义本地文件夹"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:263
+msgid ""
+"By default, all the files are handled by the standard WP functions and are "
+"stored in the same as any regular attachments. This setting is called to "
+"separate file uploads via the plugin's File Upload option from regular "
+"attachments and store them in different folder with custom folders "
+"structure. This custom folder is still in \"Uploads\" folder."
+msgstr ""
+"默认情况下，所有文件都由标准 WP 函数处理，并存储在与任何常规附件相同的文件"
+"中。调用此设置以将文件上传通过插件的文件上传选项与常规附件分开，并将其存储在"
+"具有自定义文件夹结构的不同文件夹中。此自定义文件夹仍在\"上传\"文件夹中。"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:270
+msgid "Define custom folders structure for file uploads"
+msgstr "为文件上载定义自定义文件夹结构"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:271
+msgid ""
+"This setting works only if a custom local folder is enabled. The path always "
+"starts in the standard \"uploads\" folder. {{{POST_ID}}} and {{{DATE}}} "
+"variables may be used folders structure scheme."
+msgstr ""
+"此设置仅在启用自定义本地文件夹时才有效。路径始终在标准\"上传\"文件夹中开始。 "
+"{{{POST_ID}}}和{{{DATE}}}变量可能使用文件夹结构方案。"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:274
+msgid "cpo-uploads/{{{POST_ID}}}/{{{DATE}}}"
+msgstr "cpo-uploads/{{{POST_ID}}}/{{{DATE}}}"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:279
+msgid "Dropbox Access Token"
+msgstr "Dropbox 访问令牌"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:280
+msgid ""
+"This access token makes it possible to upload files uploaded by customers to "
+"a separate folder in your Dropbox account. Attention: current limitation is "
+"150 mb file! So, if you choose \"dropbox\" as storage option, make sure that "
+"your file uploads are limited to 150 mb!"
+msgstr ""
+"此访问令牌可以将客户上传的文件上载到 Dropbox 帐户中的单独文件夹中。注意：当前"
+"限制是 150 MB 文件！因此，如果您选择\"投递箱\"作为存储选项，请确保您的文件上"
+"传限制为 150 MB！"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:290
+msgid "Free sample functionality"
+msgstr "免费样品功能"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:295
+msgid "Enable \"Free sample\" functionality"
+msgstr "启用“免费样品”功能"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:296
+msgid ""
+"Enables so called \"Free Sample\" functionality (adding to cart free "
+"products (zero price)) and limits the total number of free products (if set)."
+msgstr ""
+"启用所谓的“免费样品”功能（添加到购物车中的免费产品（零价格）），并限制免费产"
+"品的总数（如果已设置）。"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:302
+msgid "\"Free sample\" products limit"
+msgstr "\"免费样品\"产品限制"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:303
+msgid ""
+"Sets the maximum total number of free products which can be added to a "
+"single order. Set to \"0\" or leave it empty to allow unlimited samples."
+msgstr ""
+"设置可添加到单个订单的可用产品的最大总数。设置为\"0\"或将它留空以允许无限采"
+"样。"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:306
+msgid "5"
+msgstr "5"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:473
+msgid "Upload an image"
+msgstr "上傳圖片"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:473
+msgid "Use image"
+msgstr "使用图像"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:473
+msgid "Upload new image"
+msgstr "上传新图像"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:474
+msgid "Remove image"
+msgstr "删除图像"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:536
+msgid "Uni CPO Plugin Settings"
+msgstr "Uni CPO 插件设置"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:539
+msgid "Uni CPO product basic setup tutorial"
+msgstr "Uni CPO 产品基本设置教程"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:546
+msgid "All"
+msgstr "所有"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:568
+msgid "Save Settings"
+msgstr "保存设置"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:585
+msgid "Add/edit product related general settings"
+msgstr "添加/编辑与产品相关的常规设置"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:586
+msgid ""
+"This tool makes it possible to edit many CPO related settings for many "
+"products at once."
+msgstr "此工具可以同时编辑许多产品的许多 CPO 相关设置。"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:589
+msgid ""
+"Make changes, click \"Save Data\" when your ready to update the information "
+"or click \"Reset Data\" to cancel all changes and revert back to initial "
+"(last saved)."
+msgstr ""
+"进行更改，当您准备好更新信息时，单击\"保存数据\"或单击\"重置数据\"以取消所有"
+"更改并恢复回初始更改（上次保存）。"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:590
+msgid ""
+"FYI: if you see variables highlighted in red, it is a signal that something "
+"is wrong! Such variables are used in product configuration, but do not exist "
+"in DB. Which means they were overwritten. Immediately check those products, "
+"probably their price calculation are not functioning properly!"
+msgstr ""
+"Fyi： 如果您看到变量以红色突出显示， 这是一个信号， 表明出了什么问题！此类变"
+"量用于产品配置，但在 DB 中不存在。这意味着他们被覆盖了。立即检查这些产品，可"
+"能是他们的价格计算不能正常工作！"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:593
+#: includes/admin/class-uni-cpo-plugin-settings.php:742
+#: includes/admin/class-uni-cpo-plugin-settings.php:789
+msgid "This functionality is included in PRO version of the plugin"
+msgstr "此功能包含在插件的 PRO 版本中"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:607
+#, fuzzy
+msgid ""
+"This page is dedicated to copying and pasting of Uni CPO related settings in "
+"many products at once."
+msgstr "此页面专门用于同时复制和粘贴许多产品中的 Uni CPO 相关设置。"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:623
+#, fuzzy
+msgid ""
+"⚠️ Attention: there are too many products on the site, so only first 500 "
+"products are shown here!"
+msgstr "⚠️ 注意：网站上的产品太多，所以这里只显示前500个产品！"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:626
+#, fuzzy
+msgid "Step 1: Choose the \"master\" product"
+msgstr "第 1 步：选择“主”产品"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:627
+#, fuzzy
+msgid "The product which settings you would like to copy."
+msgstr "要复制哪些设置的产品。"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:647
+#, fuzzy
+msgid "🤔 Maybe there is no products with Uni CPO custom options enabled?"
+msgstr "🤔 也许没有启用 Uni CPO 自定义选项的产品？"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:648
+#, fuzzy
+msgid ""
+"Or maybe there are too many products and we cannot display them all. Try "
+"providing product ID manually:"
+msgstr "或者也许产品太多，我们无法全部展示。尝试手动提供产品编号："
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:652
+#, fuzzy
+msgid "Step 2: Choose settings"
+msgstr "第 2 步：选择设置"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:653
+#, fuzzy
+msgid ""
+"The specific types of settings which must be copied or check \"Copy all data "
+"and settings\"."
+msgstr "必须复制或选中“复制所有数据和设置”的特定类型的设置。"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:657
+msgid "All data"
+msgstr "所有数据"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:658
+#, fuzzy
+msgid "Only specific data"
+msgstr "仅特定数据"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:662
+#, fuzzy
+msgid "Builder content data"
+msgstr "构建器内容数据"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:663
+msgid "General settings"
+msgstr "一般設定"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:664
+#, fuzzy
+msgid "Discounts data"
+msgstr "折扣数据"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:665
+#, fuzzy
+msgid "Formula data"
+msgstr "公式数据"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:666
+#, fuzzy
+msgid "Weight calc data"
+msgstr "重量计算数据"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:667
+#, fuzzy
+msgid "Image conditional logic data"
+msgstr "镜像条件逻辑数据"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:668
+#, fuzzy
+msgid "Dimensions data"
+msgstr "尺寸数据"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:669
+#, fuzzy
+msgid "Non option variables data"
+msgstr "非选项变量数据"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:673
+#, fuzzy
+msgid "Step 3: Choose other products"
+msgstr "第 3 步：选择其他产品"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:674
+#, fuzzy
+msgid "The product or products which settings you would like to overwrite."
+msgstr "要覆盖的一个或多个设置的产品。"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:704
+#, fuzzy
+msgid "All applicable products"
+msgstr "所有适用产品"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:705
+msgid "Specific products"
+msgstr "特定产品"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:735
+#: includes/class-uni-cpo-templates.php:900
+#: includes/class-uni-cpo-templates.php:1188
+#: includes/class-uni-cpo-templates.php:1360
+#: includes/class-uni-cpo-templates.php:1561
+#: includes/class-uni-cpo-templates.php:1754
+#: includes/class-uni-cpo-templates.php:1917
+#: includes/class-uni-cpo-templates.php:2097
+#: includes/settings/class-uni-cpo-setting-sync.php:89
+msgid "Submit"
+msgstr "提交"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:739
+#, fuzzy
+msgid "No products where Uni CPO can be used."
+msgstr "没有可以使用Uni CPO的产品。"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:757
+msgid "Import/Export of suboptions"
+msgstr "导入/导出子选项"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:758
+msgid ""
+"This section is dedicated to import/export functionality for suboptions of "
+"the following option types: Radio, Checkboxes and Select"
+msgstr "本节专门介绍以下选项类型的子选项的导入/导出功能：单选，复选框和选择"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:770
+msgid "Existing options"
+msgstr "现有选项"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:772
+msgid "select"
+msgstr "选择"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:779
+#: includes/class-uni-cpo-templates.php:869
+#: includes/class-uni-cpo-templates.php:887
+msgid "Export"
+msgstr "导出"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:780
+msgid "View"
+msgstr "查看"
+
+#: includes/admin/class-uni-cpo-plugin-settings.php:783
+#: includes/class-uni-cpo-templates.php:835
+#: includes/class-uni-cpo-templates.php:865
+#: includes/class-uni-cpo-templates.php:2421
+#: includes/class-uni-cpo-templates.php:2699
+#: includes/settings/class-uni-cpo-setting-cpo-matrix-data.php:106
+msgid "Import"
+msgstr "导入"
+
+#: includes/admin/uni-cpo-admin-functions.php:22
+msgid "CPO Form Builder"
+msgstr "CPO 表单生成器"
+
+#: includes/admin/uni-cpo-admin-functions.php:40
+msgid "go to the builder"
+msgstr "去建设者"
+
+#: includes/admin/uni-cpo-admin-functions.php:43
+#, fuzzy
+msgid "First time using Uni CPO?"
+msgstr "第一次使用 Uni CPO？"
+
+#: includes/admin/uni-cpo-admin-functions.php:44
+#, fuzzy
+msgid ""
+"You may import one of our ready-made configurations of the commonly used "
+"product setups"
+msgstr "您可以导入我们常用产品设置的现成配置之一"
+
+#: includes/admin/uni-cpo-admin-functions.php:56
+msgid "Import configuration"
+msgstr "导入配置"
+
+#: includes/admin/uni-cpo-admin-functions.php:61
+#, fuzzy
+msgid "Link to the documentation"
+msgstr "文档链接"
+
+#: includes/admin/uni-cpo-admin-functions.php:64
+#, fuzzy
+msgid "List of tutorials and articles"
+msgstr "教程和文章列表"
+
+#: includes/admin/uni-cpo-admin-functions.php:351
+msgid "Add/edit CPO options"
+msgstr "添加/编辑 CPO 选项"
+
+#: includes/admin/uni-cpo-admin-functions.php:395
+#: includes/uni-cpo-core-functions.php:1343
+msgid "Update"
+msgstr "更新"
+
+#: includes/admin/uni-cpo-admin-functions.php:419
+#: includes/uni-cpo-functions.php:301
+msgid "(Sample)"
+msgstr "示例："
+
+#: includes/admin/uni-cpo-admin-functions.php:443
+msgid "Add/Edit CPO option(s)"
+msgstr "添加/编辑 CPO 选项"
+
+#: includes/class-uni-cpo-ajax.php:147 includes/class-uni-cpo-ajax.php:206
+#: includes/class-uni-cpo-ajax.php:229 includes/class-uni-cpo-ajax.php:255
+#: includes/class-uni-cpo-ajax.php:285 includes/class-uni-cpo-ajax.php:317
+#: includes/class-uni-cpo-ajax.php:358 includes/class-uni-cpo-ajax.php:412
+#: includes/class-uni-cpo-ajax.php:440 includes/class-uni-cpo-ajax.php:470
+#: includes/class-uni-cpo-ajax.php:501 includes/class-uni-cpo-ajax.php:533
+#: includes/class-uni-cpo-ajax.php:566 includes/class-uni-cpo-ajax.php:594
+#: includes/class-uni-cpo-ajax.php:631 includes/class-uni-cpo-ajax.php:680
+#: includes/class-uni-cpo-ajax.php:1587 includes/class-uni-cpo-ajax.php:1668
+msgid "Insufficient permissions for this operation"
+msgstr "此操作的权限不足"
+
+#: includes/class-uni-cpo-ajax.php:190
+msgid "The data was not saved. Maybe, there is nothing to save?"
+msgstr "未保存数据。也许，没有什么可以保存的？"
+
+#: includes/class-uni-cpo-ajax.php:213
+msgid "Hm-m... Something went wrong."
+msgstr "嗯...出问题了"
+
+#: includes/class-uni-cpo-ajax.php:261 includes/class-uni-cpo-ajax.php:686
+msgid "Type is not specified"
+msgstr "未指定类型"
+
+#: includes/class-uni-cpo-ajax.php:269 includes/class-uni-cpo-ajax.php:702
+msgid "No modules"
+msgstr "模块"
+
+#: includes/class-uni-cpo-ajax.php:323 includes/class-uni-cpo-ajax.php:364
+msgid "Product ID is not specified"
+msgstr "未指定产品 ID"
+
+#: includes/class-uni-cpo-ajax.php:340
+msgid "No similar products"
+msgstr "无类似产品"
+
+#: includes/class-uni-cpo-ajax.php:368
+msgid "Target product ID is not specified"
+msgstr "未指定目标产品 ID"
+
+#: includes/class-uni-cpo-ajax.php:375
+#, php-format
+msgid "Product creation failed, could not find original product: %s"
+msgstr "产品创建失败，找不到原始产品：％s"
+
+#: includes/class-uni-cpo-ajax.php:382
+#, php-format
+msgid "Product creation failed, could not find targeted product: %s"
+msgstr "产品创建失败，找不到目标产品：%s"
+
+#: includes/class-uni-cpo-ajax.php:393
+msgid "Error"
+msgstr "错误"
+
+#: includes/class-uni-cpo-ajax.php:635 includes/class-uni-cpo-ajax.php:2032
+#, fuzzy
+msgid "No files added"
+msgstr "No <acronym title=\"Cascading Style Sheet\">CSS</acronym> 添加的文件"
+
+#: includes/class-uni-cpo-ajax.php:652 includes/class-uni-cpo-ajax.php:2049
+msgid "Only CSV files are allowed"
+msgstr "仅允许 CSV 文件"
+
+#: includes/class-uni-cpo-ajax.php:662 includes/class-uni-cpo-ajax.php:958
+#: includes/class-uni-cpo-ajax.php:1496 includes/class-uni-cpo-ajax.php:1835
+#: includes/class-uni-cpo-ajax.php:1983 includes/class-uni-cpo-ajax.php:2119
+#: includes/class-uni-cpo-ajax.php:2432 includes/uni-cpo-core-functions.php:169
+msgid "Something went wrong"
+msgstr "出了些问题"
+
+#: includes/class-uni-cpo-ajax.php:690
+msgid "Target post is not chosen"
+msgstr "未选择目标帖子"
+
+#: includes/class-uni-cpo-ajax.php:694
+msgid "Sync method is not chosen"
+msgstr "未选择同步方法"
+
+#: includes/class-uni-cpo-ajax.php:722
+msgid "No post ID specified"
+msgstr "未指定帖子 ID"
+
+#: includes/class-uni-cpo-ajax.php:726
+msgid "No file name specified"
+msgstr "未指定文件名"
+
+#: includes/class-uni-cpo-ajax.php:730
+msgid "No option variable specified"
+msgstr "未指定选项变量"
+
+#: includes/class-uni-cpo-ajax.php:734
+msgid "Failed to upload file(s)."
+msgstr "无法上传文件。"
+
+#: includes/class-uni-cpo-ajax.php:738
+msgid "No dropbox token set. Abort operation."
+msgstr "未设置保管箱令牌。 中止操作。"
+
+#: includes/class-uni-cpo-ajax.php:747 includes/uni-cpo-core-functions.php:2950
+msgid "The temp uploading dir cannot be created."
+msgstr "无法创建临时上传目录。"
+
+#: includes/class-uni-cpo-ajax.php:766 includes/class-uni-cpo-ajax.php:775
+msgid "Failed to open input stream."
+msgstr "无法打开输入流。"
+
+#: includes/class-uni-cpo-ajax.php:794 includes/class-uni-cpo-ajax.php:1868
+msgid "Sorry, this file type is not permitted for security reasons."
+msgstr "抱歉,出于安全原因,不允许使用此文件类型."
+
+#: includes/class-uni-cpo-ajax.php:809
+msgid "The uploading dir cannot be created."
+msgstr "无法创建上传目录。"
+
+#: includes/class-uni-cpo-ajax.php:817
+msgid "An error occurred during uploading. Please, contact admin of the site."
+msgstr "上载过程中发生错误。请与网站管理员联系。"
+
+#: includes/class-uni-cpo-ajax.php:828
+msgid "The uploaded file could not be moved."
+msgstr "无法移动上传的文件。"
+
+#: includes/class-uni-cpo-ajax.php:872
+msgid "File is valid, and was successfully uploaded."
+msgstr "文件有效，已成功上载。"
+
+#: includes/class-uni-cpo-ajax.php:906
+msgid "Still uploading..."
+msgstr "仍在上传..."
+
+#: includes/class-uni-cpo-ajax.php:927
+msgid "Not enough data"
+msgstr "没有足够的数据"
+
+#: includes/class-uni-cpo-ajax.php:956
+msgid "File successfully deleted"
+msgstr "已成功删除文件"
+
+#: includes/class-uni-cpo-ajax.php:1070 includes/class-uni-cpo-ajax.php:1796
+#: includes/class-uni-cpo-ajax.php:1858 includes/class-uni-cpo-ajax.php:2314
+msgid "Product ID is not set"
+msgstr "未设置产品 ID"
+
+#: includes/class-uni-cpo-ajax.php:1386
+msgid "Price calculation is disabled in settings"
+msgstr "价格计算在设置中禁用"
+
+#: includes/class-uni-cpo-ajax.php:1540
+#, php-format
+msgid "You cannot add another \"%s\" to your cart."
+msgstr "您已添加\"%s\"到您的购物车，请到购物车查看。"
+
+#: includes/class-uni-cpo-ajax.php:1548
+#: includes/uni-cpo-core-functions.php:1943
+#, php-format
+msgid "The total number of samples in the cart is limited to %d"
+msgstr "购物车中的样品总数限制为%d"
+
+#: includes/class-uni-cpo-ajax.php:1652
+msgid "No options available"
+msgstr "没有可用的选项"
+
+#: includes/class-uni-cpo-ajax.php:1800
+msgid "Email is not set"
+msgstr "未设置电子邮件"
+
+#: includes/class-uni-cpo-ajax.php:1822
+msgid "File cannot be saved"
+msgstr "无法保存文件"
+
+#: includes/class-uni-cpo-ajax.php:1825
+#, php-format
+msgid "[%s] Export request for product #%d"
+msgstr "[%s] 产品 #%d"
+
+#: includes/class-uni-cpo-ajax.php:1826
+#, php-format
+msgid ""
+"A .txt file with encoded info of settings for product #%d is attached to "
+"this email. The info contains the builder content as well as all the product "
+"settings added via CPO plugin for this product. Use this file to re-import "
+"the settings elsewhere."
+msgstr ""
+"此.txt包含产品 #%d设置编码信息的一个文件。该信息包含构建器内容以及通过 CPO 插"
+"件为此产品添加的所有产品设置。使用此文件可以重新导入其他位置的设置。"
+
+#: includes/class-uni-cpo-ajax.php:1880
+msgid "File cannot be read"
+msgstr "无法读取文件"
+
+#: includes/class-uni-cpo-ajax.php:2002 includes/class-uni-cpo-ajax.php:2028
+#: includes/class-uni-cpo-ajax.php:2089
+msgid "No option chosen"
+msgstr "未选择任何选项"
+
+#: includes/class-uni-cpo-ajax.php:2010
+msgid "No suboptions yet"
+msgstr "尚未子选项"
+
+#: includes/class-uni-cpo-ajax.php:2071
+msgid ""
+"Something went wrong. Try changing delimiter setting value for CSV file."
+msgstr "出了点问题。尝试更改 CSV 文件的分隔符设置值。"
+
+#: includes/class-uni-cpo-ajax.php:2191
+#, fuzzy
+msgid ""
+"No source product has been selected or product with such ID does not exist"
+msgstr "未选择源产品或不存在具有此类 ID 的产品"
+
+#: includes/class-uni-cpo-ajax.php:2276
+#, fuzzy
+msgid "No target product(s) has been found"
+msgstr "未找到目标产品"
+
+#: includes/class-uni-cpo-ajax.php:2331
+#, fuzzy
+msgid "Product configuration file does not exist"
+msgstr "产品配置文件不存在"
+
+#: includes/class-uni-cpo-ajax.php:2392 includes/class-uni-cpo-ajax.php:2395
+#, fuzzy
+msgid "Sorry, product configuration import was not successful"
+msgstr "抱歉，产品配置导入不成功"
+
+#: includes/class-uni-cpo-frontend-scripts.php:219
+#: includes/class-uni-cpo-frontend-scripts.php:228
+msgid "This value seems to be invalid."
+msgstr "该值似乎无效。"
+
+#: includes/class-uni-cpo-frontend-scripts.php:220
+msgid "This value should be a valid email."
+msgstr "此值应是有效的电子邮件。"
+
+#: includes/class-uni-cpo-frontend-scripts.php:221
+msgid "This value should be a valid url."
+msgstr "此值应为有效的网址。"
+
+#: includes/class-uni-cpo-frontend-scripts.php:222
+msgid "This value should be a valid number."
+msgstr "此值应为有效的网址。"
+
+#: includes/class-uni-cpo-frontend-scripts.php:223
+msgid "This value should be digits."
+msgstr "此值应为数字。"
+
+#: includes/class-uni-cpo-frontend-scripts.php:224
+msgid "This value should be alphanumeric."
+msgstr "此值应为字母数字。"
+
+#: includes/class-uni-cpo-frontend-scripts.php:225
+msgid "This value should be a valid integer."
+msgstr "此值应为有效的网址。"
+
+#: includes/class-uni-cpo-frontend-scripts.php:226
+msgid "This value should not be blank."
+msgstr "这个值不应该是空白的。"
+
+#: includes/class-uni-cpo-frontend-scripts.php:227
+msgid "This value is required."
+msgstr "该值是必需的。"
+
+#: includes/class-uni-cpo-frontend-scripts.php:229
+#, php-format
+msgid "This value should be greater than or equal to %s."
+msgstr "值应大于或等于%s。"
+
+#: includes/class-uni-cpo-frontend-scripts.php:230
+#, php-format
+msgid "This value should be lower than or equal to %s."
+msgstr "此值应低于或等于%s。"
+
+#: includes/class-uni-cpo-frontend-scripts.php:231
+#, php-format
+msgid "This value should be between %s and %s."
+msgstr "此值应介于 %s和 %s之间。"
+
+#: includes/class-uni-cpo-frontend-scripts.php:232
+#, php-format
+msgid "This value is too short. It should have %s characters or more."
+msgstr "该值太短。它应该包含 %s个或更多字符。"
+
+#: includes/class-uni-cpo-frontend-scripts.php:233
+#, php-format
+msgid "This value is too long. It should have %s characters or fewer."
+msgstr "此值太长。它应该有%s或更少。"
+
+#: includes/class-uni-cpo-frontend-scripts.php:234
+#, php-format
+msgid ""
+"This value length is invalid. It should be between %s and %s characters long."
+msgstr "该值长度无效。它的长度应在 %s 和 %s 个字符之间。"
+
+#: includes/class-uni-cpo-frontend-scripts.php:235
+#, php-format
+msgid "You must select at least %s choices."
+msgstr "您必须选择至少%s选项。"
+
+#: includes/class-uni-cpo-frontend-scripts.php:236
+#, php-format
+msgid "You must select %s choices or fewer."
+msgstr "您必须选择 %s个或更少的选项。"
+
+#: includes/class-uni-cpo-frontend-scripts.php:237
+#, php-format
+msgid "You must select between %s and %s choices."
+msgstr "您必须在%s和%s选项之间进行选择。"
+
+#: includes/class-uni-cpo-frontend-scripts.php:238
+msgid "This value should be the same."
+msgstr "此值应相同。"
+
+#: includes/class-uni-cpo-frontend-scripts.php:239
+msgid "This value should be a valid date (YYYY-MM-DD)."
+msgstr "此值应为有效日期(YYYY-MM-DD)。"
+
+#: includes/class-uni-cpo-frontend-scripts.php:240
+#, php-format
+msgid "This value is too short. It should have %s words or more."
+msgstr "此值太短。它应该有%s或更多。"
+
+#: includes/class-uni-cpo-frontend-scripts.php:241
+#, php-format
+msgid "This value is too long. It should have %s words or fewer."
+msgstr "此值太长。它应该有%s或更少。"
+
+#: includes/class-uni-cpo-frontend-scripts.php:242
+#, php-format
+msgid ""
+"This value length is invalid. It should be between %s and %s words long."
+msgstr "此值长度无效。它应该是两%s%s之间。"
+
+#: includes/class-uni-cpo-frontend-scripts.php:243
+msgid "This value should be greater."
+msgstr "此值应更大。"
+
+#: includes/class-uni-cpo-frontend-scripts.php:244
+msgid "This value should be greater or equal."
+msgstr "此值应大于或相等。"
+
+#: includes/class-uni-cpo-frontend-scripts.php:245
+msgid "This value should be less."
+msgstr "此值应该更少。"
+
+#: includes/class-uni-cpo-frontend-scripts.php:246
+msgid "This value should be less or equal."
+msgstr "此值应小于或相等。"
+
+#: includes/class-uni-cpo-frontend-scripts.php:247
+msgid "Must be unique!"
+msgstr "必须是唯一的！"
+
+#: includes/class-uni-cpo-frontend-scripts.php:248
+#, php-format
+msgid "This value should be greater or equal than %s"
+msgstr "此值应大于或等于%s"
+
+#: includes/class-uni-cpo-frontend-scripts.php:249
+#, php-format
+msgid "This value should be greater than %s"
+msgstr "此值应大于%s"
+
+#: includes/class-uni-cpo-frontend-scripts.php:250
+#, php-format
+msgid "This value should be less or equal than %s"
+msgstr "此值应小于或等于%s"
+
+#: includes/class-uni-cpo-frontend-scripts.php:251
+#, php-format
+msgid "This value should be less than %s"
+msgstr "此值应小于%s"
+
+#: includes/class-uni-cpo-frontend-scripts.php:256
+msgid "Sun"
+msgstr "星期日"
+
+#: includes/class-uni-cpo-frontend-scripts.php:257
+msgid "Mon"
+msgstr "星期一"
+
+#: includes/class-uni-cpo-frontend-scripts.php:258
+msgid "Tue"
+msgstr "星期二"
+
+#: includes/class-uni-cpo-frontend-scripts.php:259
+msgid "Wed"
+msgstr "星期三"
+
+#: includes/class-uni-cpo-frontend-scripts.php:260
+msgid "Thu"
+msgstr "星期四"
+
+#: includes/class-uni-cpo-frontend-scripts.php:261
+msgid "Fri"
+msgstr "星期五"
+
+#: includes/class-uni-cpo-frontend-scripts.php:262
+msgid "Sat"
+msgstr "星期六"
+
+#: includes/class-uni-cpo-frontend-scripts.php:265
+msgid "Sunday"
+msgstr "星期日"
+
+#: includes/class-uni-cpo-frontend-scripts.php:266
+msgid "Monday"
+msgstr "星期一"
+
+#: includes/class-uni-cpo-frontend-scripts.php:267
+msgid "Tuesday"
+msgstr "星期二"
+
+#: includes/class-uni-cpo-frontend-scripts.php:268
+msgid "Wednesday"
+msgstr "星期三"
+
+#: includes/class-uni-cpo-frontend-scripts.php:269
+msgid "Thursday"
+msgstr "星期四"
+
+#: includes/class-uni-cpo-frontend-scripts.php:270
+msgid "Friday"
+msgstr "星期五"
+
+#: includes/class-uni-cpo-frontend-scripts.php:271
+msgid "Saturday"
+msgstr "星期六"
+
+#: includes/class-uni-cpo-frontend-scripts.php:276
+msgid "Jan"
+msgstr "一月"
+
+#: includes/class-uni-cpo-frontend-scripts.php:277
+msgid "Feb"
+msgstr "二月"
+
+#: includes/class-uni-cpo-frontend-scripts.php:278
+msgid "Mar"
+msgstr "三月"
+
+#: includes/class-uni-cpo-frontend-scripts.php:279
+msgid "Apr"
+msgstr "四月"
+
+#: includes/class-uni-cpo-frontend-scripts.php:280
+#: includes/class-uni-cpo-frontend-scripts.php:294
+msgid "May"
+msgstr "五月"
+
+#: includes/class-uni-cpo-frontend-scripts.php:281
+msgid "Jun"
+msgstr "六月"
+
+#: includes/class-uni-cpo-frontend-scripts.php:282
+msgid "Jul"
+msgstr "七月"
+
+#: includes/class-uni-cpo-frontend-scripts.php:283
+msgid "Aug"
+msgstr "八月"
+
+#: includes/class-uni-cpo-frontend-scripts.php:284
+msgid "Sep"
+msgstr "九月"
+
+#: includes/class-uni-cpo-frontend-scripts.php:285
+msgid "Oct"
+msgstr "十月"
+
+#: includes/class-uni-cpo-frontend-scripts.php:286
+msgid "Nov"
+msgstr "十一月"
+
+#: includes/class-uni-cpo-frontend-scripts.php:287
+msgid "Dec"
+msgstr "十二月"
+
+#: includes/class-uni-cpo-frontend-scripts.php:290
+msgid "January"
+msgstr "一月"
+
+#: includes/class-uni-cpo-frontend-scripts.php:291
+msgid "February"
+msgstr "二月"
+
+#: includes/class-uni-cpo-frontend-scripts.php:292
+msgid "March"
+msgstr "三月"
+
+#: includes/class-uni-cpo-frontend-scripts.php:293
+msgid "April"
+msgstr "四月"
+
+#: includes/class-uni-cpo-frontend-scripts.php:295
+msgid "June"
+msgstr "六月"
+
+#: includes/class-uni-cpo-frontend-scripts.php:296
+msgid "July"
+msgstr "七月"
+
+#: includes/class-uni-cpo-frontend-scripts.php:297
+msgid "August"
+msgstr "八月"
+
+#: includes/class-uni-cpo-frontend-scripts.php:298
+msgid "September"
+msgstr "九月"
+
+#: includes/class-uni-cpo-frontend-scripts.php:299
+msgid "October"
+msgstr "十月"
+
+#: includes/class-uni-cpo-frontend-scripts.php:300
+msgid "November"
+msgstr "十一月"
+
+#: includes/class-uni-cpo-frontend-scripts.php:301
+msgid "December"
+msgstr "十二月"
+
+#: includes/class-uni-cpo-frontend-scripts.php:304
+msgid "Scroll to increment"
+msgstr "滚动增加"
+
+#: includes/class-uni-cpo-frontend-scripts.php:305
+msgid "Click to toggle"
+msgstr "点击切换"
+
+#: includes/class-uni-cpo-frontend-scripts.php:627
+msgid "Smart Search"
+msgstr "智能搜索"
+
+#: includes/class-uni-cpo-frontend-scripts.php:630
+msgid "Basic Modules"
+msgstr "基本模块"
+
+#: includes/class-uni-cpo-frontend-scripts.php:631
+msgid "Options"
+msgstr "选项"
+
+#: includes/class-uni-cpo-frontend-scripts.php:636
+msgid "General"
+msgstr "常规"
+
+#: includes/class-uni-cpo-frontend-scripts.php:640
+msgid "Style"
+msgstr "样式"
+
+#: includes/class-uni-cpo-frontend-scripts.php:644
+msgid "Advanced"
+msgstr "高级"
+
+#: includes/class-uni-cpo-frontend-scripts.php:648
+msgid "Main"
+msgstr "主要"
+
+#: includes/class-uni-cpo-frontend-scripts.php:652
+msgid "Suboptions"
+msgstr "子选项"
+
+#: includes/class-uni-cpo-frontend-scripts.php:656
+#: includes/options/class-uni-cpo-option-matrix.php:38
+msgid "Matrix"
+msgstr "矩阵"
+
+#: includes/class-uni-cpo-frontend-scripts.php:660
+#: includes/class-uni-cpo-templates.php:1060
+msgid "Rules"
+msgstr "规则"
+
+#: includes/class-uni-cpo-frontend-scripts.php:664
+msgid "Conditional"
+msgstr "条件"
+
+#: includes/class-uni-cpo-frontend-scripts.php:668
+msgid "Validation"
+msgstr "验证"
+
+#: includes/class-uni-cpo-frontend-scripts.php:673
+msgid "Delete"
+msgstr "删除"
+
+#: includes/class-uni-cpo-frontend-scripts.php:674
+msgid "Save"
+msgstr "保存"
+
+#: includes/class-uni-cpo-frontend-scripts.php:675
+#: includes/settings/class-uni-cpo-setting-sync.php:21
+msgid "Sync"
+msgstr "同步"
+
+#: includes/class-uni-cpo-frontend-scripts.php:676
+#: includes/class-uni-cpo-templates.php:898
+#: includes/class-uni-cpo-templates.php:1186
+#: includes/class-uni-cpo-templates.php:1358
+#: includes/class-uni-cpo-templates.php:1559
+#: includes/class-uni-cpo-templates.php:1752
+#: includes/class-uni-cpo-templates.php:1915
+#: includes/class-uni-cpo-templates.php:2095
+#: includes/uni-cpo-core-functions.php:1376
+msgid "Cancel"
+msgstr "取消"
+
+#: includes/class-uni-cpo-frontend-scripts.php:677
+msgid "Suggestion"
+msgstr "建议"
+
+#: includes/class-uni-cpo-frontend-scripts.php:680
+#: includes/modules/class-uni-cpo-module-row.php:29
+msgid "Row"
+msgstr "行"
+
+#: includes/class-uni-cpo-frontend-scripts.php:681
+#: includes/modules/class-uni-cpo-module-column.php:29
+msgid "Column"
+msgstr "列"
+
+#: includes/class-uni-cpo-frontend-scripts.php:682
+msgid "Module"
+msgstr "模块"
+
+#: includes/class-uni-cpo-frontend-scripts.php:683
+msgid "Move Row"
+msgstr "移动行"
+
+#: includes/class-uni-cpo-frontend-scripts.php:685
+#: includes/class-uni-cpo-templates.php:830
+#: includes/class-uni-cpo-templates.php:831
+#: includes/settings/class-uni-cpo-setting-sync.php:61
+#: includes/uni-cpo-functions.php:433
+msgid "Duplicate"
+msgstr "复制"
+
+#: includes/class-uni-cpo-frontend-scripts.php:686
+#: includes/options/class-uni-cpo-option-file-upload.php:178
+msgid "Remove"
+msgstr "删除"
+
+#: includes/class-uni-cpo-frontend-scripts.php:688
+msgid "Upload"
+msgstr "上传"
+
+#: includes/class-uni-cpo-frontend-scripts.php:689
+#: includes/options/class-uni-cpo-option-file-upload.php:534
+msgid "Select file"
+msgstr "选择文件"
+
+#: includes/class-uni-cpo-frontend-scripts.php:690
+msgid "Please add suboptions"
+msgstr "请添加子选项"
+
+#: includes/class-uni-cpo-frontend-scripts.php:691
+msgid "2nd var/1st var"
+msgstr "第二变种/第一变种"
+
+#: includes/class-uni-cpo-frontend-scripts.php:692
+#: includes/settings/class-uni-cpo-setting-sync.php:79
+msgid "- None -"
+msgstr "- 没有 -"
+
+#: includes/class-uni-cpo-frontend-scripts.php:694
+msgid "Pro Version Feature"
+msgstr "专业版功能"
+
+#: includes/class-uni-cpo-frontend-scripts.php:696
+msgid "No cart form found! Check WooCommerce hooks integration with your theme"
+msgstr "未找到购物车表单！检查 WooCommerce 挂钩集成与您的主题"
+
+#: includes/class-uni-cpo-frontend-scripts.php:697
+msgid "Too many cart forms found! Uni CPO works on single product page only!"
+msgstr "找到太多的购物车表单！Uni CPO 仅适用于单个产品页面！"
+
+#: includes/class-uni-cpo-frontend-scripts.php:698
+msgid "Regular price is not set. Price is required (even \"1\" works)!"
+msgstr "未设置正常价格。价格是必需的（即使是“ 1”也可以）！"
+
+#: includes/class-uni-cpo-frontend-scripts.php:699
+msgid "It seems that price tag selector is wrong, please update!"
+msgstr "看来价格标签选择器错了，请更新！"
+
+#: includes/class-uni-cpo-frontend-scripts.php:700
+msgid "It seems that image tag selector is wrong, please update!"
+msgstr "看来图像标签选择器错了，请更新！"
+
+#: includes/class-uni-cpo-frontend-scripts.php:735
+#: includes/class-uni-cpo-frontend-scripts.php:927
+msgid "Clear"
+msgstr "清除"
+
+#: includes/class-uni-cpo-frontend-scripts.php:736
+#: includes/class-uni-cpo-frontend-scripts.php:928
+#: includes/settings/class-uni-cpo-setting-font-family.php:24
+#: includes/settings/class-uni-cpo-setting-font-style.php:24
+msgid "Default"
+msgstr "默认"
+
+#: includes/class-uni-cpo-frontend-scripts.php:737
+#: includes/class-uni-cpo-frontend-scripts.php:929
+msgid "Select Color"
+msgstr "选择颜色"
+
+#: includes/class-uni-cpo-frontend-scripts.php:738
+#: includes/class-uni-cpo-frontend-scripts.php:930
+msgid "Current Color"
+msgstr "当前颜色"
+
+#: includes/class-uni-cpo-frontend-scripts.php:890
+msgid "Calculating"
+msgstr "计算"
+
+#: includes/class-uni-cpo-frontend-scripts.php:891
+#, php-format
+msgid "This file should not be larger than %s Kb"
+msgstr "此文件不应大于 %s Kb"
+
+#: includes/class-uni-cpo-frontend-scripts.php:892
+msgid "File of this type is not allowed"
+msgstr "不允许使用文件类型"
+
+#: includes/class-uni-cpo-frontend-scripts.php:893
+msgid "The product has been added successfully!"
+msgstr "您的产品已成功添加。"
+
+#: includes/class-uni-cpo-frontend-scripts.php:982
+msgid "Save changes"
+msgstr "保存更改"
+
+#: includes/class-uni-cpo-post-types.php:57
+#: includes/class-uni-cpo-post-types.php:58
+msgid "Builderius Module"
+msgstr "Builderius 模块"
+
+#: includes/class-uni-cpo-post-types.php:59
+msgid "New Builderius Module"
+msgstr "新的Builderius模块"
+
+#: includes/class-uni-cpo-post-types.php:60
+msgid "Add Builderius Module"
+msgstr "添加 Builderius 模块"
+
+#: includes/class-uni-cpo-post-types.php:61
+msgid "Edit Builderius Module"
+msgstr "编辑Builderius模块"
+
+#: includes/class-uni-cpo-post-types.php:62
+msgid "All Builderius Modules"
+msgstr "所有 Builderius 模块"
+
+#: includes/class-uni-cpo-post-types.php:63
+msgid "View Builderius Module"
+msgstr "查看 Builderius 模块"
+
+#: includes/class-uni-cpo-post-types.php:64
+msgid "Search Builderius Modules"
+msgstr "搜索Builderius模块"
+
+#: includes/class-uni-cpo-post-types.php:65
+msgid "Builderius Modules not found"
+msgstr "未找到 Builderius 模块"
+
+#: includes/class-uni-cpo-post-types.php:66
+msgid "Builderius Modules not found in cart"
+msgstr "在购物车中找不到 Builderius 模块"
+
+#: includes/class-uni-cpo-post-types.php:67
+msgid "Parent Builderius Module"
+msgstr "父Builderius模块"
+
+#: includes/class-uni-cpo-post-types.php:68
+msgid "Builderius Modules"
+msgstr "Builderius 模块"
+
+#: includes/class-uni-cpo-post-types.php:101
+#: includes/class-uni-cpo-post-types.php:102
+msgid "CPO option"
+msgstr "CPO 选项"
+
+#: includes/class-uni-cpo-post-types.php:103
+msgid "New CPO option"
+msgstr "新的 CPO 选项"
+
+#: includes/class-uni-cpo-post-types.php:104
+msgid "Add CPO option"
+msgstr "添加 CPO 选项"
+
+#: includes/class-uni-cpo-post-types.php:105
+msgid "Edit CPO option"
+msgstr "CPO 选项"
+
+#: includes/class-uni-cpo-post-types.php:106
+msgid "All CPO options"
+msgstr "所有 CPO 选项"
+
+#: includes/class-uni-cpo-post-types.php:107
+msgid "View CPO option"
+msgstr "查看 CPO 选项"
+
+#: includes/class-uni-cpo-post-types.php:108
+msgid "Search CPO options"
+msgstr "搜索 CPO 选项"
+
+#: includes/class-uni-cpo-post-types.php:109
+msgid "CPO options not found"
+msgstr "未找到 CPO 选项"
+
+#: includes/class-uni-cpo-post-types.php:110
+msgid "CPO options not found in cart"
+msgstr "未找到 CPO 选项"
+
+#: includes/class-uni-cpo-post-types.php:111
+msgid "Parent CPO option"
+msgstr "父 CPO 选项"
+
+#: includes/class-uni-cpo-post-types.php:112
+msgid "CPO options"
+msgstr "CPO 选项"
+
+#: includes/class-uni-cpo-product.php:91
+msgid "CPO builder"
+msgstr "CPO 生成器"
+
+#: includes/class-uni-cpo-product.php:125
+msgid "Go to CPO builder"
+msgstr "转到 CPO 生成器"
+
+#: includes/class-uni-cpo-product.php:126
+msgid "CPO Builder"
+msgstr "CPO 生成器"
+
+#: includes/class-uni-cpo-product.php:928
+msgid "Product does not exist or not chosen"
+msgstr "产品不存在或未选择"
+
+#: includes/class-uni-cpo-product.php:1074
+msgid "No context set. The data was not saved."
+msgstr "未设置上下文。未保存数据。"
+
+#: includes/class-uni-cpo-templates.php:55
+msgid "Day/night mode"
+msgstr "日夜转换模式"
+
+#: includes/class-uni-cpo-templates.php:60
+msgid "Left/right panel position"
+msgstr "左/右面板位置"
+
+#: includes/class-uni-cpo-templates.php:66
+msgid "View saved content"
+msgstr "查看已保存的内容"
+
+#: includes/class-uni-cpo-templates.php:71
+msgid "History of saved content"
+msgstr "保存内容的历史记录"
+
+#: includes/class-uni-cpo-templates.php:94
+msgid "Product general settings"
+msgstr "产品常规设置"
+
+#: includes/class-uni-cpo-templates.php:99
+msgid "Delete content"
+msgstr "删除内容"
+
+#: includes/class-uni-cpo-templates.php:105
+msgid "Non option variables"
+msgstr "非选项变量"
+
+#: includes/class-uni-cpo-templates.php:111
+#: includes/class-uni-cpo-templates.php:144
+msgid "Formula and conditional logic"
+msgstr "公式和条件逻辑"
+
+#: includes/class-uni-cpo-templates.php:118
+msgid "Weight conditional logic"
+msgstr "权重条件逻辑"
+
+#: includes/class-uni-cpo-templates.php:122
+#, fuzzy
+msgid "Shipping class logic"
+msgstr "运输类逻辑"
+
+#: includes/class-uni-cpo-templates.php:128
+msgid "Dimensions settings"
+msgstr "查看尺寸设置"
+
+#: includes/class-uni-cpo-templates.php:132
+msgid "Image conditional logic"
+msgstr "图像条件逻辑"
+
+#: includes/class-uni-cpo-templates.php:137
+msgid "Save content"
+msgstr "内容"
+
+#: includes/class-uni-cpo-templates.php:148
+#: includes/class-uni-cpo-templates.php:923
+msgid "Cart discounts"
+msgstr "购物车折扣"
+
+#: includes/class-uni-cpo-templates.php:225
+msgid "Autosave"
+msgstr "自动保存"
+
+#: includes/class-uni-cpo-templates.php:316
+msgid ""
+"Saving updates the builder content. Checking this will allow to save to DB "
+"as well."
+msgstr "保存更新生成器内容。检查这将允许保存到数据库。"
+
+#: includes/class-uni-cpo-templates.php:320
+msgid "Save to DB?"
+msgstr "保存到 DB？"
+
+#: includes/class-uni-cpo-templates.php:347
+#: includes/class-uni-cpo-templates.php:355
+#: includes/class-uni-cpo-templates.php:931
+msgid "General Settings"
+msgstr "常规设置"
+
+#: includes/class-uni-cpo-templates.php:361
+msgid "Price Settings"
+msgstr "价格设置"
+
+#: includes/class-uni-cpo-templates.php:370
+msgid "Image Related Settings"
+msgstr "图像相关设置"
+
+#: includes/class-uni-cpo-templates.php:376
+msgid "Import/Export"
+msgstr "导入/导出"
+
+#: includes/class-uni-cpo-templates.php:396
+#: includes/class-uni-cpo-templates.php:417
+#: includes/class-uni-cpo-templates.php:441
+#: includes/class-uni-cpo-templates.php:465
+#: includes/class-uni-cpo-templates.php:486
+#: includes/class-uni-cpo-templates.php:507
+#: includes/class-uni-cpo-templates.php:528
+#: includes/class-uni-cpo-templates.php:568
+#: includes/class-uni-cpo-templates.php:588
+#: includes/class-uni-cpo-templates.php:741
+#: includes/class-uni-cpo-templates.php:762
+#: includes/class-uni-cpo-templates.php:974
+#: includes/class-uni-cpo-templates.php:996
+#: includes/class-uni-cpo-templates.php:1240
+#: includes/class-uni-cpo-templates.php:1399
+#: includes/class-uni-cpo-templates.php:1609
+#: includes/class-uni-cpo-templates.php:1629
+#: includes/class-uni-cpo-templates.php:1802
+#: includes/class-uni-cpo-templates.php:1965
+#: includes/class-uni-cpo-templates.php:2005
+#: includes/class-uni-cpo-templates.php:2039
+#: includes/class-uni-cpo-templates.php:2073
+#: includes/class-uni-cpo-templates.php:2143
+#: includes/class-uni-cpo-templates.php:2163
+#, fuzzy
+msgid "on"
+msgstr "开启"
+
+#: includes/class-uni-cpo-templates.php:397
+#: includes/class-uni-cpo-templates.php:418
+#: includes/class-uni-cpo-templates.php:442
+#: includes/class-uni-cpo-templates.php:466
+#: includes/class-uni-cpo-templates.php:487
+#: includes/class-uni-cpo-templates.php:508
+#: includes/class-uni-cpo-templates.php:529
+#: includes/class-uni-cpo-templates.php:569
+#: includes/class-uni-cpo-templates.php:589
+#: includes/class-uni-cpo-templates.php:742
+#: includes/class-uni-cpo-templates.php:763
+#: includes/class-uni-cpo-templates.php:975
+#: includes/class-uni-cpo-templates.php:997
+#: includes/class-uni-cpo-templates.php:1241
+#: includes/class-uni-cpo-templates.php:1400
+#: includes/class-uni-cpo-templates.php:1610
+#: includes/class-uni-cpo-templates.php:1630
+#: includes/class-uni-cpo-templates.php:1803
+#: includes/class-uni-cpo-templates.php:1966
+#: includes/class-uni-cpo-templates.php:2006
+#: includes/class-uni-cpo-templates.php:2040
+#: includes/class-uni-cpo-templates.php:2074
+#: includes/class-uni-cpo-templates.php:2144
+#: includes/class-uni-cpo-templates.php:2164
+msgid "off"
+msgstr "关"
+
+#: includes/class-uni-cpo-templates.php:400
+msgid "Display custom options on the product page?"
+msgstr "在产品页面上显示自定义选项？"
+
+#: includes/class-uni-cpo-templates.php:402
+msgid ""
+"This is the main option of the plugin. By choosing \"off\" you are entirely "
+"disabling the work of the plugin for this product. The plugin still may work "
+"for other your products, however."
+msgstr ""
+"这是插件的主要选项。通过选择\"关闭\"，你完全禁用此产品的插件的工作。但是，该"
+"插件仍可能为其他产品工作。"
+
+#: includes/class-uni-cpo-templates.php:421
+msgid "Enable price calculation based on custom options?"
+msgstr "启用基于自定义选项的价格计算？"
+
+#: includes/class-uni-cpo-templates.php:423
+msgid ""
+"Sometimes you just need to display custom options without using their values "
+"in a math formula as well as calculate the product price. Then just the "
+"custom options added to this product will be used only as an additional "
+"information in an order meta."
+msgstr ""
+"有时，您只需要显示自定义选项，而无需在数学公式中使用它们的值，以及计算产品价"
+"格。然后，仅将添加到此产品的自定义选项将仅用作订单元中的附加信息。"
+
+#: includes/class-uni-cpo-templates.php:425
+msgid ""
+"Important: this option will work only if you enable displaying of custom "
+"options!"
+msgstr "重要提示：只有启用显示自定义选项时，此选项才有效！"
+
+#: includes/class-uni-cpo-templates.php:446
+msgid ""
+"Use a special \"calculate\" button instead of instant price calculation?"
+msgstr "使用特殊的“计算”按钮代替即时价格计算？"
+
+#: includes/class-uni-cpo-templates.php:449
+msgid ""
+"Enable this option if you want to use \"calculate\" button and perform "
+"calculation on click on this button instead of instant price calculation "
+"after any options chosen/value defined."
+msgstr ""
+"如果要使用\"计算\"按钮，并在选择/值后单击此按钮，而不是即时价格计算，请启用此"
+"选项。"
+
+#: includes/class-uni-cpo-templates.php:469
+msgid "Enable duplication of this product in the cart?"
+msgstr "启用此产品在购物车中的复制？"
+
+#: includes/class-uni-cpo-templates.php:471
+msgid ""
+"Cart item of this product can be duplicated in the cart if this option is "
+"enabled."
+msgstr "如果启用此选项，则此产品的购物车项目可以在购物车中复制。"
+
+#: includes/class-uni-cpo-templates.php:490
+msgid "Enable inline editing of this product in the cart?"
+msgstr "启用购物车中此产品的内联编辑？"
+
+#: includes/class-uni-cpo-templates.php:492
+msgid ""
+"Cart item of this product will be possible to edit inline in the cart if "
+"this option is enabled. Inline editing mode means that form fields will be "
+"shown directly in the cart. Do not forget to enable inline editing for all "
+"or some options as it also works on per option basis!"
+msgstr ""
+"如果启用此选项，则可以在购物车中内联编辑此产品的购物车项目。内联编辑模式意味"
+"着表单字段将直接显示在购物车中。不要忘记为所有或某些选项启用内联编辑，因为它"
+"也可以在每个选项的基础上使用！"
+
+#: includes/class-uni-cpo-templates.php:511
+msgid ""
+"Enable editing of this product in the cart by returning to product page?"
+msgstr "通过返回到产品页面，在购物车中启用此产品的编辑功能？"
+
+#: includes/class-uni-cpo-templates.php:513
+msgid ""
+"Cart item of this product will be possible to edit in the cart in \"full\" "
+"edit mode if this option is enabled. It means that a customer will be "
+"redirected to the product page where options' values will be pre-filled with "
+"those from the cart item. A customer will be redirected to the cart after "
+"clicking both \"Cancel\" and \"Update\" buttons. The related cart item "
+"options' values will be updated if \"Update\" button will be clicked."
+msgstr ""
+"如果启用此选项，此产品的购物车项目将可以以\"完全\"编辑模式在购物车中编辑。这"
+"意味着客户将被重定向到产品页面，其中选项的值将预先填充购物车项目的值。单击"
+"\"取消\"和\"更新\"按钮后，客户将被重定向到购物车。如果单击\"更新\"按钮，将更"
+"新相关购物车选项的值。"
+
+#: includes/class-uni-cpo-templates.php:532
+msgid "Enable \"silent validation\" mode?"
+msgstr "启用\"静默验证\"模式？"
+
+#: includes/class-uni-cpo-templates.php:534
+msgid ""
+"Removes validation error messages for all the required fields, but still "
+"correctly validates them; useful for preventing \"this field is required\" "
+"messages spam in the form field."
+msgstr ""
+"删除所有所需字段的验证错误消息，但仍正确验证它们;可用于防止窗体字段中的\"此字"
+"段是必需的\"垃圾邮件。"
+
+#: includes/class-uni-cpo-templates.php:540
+msgid "Custom quantity field"
+msgstr "自定义数量字段"
+
+#: includes/class-uni-cpo-templates.php:543
+msgid ""
+"By default it is a standard WC qty field. But it also can be any Text Input "
+"based custom option. Important: WC original \"sold individually\" setting "
+"must be enabled so this setting could work!"
+msgstr ""
+"默认情况下，它是一个标准的 WC qty 字段。但它也可以是任何基于文本输入的自定义"
+"选项。重要提示：必须启用 WC 原始\"单独销售\"设置，以便此设置可以正常工作！"
+
+#: includes/class-uni-cpo-templates.php:548
+#: includes/class-uni-cpo-templates.php:1049
+msgid "WC qty field"
+msgstr "WC数量字段"
+
+#: includes/class-uni-cpo-templates.php:572
+msgid "Sold individually?"
+msgstr "单独卖吗?"
+
+#: includes/class-uni-cpo-templates.php:574
+msgid ""
+"Uni CPO uses WC original \"sold individually\" setting for hiding WC qty "
+"field only. Still, we need a possibility to restrict adding the same product "
+"twice to the cart even for Uni CPO enabled products. This is exactly what "
+"this setting does!"
+msgstr ""
+"Uni CPO使用WC原始的“单独出售”设置来仅隐藏WC数量字段。尽管如此，即使对于支持"
+"Uni CPO的产品，我们仍然需要限制将同一产品两次添加到购物车中。这正是此设置的作"
+"用！"
+
+#: includes/class-uni-cpo-templates.php:592
+msgid "Reset form button?"
+msgstr "重置表单按钮？"
+
+#: includes/class-uni-cpo-templates.php:594
+msgid "Enable this option if you want to show \"Reset all form\" button"
+msgstr "如果要显示\"重置所有窗体\"按钮，请启用此选项"
+
+#: includes/class-uni-cpo-templates.php:602
+msgid "Minimal price"
+msgstr "最低价格"
+
+#: includes/class-uni-cpo-templates.php:605
+msgid ""
+"Set minimal possible price for the product regardless the calculated value "
+"by using the product custom formula."
+msgstr "使用产品自定义公式为产品设置最低可能价格，而不考虑计算值。"
+
+#: includes/class-uni-cpo-templates.php:607
+msgid ""
+" Important: you still have to define a regular product price under General "
+"tab! Otherwise, this product will be considered as free."
+msgstr ""
+"重要提示：您仍要在\"常规\"选项卡下定义常规产品价格！否则，此产品将被视为免"
+"费。"
+
+#: includes/class-uni-cpo-templates.php:621
+msgid "Maximum price"
+msgstr "最高价格"
+
+#: includes/class-uni-cpo-templates.php:624
+msgid ""
+"Set maximum possible price for the product. The calculated price will be "
+"compared with this value and ordering of the product will be disabled if the "
+"calculated price is bigger than this value. If \"Text to display when "
+"ordering is disabled\" setting is not empty, its value will be displayed in "
+"this case."
+msgstr ""
+"设置产品的最高可能价格。将计算出的价格与此值进行比较，如果计算出的价格大于该"
+"值，则将禁用该产品的订购。如果“禁用订购时显示的文本”设置不为空，则在这种情况"
+"下将显示其值。"
+
+#: includes/class-uni-cpo-templates.php:637
+msgid "Text to display when ordering is disabled"
+msgstr "禁用订购时要显示的文本"
+
+#: includes/class-uni-cpo-templates.php:640
+msgid ""
+"Every time you use a special word \"disable\" instead of actual formula, the "
+"product becomes disabled for ordering and the text below is displayed just "
+"under the product price. Leave it empty to disable the setting."
+msgstr ""
+"每次使用特殊单词\"禁用\"而不是实际配方时，产品都会因订购而禁用，下面的文本仅"
+"显示在产品价格下。将其留空以禁用该设置。"
+
+#: includes/class-uni-cpo-templates.php:651
+msgid "Price suffix"
+msgstr "價格後綴"
+
+#: includes/class-uni-cpo-templates.php:654
+msgid ""
+"Custom price tag suffix. If set, will be shown ONLY if the product ordering "
+"is disabled for any reason."
+msgstr "自定义价格标签后缀。如果设置，则仅在因任何原因禁用产品订购时才显示。"
+
+#: includes/class-uni-cpo-templates.php:666
+msgid "Price postfix"
+msgstr "价格后缀"
+
+#: includes/class-uni-cpo-templates.php:669
+msgid "Custom price tag postfix. If set, will be shown in any case."
+msgstr "自定义价格标签后缀。如果设置，将在任何情况下显示。"
+
+#: includes/class-uni-cpo-templates.php:681
+msgid "Starting price"
+msgstr "起步价"
+
+#: includes/class-uni-cpo-templates.php:684
+msgid ""
+"Displays a starting price (marketing price) instead of \"0.00\" if any of "
+"required options is empty. Leave empty to disable the setting."
+msgstr ""
+"如果任何必需选项为空，将显示起始价格（市场价）而不是\"0.00\"。留空以禁用设"
+"置。"
+
+#: includes/class-uni-cpo-templates.php:697
+msgid "Price template for archives"
+msgstr "存档的价格模板"
+
+#: includes/class-uni-cpo-templates.php:712
+msgid "Price template for archives during active sale"
+msgstr "活跃销售期间存档的价格模板"
+
+#: includes/class-uni-cpo-templates.php:715
+msgid ""
+"This the same as above, but this template will be chosen only during active "
+"sales campaign for this product."
+msgstr "这与上述相同，但此模板仅在此产品的活动销售活动期间选择。"
+
+#: includes/class-uni-cpo-templates.php:745
+msgid "Enable Colorify?"
+msgstr "启用Colorify？"
+
+#: includes/class-uni-cpo-templates.php:747
+msgid ""
+"Enables \"Colorify\" functionality. Important: product image must be set "
+"(either alone or with product gallery images)."
+msgstr "启用\"着色\"功能。重要提示：必须设置产品映像（单独或使用产品库图像）。"
+
+#: includes/class-uni-cpo-templates.php:766
+msgid "Enable Imagify?"
+msgstr "启用想象？"
+
+#: includes/class-uni-cpo-templates.php:768
+msgid ""
+"Enables \"Imagify\" functionality. Important: it does not work when Colorify "
+"is enabled! You have to use either Colorify or Imagify. Important: product "
+"image must be set (either alone or with product gallery images)."
+msgstr ""
+"启用“放大”功能。重要提示：启用Colorify时，它不起作用！您必须使用Colorify或"
+"Imagify。重要：必须设置产品图像（单独设置或与产品库图像一起设置）。"
+
+#: includes/class-uni-cpo-templates.php:774
+msgid "Base image for Imagify"
+msgstr "用于想象的基本图像"
+
+#: includes/class-uni-cpo-templates.php:777
+msgid ""
+"Adds a base image (the static one that will be placed below all other "
+"\"images-layers\") to be used for Imagify"
+msgstr "添加一个基础图像（静态图像，将放置在所有其他\"图像层\"下方），用于想象"
+
+#: includes/class-uni-cpo-templates.php:816
+msgid "Duplicate from another product"
+msgstr "来自其他产品的重复"
+
+#: includes/class-uni-cpo-templates.php:822
+#: includes/settings/class-uni-cpo-setting-sync.php:72
+msgid "Fetch data"
+msgstr "取出数据"
+
+#: includes/class-uni-cpo-templates.php:825
+msgid "-None-"
+msgstr "-无-"
+
+#: includes/class-uni-cpo-templates.php:846
+msgid "remove pid attribute values from all the modules"
+msgstr "从所有模块中删除pid属性值"
+
+#: includes/class-uni-cpo-templates.php:859
+#: includes/class-uni-cpo-templates.php:2416
+#: includes/class-uni-cpo-templates.php:2694
+#: includes/settings/class-uni-cpo-setting-cpo-matrix-data.php:101
+msgid "Choose a file"
+msgstr "选择一个文件"
+
+#: includes/class-uni-cpo-templates.php:874
+msgid "Email"
+msgstr "電子郵件"
+
+#: includes/class-uni-cpo-templates.php:884
+msgid "Your email"
+msgstr "您的邮箱"
+
+#: includes/class-uni-cpo-templates.php:937
+msgid "Role Based Discounts"
+msgstr "基于角色的折扣"
+
+#: includes/class-uni-cpo-templates.php:943
+msgid "Quantity Based Discounts"
+msgstr "基于数量的折扣"
+
+#: includes/class-uni-cpo-templates.php:951
+msgid "Cart discounts strategy"
+msgstr "购物车折扣策略"
+
+#: includes/class-uni-cpo-templates.php:954
+msgid "Choose how to apply different types of cart discounts"
+msgstr "选择如何应用不同类型的购物车折扣"
+
+#: includes/class-uni-cpo-templates.php:957
+msgid "Use the highest discount only"
+msgstr "仅使用最高折扣"
+
+#: includes/class-uni-cpo-templates.php:958
+msgid "Combine all applicable discounts"
+msgstr "合并所有适用的折扣"
+
+#: includes/class-uni-cpo-templates.php:978
+msgid "Enable role based cart discounts?"
+msgstr "启用基于角色的购物车折扣？"
+
+#: includes/class-uni-cpo-templates.php:980
+msgid ""
+"This setting enables/disables cart discounts functionality based on a user "
+"role."
+msgstr "此设置根据用户角色启用/禁用购物车折扣功能。"
+
+#: includes/class-uni-cpo-templates.php:1000
+msgid "Enable quantity based cart discounts?"
+msgstr "启用基于数量的购物车折扣？"
+
+#: includes/class-uni-cpo-templates.php:1002
+msgid ""
+"This setting enables/disables cart discounts functionality based on the "
+"quantity of ordered items."
+msgstr "此设置根据订购物料的数量启用/禁用购物车折扣功能。"
+
+#: includes/class-uni-cpo-templates.php:1016
+msgid "Type and value of discount for"
+msgstr "折扣的类型和值"
+
+#: includes/class-uni-cpo-templates.php:1024
+#: includes/class-uni-cpo-templates.php:1101
+#: includes/class-uni-cpo-templates.php:1154
+msgid "Percentage"
+msgstr "百分比"
+
+#: includes/class-uni-cpo-templates.php:1025
+#: includes/class-uni-cpo-templates.php:1102
+#: includes/class-uni-cpo-templates.php:1155
+#: includes/settings/class-uni-cpo-setting-background-image.php:140
+#: includes/settings/class-uni-cpo-setting-content-width.php:24
+msgid "Fixed"
+msgstr "固定"
+
+#: includes/class-uni-cpo-templates.php:1041
+msgid "Choose a qty field to check for qty discounts based on."
+msgstr "选择一个数量字段，以检查基于数量的折扣。"
+
+#: includes/class-uni-cpo-templates.php:1044
+msgid ""
+"It may be standard WC qty field or any custom option that serves as qty "
+"field. We do not recommend using the option chosen here in your price "
+"calculation formula, still it is possible. Always double check ;)"
+msgstr ""
+"它可以是标准的WC数量字段，也可以是用作数量字段的任何自定义选项。 我们不建议您"
+"在价格计算公式中使用此处选择的选项，但仍然可以。 总是仔细检查;）"
+
+#: includes/class-uni-cpo-templates.php:1066
+#: includes/class-uni-cpo-templates.php:1279
+#: includes/class-uni-cpo-templates.php:1413
+#: includes/class-uni-cpo-templates.php:1668
+#: includes/class-uni-cpo-templates.php:1817
+#: includes/class-uni-cpo-templates.php:2216
+#: includes/settings/class-uni-cpo-setting-cpo-date-rules.php:51
+#: includes/settings/class-uni-cpo-setting-cpo-sc-scheme.php:50
+#: includes/settings/class-uni-cpo-setting-cpo-vc-scheme.php:47
+msgid "Add Rule"
+msgstr "添加规则"
+
+#: includes/class-uni-cpo-templates.php:1067
+#: includes/class-uni-cpo-templates.php:1280
+#: includes/class-uni-cpo-templates.php:1414
+#: includes/class-uni-cpo-templates.php:1669
+#: includes/class-uni-cpo-templates.php:1818
+#: includes/class-uni-cpo-templates.php:2217
+#: includes/settings/class-uni-cpo-setting-cpo-date-rules.php:52
+#: includes/settings/class-uni-cpo-setting-cpo-sc-scheme.php:51
+#: includes/settings/class-uni-cpo-setting-cpo-vc-scheme.php:48
+msgid "Remove All"
+msgstr "移除所有"
+
+#: includes/class-uni-cpo-templates.php:1079
+#: includes/class-uni-cpo-templates.php:1132
+msgid "Min. qty"
+msgstr "最小数量"
+
+#: includes/class-uni-cpo-templates.php:1088
+#: includes/class-uni-cpo-templates.php:1141
+msgid "Max. qty"
+msgstr "最大 qty"
+
+#: includes/class-uni-cpo-templates.php:1097
+#: includes/class-uni-cpo-templates.php:1150
+#: includes/settings/class-uni-cpo-setting-background-type.php:21
+#: includes/settings/class-uni-cpo-setting-divider-style.php:21
+msgid "Type"
+msgstr "类型"
+
+#: includes/class-uni-cpo-templates.php:1105
+#: includes/class-uni-cpo-templates.php:1158
+msgid "Discount"
+msgstr "折扣"
+
+#: includes/class-uni-cpo-templates.php:1218
+msgid "Main Formula & Formulas Conditional Logic"
+msgstr "主要公式和公式条件逻辑"
+
+#: includes/class-uni-cpo-templates.php:1224
+msgid "Formula"
+msgstr "公式"
+
+#: includes/class-uni-cpo-templates.php:1226
+msgid ""
+"This is a simple formula for your product. It will be applied if no rules "
+"are added or none of them are match."
+msgstr ""
+"这是一个简单的公式，您的产品。如果未添加任何规则或没有规则匹配，则将应用该规"
+"则。"
+
+#: includes/class-uni-cpo-templates.php:1244
+#: includes/class-uni-cpo-templates.php:1633
+msgid "Conditional Logic"
+msgstr "条件逻辑"
+
+#: includes/class-uni-cpo-templates.php:1246
+msgid ""
+"It is also possible to use Formula Conditional Rules feature. First, enable "
+"it here and add some rules then."
+msgstr "也可以使用公式条件规则功能。首先，在这里启用它，然后添加一些规则。"
+
+#: includes/class-uni-cpo-templates.php:1252
+msgid "Main formula"
+msgstr "主要配方"
+
+#: includes/class-uni-cpo-templates.php:1261
+#: includes/class-uni-cpo-templates.php:1650
+#: includes/class-uni-cpo-templates.php:2172
+msgid "Available variables:"
+msgstr "可用变量："
+
+#: includes/class-uni-cpo-templates.php:1275
+#: includes/class-uni-cpo-templates.php:1409
+#: includes/class-uni-cpo-templates.php:1664
+#: includes/class-uni-cpo-templates.php:1813
+msgid "Controls:"
+msgstr "控制"
+
+#: includes/class-uni-cpo-templates.php:1296
+#: includes/class-uni-cpo-templates.php:1329
+#: includes/class-uni-cpo-templates.php:1430
+#: includes/class-uni-cpo-templates.php:1495
+#: includes/class-uni-cpo-templates.php:1686
+#: includes/class-uni-cpo-templates.php:1721
+#: includes/class-uni-cpo-templates.php:1835
+#: includes/class-uni-cpo-templates.php:1875
+#: includes/settings/class-uni-cpo-setting-cpo-date-rules.php:69
+#: includes/settings/class-uni-cpo-setting-cpo-date-rules.php:103
+#: includes/settings/class-uni-cpo-setting-cpo-fc-scheme.php:42
+#: includes/settings/class-uni-cpo-setting-cpo-sc-scheme.php:68
+#: includes/settings/class-uni-cpo-setting-cpo-sc-scheme.php:116
+#: includes/settings/class-uni-cpo-setting-cpo-vc-scheme.php:65
+#: includes/settings/class-uni-cpo-setting-cpo-vc-scheme.php:99
+msgid "Fetch the rule"
+msgstr "获取规则"
+
+#: includes/class-uni-cpo-templates.php:1383
+#: includes/class-uni-cpo-templates.php:1403
+msgid "Image Conditional Logic"
+msgstr "图像条件逻辑"
+
+#: includes/class-uni-cpo-templates.php:1405
+msgid ""
+"It is possible to change the main image of product item based on the values "
+"of custom options."
+msgstr "可以根据自定义选项的值更改产品项的主图像。"
+
+#: includes/class-uni-cpo-templates.php:1438
+#: includes/class-uni-cpo-templates.php:1503
+#: includes/modules/class-uni-cpo-module-image.php:29
+#: includes/settings/class-uni-cpo-setting-background-image.php:40
+#: includes/settings/class-uni-cpo-setting-background-type.php:28
+#: includes/settings/class-uni-cpo-setting-cpo-mode-checkbox.php:24
+#: includes/settings/class-uni-cpo-setting-cpo-mode-radio.php:25
+#: includes/settings/class-uni-cpo-setting-cpo-radio-options.php:199
+#: includes/settings/class-uni-cpo-setting-cpo-radio-options.php:402
+#: includes/settings/class-uni-cpo-setting-image.php:21
+msgid "Image"
+msgstr "圖片"
+
+#: includes/class-uni-cpo-templates.php:1439
+#: includes/class-uni-cpo-templates.php:1504
+msgid ""
+"Is used as a suboption image as well as can be used as the one that replaces "
+"the main product image"
+msgstr "选！用作子选项映像，也可以用作替换主产品映像的图像"
+
+#: includes/class-uni-cpo-templates.php:1593
+#: includes/class-uni-cpo-templates.php:1613
+msgid "Weight Calculation"
+msgstr "重量计算"
+
+#: includes/class-uni-cpo-templates.php:1615
+msgid ""
+"It is possible to calculate the weight of the ordered product item based on "
+"the values of custom options and a custom maths formula."
+msgstr "可以根据自定义选项和自定义数学公式的值计算订购产品物料的权重。"
+
+#: includes/class-uni-cpo-templates.php:1635
+msgid "It is also possible to use Weight Formula Conditional Rules feature."
+msgstr "也可以使用权重公式条件规则功能。"
+
+#: includes/class-uni-cpo-templates.php:1641
+msgid "Main formula for weight"
+msgstr "重量的主要公式"
+
+#: includes/class-uni-cpo-templates.php:1786
+#: includes/class-uni-cpo-templates.php:1806
+msgid "Shipping class"
+msgstr "运费类别"
+
+#: includes/class-uni-cpo-templates.php:1808
+#, fuzzy
+msgid ""
+"Enable conditional logic for shipping class. The chosen shipping class will "
+"be set dynamically to this product after it is being added to the cart."
+msgstr ""
+"为运输类启用条件逻辑。将该产品添加到购物车后，所选的运输等级将动态设置为该产"
+"品。"
+
+#: includes/class-uni-cpo-templates.php:1846
+#: includes/class-uni-cpo-templates.php:1886
+#, fuzzy
+msgid "No shipping class chosen"
+msgstr "未选择运输等级"
+
+#: includes/class-uni-cpo-templates.php:1949
+msgid "Dimensions Settings"
+msgstr "查看尺寸设置"
+
+#: includes/class-uni-cpo-templates.php:1969
+msgid "Dimensions Calculation"
+msgstr "尺寸计算"
+
+#: includes/class-uni-cpo-templates.php:1971
+msgid ""
+"It is possible to enable setting ordered product dimensions dynamically "
+"based on chosen custom options"
+msgstr "可以根据所选的自定义选项动态启用设置订购的产品维度"
+
+#: includes/class-uni-cpo-templates.php:1977
+msgid "Measurement unit"
+msgstr "计量单位"
+
+#: includes/class-uni-cpo-templates.php:1979
+#, php-format
+msgid ""
+"The following measurement unit is being used in your store: %s (according to "
+"the WC settings). The same unit will be used by your shipping plugin (if you "
+"use any)."
+msgstr ""
+"您的商店中正在使用以下度量单位：%s（根据WC设置）。您的运输插件将使用相同的单"
+"位（如果使用的话）。"
+
+#: includes/class-uni-cpo-templates.php:1981
+msgid ""
+"Additionally, you may use this setting if you want to let you customers to "
+"choose an input measurement unit dynamically. Select the option which "
+"handles this. The values of the options responsible for width, height and "
+"length will be automatically converted FROM the unit chosen in this option "
+"TO the measurement unit of your store before are being sent both to shipping "
+"plugin and used in price calculation."
+msgstr ""
+"此外，如果您希望让客户动态选择输入测量单位，可以使用此设置。选择处理此问题的"
+"选项。负责宽度、高度和长度的选项的值将自动从此选项中选择的单位转换为商店的测"
+"量单位，然后被发送到运输插件并用于价格计算。"
+
+#: includes/class-uni-cpo-templates.php:1984
+#: includes/class-uni-cpo-templates.php:2015
+#: includes/class-uni-cpo-templates.php:2049
+#: includes/class-uni-cpo-templates.php:2083
+msgid "- Not selected -"
+msgstr "- 未选择 -"
+
+#: includes/class-uni-cpo-templates.php:1992
+msgid "Length"
+msgstr "长度"
+
+#: includes/class-uni-cpo-templates.php:2009
+msgid "Convert length automatically?"
+msgstr "自动转换长度？"
+
+#: includes/class-uni-cpo-templates.php:2012
+msgid "Select the option which value will be used as product length."
+msgstr "选择将哪个值用作产品长度的选项。"
+
+#: includes/class-uni-cpo-templates.php:2026
+#: includes/settings/class-uni-cpo-setting-width-px.php:21
+#: includes/settings/class-uni-cpo-setting-width.php:21
+msgid "Width"
+msgstr "宽度"
+
+#: includes/class-uni-cpo-templates.php:2043
+msgid "Convert width automatically?"
+msgstr "自动转换宽度？"
+
+#: includes/class-uni-cpo-templates.php:2046
+msgid "Select the option which value will be used as product width."
+msgstr "选择将哪个值用作产品高度的选项。"
+
+#: includes/class-uni-cpo-templates.php:2060
+#: includes/settings/class-uni-cpo-setting-height-px.php:21
+#: includes/settings/class-uni-cpo-setting-height.php:21
+msgid "Height"
+msgstr "高度"
+
+#: includes/class-uni-cpo-templates.php:2077
+msgid "Convert height automatically?"
+msgstr "自动转换高度？"
+
+#: includes/class-uni-cpo-templates.php:2080
+msgid "Select the option which value will be used as product height."
+msgstr "选择将哪个值用作产品高度的选项。"
+
+#: includes/class-uni-cpo-templates.php:2128
+#: includes/class-uni-cpo-templates.php:2147
+msgid "Non Option Variables"
+msgstr "非选项变量"
+
+#: includes/class-uni-cpo-templates.php:2148
+msgid "NOVs are variables without direct connection to any options."
+msgstr "NOV 是变量，无需直接与任何选项连接。"
+
+#: includes/class-uni-cpo-templates.php:2167
+msgid "Wholesale"
+msgstr "批发"
+
+#: includes/class-uni-cpo-templates.php:2168
+msgid ""
+"Enabling this functionality will make it possible to set different value/"
+"formula on per user role basis"
+msgstr "启用此功能将使得可以基于每个用户角色设置不同的值/公式"
+
+#: includes/class-uni-cpo-templates.php:2211
+msgid "Controls"
+msgstr "控制"
+
+#: includes/class-uni-cpo-templates.php:2245
+#: includes/class-uni-cpo-templates.php:2481
+msgid "Matrix?"
+msgstr "域名价格矩阵"
+
+#: includes/class-uni-cpo-templates.php:2259
+#: includes/class-uni-cpo-templates.php:2496
+msgid "Convert unit?"
+msgstr "转换单位？"
+
+#: includes/class-uni-cpo-templates.php:2270
+#: includes/class-uni-cpo-templates.php:2508
+msgid "to"
+msgstr "到"
+
+#: includes/class-uni-cpo-templates.php:2275
+#: includes/class-uni-cpo-templates.php:2514
+msgid "WC default unit"
+msgstr "WC 默认单位"
+
+#: includes/class-uni-cpo-templates.php:2276
+#: includes/class-uni-cpo-templates.php:2515
+msgid "mm"
+msgstr "毫米"
+
+#: includes/class-uni-cpo-templates.php:2277
+#: includes/class-uni-cpo-templates.php:2516
+msgid "cm"
+msgstr "厘米"
+
+#: includes/class-uni-cpo-templates.php:2278
+#: includes/class-uni-cpo-templates.php:2517
+msgid "m"
+msgstr "m"
+
+#: includes/class-uni-cpo-templates.php:2279
+#: includes/class-uni-cpo-templates.php:2518
+msgid "in"
+msgstr "在"
+
+#: includes/class-uni-cpo-templates.php:2280
+#: includes/class-uni-cpo-templates.php:2519
+msgid "ft"
+msgstr "英尺"
+
+#: includes/class-uni-cpo-templates.php:2281
+#: includes/class-uni-cpo-templates.php:2520
+msgid "yd"
+msgstr "码"
+
+#: includes/class-uni-cpo-templates.php:2288
+#: includes/class-uni-cpo-templates.php:2527
+msgid "Display in cart?"
+msgstr "在标题中显示购物车图标？"
+
+#: includes/class-uni-cpo-templates.php:2300
+#: includes/class-uni-cpo-templates.php:2540
+msgid "Name"
+msgstr "名称"
+
+#: includes/class-uni-cpo-templates.php:2406
+#: includes/class-uni-cpo-templates.php:2684
+#: includes/settings/class-uni-cpo-setting-cpo-matrix-data.php:91
+msgid "Generate"
+msgstr "生成"
+
+#: includes/data-stores/class-uni-cpo-data-store.php:54
+#: includes/data-stores/class-uni-cpo-data-store.php:60
+#: includes/data-stores/class-uni-cpo-data-store.php:66
+msgid "Invalid data store."
+msgstr "无效的数据存储."
+
+#: includes/data-stores/class-uni-cpo-option-data-store-cpt.php:84
+msgid "Invalid option."
+msgstr "选项无效。"
+
+#: includes/modules/class-uni-cpo-module-button.php:29
+msgid "Button"
+msgstr "按鈕"
+
+#: includes/modules/class-uni-cpo-module-button.php:42
+msgid "Click here"
+msgstr "点击这里"
+
+#: includes/modules/class-uni-cpo-module-image.php:142
+msgid "Please add image to this module!"
+msgstr "请在此模块中添加图片！"
+
+#: includes/modules/class-uni-cpo-module-text.php:29
+msgid "Paragraph"
+msgstr "段落"
+
+#: includes/modules/class-uni-cpo-module-text.php:42
+msgid "Some text here"
+msgstr "一些关于服务的文字"
+
+#: includes/options/class-uni-cpo-option-checkbox.php:39
+msgid "Checkbox Inputs"
+msgstr "复选框输入"
+
+#: includes/options/class-uni-cpo-option-checkbox.php:793
+#: includes/options/class-uni-cpo-option-radio.php:820
+msgid "Please add suboptions to this option!"
+msgstr "请向此选项添加子选项！"
+
+#: includes/options/class-uni-cpo-option-datepicker.php:38
+msgid "Date picker"
+msgstr "日期选择器"
+
+#: includes/options/class-uni-cpo-option-distance-by-postcode.php:36
+msgid "Distance By Postcode"
+msgstr "距离（按邮政编码）"
+
+#: includes/options/class-uni-cpo-option-dynamic-notice.php:36
+msgid "Dynamic Notice"
+msgstr "动态通知"
+
+#: includes/options/class-uni-cpo-option-extra-cart-button.php:36
+msgid "Extra Cart Button"
+msgstr "额外购物车按钮"
+
+#: includes/options/class-uni-cpo-option-extra-cart-button.php:197
+msgid "Add to cart"
+msgstr "添加到购物车"
+
+#: includes/options/class-uni-cpo-option-file-upload.php:36
+msgid "File Upload"
+msgstr "文件上传"
+
+#: includes/options/class-uni-cpo-option-file-upload.php:173
+msgid "Add/Edit file"
+msgstr "添加/编辑"
+
+#: includes/options/class-uni-cpo-option-file-upload.php:193
+msgid ""
+"Local storage setting is set to \"Dropbox\", so it is not possible to add/"
+"edit files from here"
+msgstr "本地存储设置设置为\"Dropbox\"，因此无法从这里添加/编辑文件"
+
+#: includes/options/class-uni-cpo-option-font-preview.php:36
+msgid "Font Preview"
+msgstr "字体预览"
+
+#: includes/options/class-uni-cpo-option-google-map.php:36
+msgid "Google Map"
+msgstr "谷歌地图"
+
+#: includes/options/class-uni-cpo-option-google-map.php:316
+msgid "Google map is unavailable in the builder mode"
+msgstr "Google地图在构建器模式下不可用"
+
+#: includes/options/class-uni-cpo-option-radio.php:39
+msgid "Radio Inputs"
+msgstr "无线电输入"
+
+#: includes/options/class-uni-cpo-option-radio.php:214
+#: includes/options/class-uni-cpo-option-radio.php:241
+#: includes/options/class-uni-cpo-option-select.php:223
+#: includes/options/class-uni-cpo-option-select.php:250
+#: includes/options/class-uni-cpo-option-select.php:500
+#: includes/options/class-uni-cpo-option-select.php:638
+#: includes/options/class-uni-cpo-option-select.php:663
+msgid "Please select..."
+msgstr "请选择……"
+
+#: includes/options/class-uni-cpo-option-radio.php:964
+msgid "Please add image to suboption"
+msgstr "请将图像添加到子选项"
+
+#: includes/options/class-uni-cpo-option-range-slider.php:36
+msgid "Range Slider"
+msgstr "范围滑块"
+
+#: includes/options/class-uni-cpo-option-select.php:39
+msgid "Select"
+msgstr "選擇"
+
+#: includes/options/class-uni-cpo-option-text-area.php:36
+msgid "Text Area"
+msgstr "文本区域"
+
+#: includes/options/class-uni-cpo-option-text-input.php:36
+msgid "Text Input"
+msgstr "文本输入"
+
+#: includes/settings/class-uni-cpo-setting-align.php:21
+msgid "Align"
+msgstr "对齐"
+
+#: includes/settings/class-uni-cpo-setting-background-color.php:21
+#: includes/settings/class-uni-cpo-setting-background-type.php:27
+#: includes/settings/class-uni-cpo-setting-color.php:21
+msgid "Color"
+msgstr "颜色"
+
+#: includes/settings/class-uni-cpo-setting-background-hover-color.php:21
+#: includes/settings/class-uni-cpo-setting-color-hover.php:21
+msgid "Hover Color"
+msgstr "悬停颜色"
+
+#: includes/settings/class-uni-cpo-setting-background-image.php:72
+#: includes/settings/class-uni-cpo-setting-background-image.php:83
+msgid "Repeat"
+msgstr "重複"
+
+#: includes/settings/class-uni-cpo-setting-background-image.php:82
+#: includes/settings/class-uni-cpo-setting-background-image.php:163
+#: includes/settings/class-uni-cpo-setting-background-type.php:26
+#: includes/settings/class-uni-cpo-setting-border-bottom.php:45
+#: includes/settings/class-uni-cpo-setting-border-left.php:45
+#: includes/settings/class-uni-cpo-setting-border-right.php:45
+#: includes/settings/class-uni-cpo-setting-border-top.php:45
+#: includes/settings/class-uni-cpo-setting-float.php:25
+#: includes/settings/class-uni-cpo-setting-font-weight.php:24
+#: includes/settings/class-uni-cpo-setting-sync.php:59
+msgid "None"
+msgstr "无"
+
+#: includes/settings/class-uni-cpo-setting-background-image.php:84
+msgid "Repeat-X"
+msgstr "重复-X"
+
+#: includes/settings/class-uni-cpo-setting-background-image.php:85
+msgid "Repeat-Y"
+msgstr "重复-Y"
+
+#: includes/settings/class-uni-cpo-setting-background-image.php:98
+msgid "Position"
+msgstr "位置"
+
+#: includes/settings/class-uni-cpo-setting-background-image.php:108
+msgid "Center Top"
+msgstr "中央上方"
+
+#: includes/settings/class-uni-cpo-setting-background-image.php:109
+msgid "Center Center"
+msgstr "居中"
+
+#: includes/settings/class-uni-cpo-setting-background-image.php:110
+msgid "Center Bottom"
+msgstr "中下"
+
+#: includes/settings/class-uni-cpo-setting-background-image.php:111
+msgid "Left Top"
+msgstr "左上"
+
+#: includes/settings/class-uni-cpo-setting-background-image.php:112
+msgid "Left Center"
+msgstr "左中"
+
+#: includes/settings/class-uni-cpo-setting-background-image.php:113
+msgid "Left Bottom"
+msgstr "左下"
+
+#: includes/settings/class-uni-cpo-setting-background-image.php:114
+msgid "Right Top"
+msgstr "右上"
+
+#: includes/settings/class-uni-cpo-setting-background-image.php:115
+msgid "Right Center"
+msgstr "右中"
+
+#: includes/settings/class-uni-cpo-setting-background-image.php:116
+msgid "Right Bottom"
+msgstr "右下"
+
+#: includes/settings/class-uni-cpo-setting-background-image.php:129
+msgid "Attachment"
+msgstr "附件"
+
+#: includes/settings/class-uni-cpo-setting-background-image.php:139
+msgid "Scroll"
+msgstr "滚动"
+
+#: includes/settings/class-uni-cpo-setting-background-image.php:153
+msgid "Size"
+msgstr "大小"
+
+#: includes/settings/class-uni-cpo-setting-background-image.php:164
+msgid "Contain"
+msgstr "包含"
+
+#: includes/settings/class-uni-cpo-setting-background-image.php:165
+msgid "Cover"
+msgstr "覆盖"
+
+#: includes/settings/class-uni-cpo-setting-border-bottom.php:21
+#: includes/settings/class-uni-cpo-setting-vertical-align.php:26
+msgid "Bottom"
+msgstr "底部"
+
+#: includes/settings/class-uni-cpo-setting-border-bottom.php:46
+#: includes/settings/class-uni-cpo-setting-border-left.php:46
+#: includes/settings/class-uni-cpo-setting-border-right.php:46
+#: includes/settings/class-uni-cpo-setting-border-top.php:46
+#: includes/settings/class-uni-cpo-setting-divider-style.php:24
+msgid "Solid"
+msgstr "实线"
+
+#: includes/settings/class-uni-cpo-setting-border-bottom.php:47
+#: includes/settings/class-uni-cpo-setting-border-left.php:47
+#: includes/settings/class-uni-cpo-setting-border-right.php:47
+#: includes/settings/class-uni-cpo-setting-border-top.php:47
+#: includes/settings/class-uni-cpo-setting-divider-style.php:25
+msgid "Dashed"
+msgstr "虚线"
+
+#: includes/settings/class-uni-cpo-setting-border-bottom.php:48
+#: includes/settings/class-uni-cpo-setting-border-left.php:48
+#: includes/settings/class-uni-cpo-setting-border-right.php:48
+#: includes/settings/class-uni-cpo-setting-border-top.php:48
+#: includes/settings/class-uni-cpo-setting-divider-style.php:26
+msgid "Dotted"
+msgstr "点线"
+
+#: includes/settings/class-uni-cpo-setting-border-bottom.php:49
+#: includes/settings/class-uni-cpo-setting-border-left.php:49
+#: includes/settings/class-uni-cpo-setting-border-right.php:49
+#: includes/settings/class-uni-cpo-setting-border-top.php:49
+#: includes/settings/class-uni-cpo-setting-cpo-range-type.php:28
+#: includes/settings/class-uni-cpo-setting-divider-style.php:27
+msgid "Double"
+msgstr "双线"
+
+#: includes/settings/class-uni-cpo-setting-border-left.php:21
+#: includes/settings/class-uni-cpo-setting-float.php:23
+msgid "Left"
+msgstr "左侧"
+
+#: includes/settings/class-uni-cpo-setting-border-right.php:21
+#: includes/settings/class-uni-cpo-setting-float.php:24
+msgid "Right"
+msgstr "右侧"
+
+#: includes/settings/class-uni-cpo-setting-border-top.php:21
+#: includes/settings/class-uni-cpo-setting-vertical-align.php:24
+msgid "Top"
+msgstr "顶部"
+
+#: includes/settings/class-uni-cpo-setting-class-name.php:21
+msgid "Class"
+msgstr "类"
+
+#: includes/settings/class-uni-cpo-setting-color-active.php:21
+msgid "Active Color"
+msgstr "激活颜色"
+
+#: includes/settings/class-uni-cpo-setting-color-bottom.php:21
+msgid "Color Bottom"
+msgstr "底部颜色"
+
+#: includes/settings/class-uni-cpo-setting-color-from.php:21
+msgid "From"
+msgstr "从"
+
+#: includes/settings/class-uni-cpo-setting-color-to.php:21
+msgid "To"
+msgstr "到"
+
+#: includes/settings/class-uni-cpo-setting-color-top.php:21
+msgid "Color Top"
+msgstr "顶部颜色"
+
+#: includes/settings/class-uni-cpo-setting-content-width.php:21
+msgid "Content Width"
+msgstr "内容宽度"
+
+#: includes/settings/class-uni-cpo-setting-content-width.php:25
+msgid "Full Width"
+msgstr "全宽"
+
+#: includes/settings/class-uni-cpo-setting-content.php:21
+msgid "Content"
+msgstr "内容"
+
+#: includes/settings/class-uni-cpo-setting-cpo-addtocart-mode.php:21
+msgid "Mode"
+msgstr "模式"
+
+#: includes/settings/class-uni-cpo-setting-cpo-addtocart-mode.php:23
+msgid ""
+"Choose between using like a regular \"add to cart\" button or specifically "
+"for \"free sample\" functionality (marks cart item as \"sample\")."
+msgstr ""
+"您可以选择使用常规“添加到购物车”按钮还是专门用于“免费样品”功能（将购物车商品"
+"标记为“样品”）之间进行选择。"
+
+#: includes/settings/class-uni-cpo-setting-cpo-addtocart-mode.php:25
+msgid "Regular"
+msgstr "定期"
+
+#: includes/settings/class-uni-cpo-setting-cpo-addtocart-mode.php:26
+msgid "\"Free sample\""
+msgstr "\"免费样品\""
+
+#: includes/settings/class-uni-cpo-setting-cpo-custom-values.php:21
+msgid "Custom values"
+msgstr "将 \"自定义\" 值保存到字段的选择中"
+
+#: includes/settings/class-uni-cpo-setting-cpo-custom-values.php:24
+msgid ""
+"A list of comma separated custom values. You must to add at least two "
+"values. Also you can't add comma as last char"
+msgstr ""
+"分隔自定义值的逗号列表。您必须添加至少两个值。此外， 你不能添加逗号作为最后一"
+"个字符"
+
+#: includes/settings/class-uni-cpo-setting-cpo-custom-values.php:25
+#: includes/settings/class-uni-cpo-setting-cpo-date-rules.php:25
+#: includes/settings/class-uni-cpo-setting-cpo-date-type.php:25
+#: includes/settings/class-uni-cpo-setting-cpo-day-night.php:25
+#: includes/settings/class-uni-cpo-setting-cpo-enable-cartedit.php:25
+#: includes/settings/class-uni-cpo-setting-cpo-order-label.php:25
+#: includes/settings/class-uni-cpo-setting-cpo-order-visibility.php:25
+#: includes/settings/class-uni-cpo-setting-cpo-origin-postcode.php:25
+#: includes/settings/class-uni-cpo-setting-cpo-postcode-country.php:25
+#: includes/settings/class-uni-cpo-setting-cpo-radio-options.php:25
+#: includes/settings/class-uni-cpo-setting-cpo-range-type.php:25
+#: includes/settings/class-uni-cpo-setting-cpo-rate.php:26
+#: includes/settings/class-uni-cpo-setting-cpo-select-options.php:25
+#: includes/settings/class-uni-cpo-setting-cpo-slug.php:26
+msgid "Important to save to DB if modified"
+msgstr "修改后保存到 DB 非常重要"
+
+#: includes/settings/class-uni-cpo-setting-cpo-date-conjunction.php:21
+msgid "Conjunction"
+msgstr "合相"
+
+#: includes/settings/class-uni-cpo-setting-cpo-date-conjunction.php:23
+msgid "Customizing the conjunction. Please use this template {#YOUR_SYMBOLS#}"
+msgstr "自定义连接。请使用此模板 {#YOUR_SYMBOLS#}"
+
+#: includes/settings/class-uni-cpo-setting-cpo-date-max.php:21
+msgid "Maximum date"
+msgstr "最晚日期"
+
+#: includes/settings/class-uni-cpo-setting-cpo-date-max.php:23
+msgid "Add the maximum/latest date (inclusively) allowed for selection"
+msgstr "添加允许选择的最大/最新日期（包括）"
+
+#: includes/settings/class-uni-cpo-setting-cpo-date-min.php:21
+msgid "Minimum date"
+msgstr "最短日期"
+
+#: includes/settings/class-uni-cpo-setting-cpo-date-min.php:23
+msgid "Add the minimum/earliest date (inclusively) allowed for selection"
+msgstr "添加允许选择的最小/最早日期（包括）"
+
+#: includes/settings/class-uni-cpo-setting-cpo-date-rules.php:21
+msgid "Dates based rules"
+msgstr "基于日期的规则"
+
+#: includes/settings/class-uni-cpo-setting-cpo-date-rules.php:24
+msgid ""
+"These rules work in addition to \"Price/Rate\" setting and actually extend "
+"this setting far beyond, make it possible to apply different values based on "
+"dates/dates ranges chosen."
+msgstr ""
+"这些规则除了可以使用“价格/费率”设置外，还可以将其扩展到更远的范围，从而可以根"
+"据所选的日期/日期范围应用不同的值。"
+
+#: includes/settings/class-uni-cpo-setting-cpo-date-type.php:21
+#: includes/settings/class-uni-cpo-setting-cpo-type.php:21
+msgid "Type of field"
+msgstr "字段类型"
+
+#: includes/settings/class-uni-cpo-setting-cpo-date-type.php:24
+msgid "Choose between \"single\", \"range\" and \"multiple\" datepicker"
+msgstr "在“单个”，“范围”和“多个”日期选择器之间选择"
+
+#: includes/settings/class-uni-cpo-setting-cpo-date-type.php:27
+#: includes/settings/class-uni-cpo-setting-cpo-postcode-type.php:25
+#: includes/settings/class-uni-cpo-setting-cpo-range-type.php:27
+#: includes/settings/class-uni-cpo-setting-cpo-upload-mode.php:25
+msgid "Single"
+msgstr "单个"
+
+#: includes/settings/class-uni-cpo-setting-cpo-date-type.php:28
+msgid "Range"
+msgstr "范围"
+
+#: includes/settings/class-uni-cpo-setting-cpo-date-type.php:29
+#: includes/settings/class-uni-cpo-setting-cpo-upload-mode.php:26
+msgid "Multiple"
+msgstr "多个"
+
+#: includes/settings/class-uni-cpo-setting-cpo-day-night.php:21
+msgid "Days/Nights mode"
+msgstr "日/夜模式"
+
+#: includes/settings/class-uni-cpo-setting-cpo-day-night.php:24
+msgid "Choose between counting days or nights"
+msgstr "在计数日或日之间进行选择"
+
+#: includes/settings/class-uni-cpo-setting-cpo-day-night.php:27
+msgid "Nights"
+msgstr "晚"
+
+#: includes/settings/class-uni-cpo-setting-cpo-day-night.php:28
+msgid "Days"
+msgstr "天"
+
+#: includes/settings/class-uni-cpo-setting-cpo-def-val.php:21
+msgid "Default (initial) value"
+msgstr "默认（初始）值"
+
+#: includes/settings/class-uni-cpo-setting-cpo-def-val.php:23
+msgid "Add the default value for this field"
+msgstr "添加此字段的默认值"
+
+#: includes/settings/class-uni-cpo-setting-cpo-disabled-dates.php:21
+msgid "Disabled dates"
+msgstr "禁用日期"
+
+#: includes/settings/class-uni-cpo-setting-cpo-disabled-dates.php:23
+msgid "Comma separated list of disabled dates"
+msgstr "逗号分隔的禁用日期列表"
+
+#: includes/settings/class-uni-cpo-setting-cpo-disabled-dates.php:26
+msgid "Select date(s)..."
+msgstr "选择日期..."
+
+#: includes/settings/class-uni-cpo-setting-cpo-enable-cartedit.php:21
+msgid "Enable inline editing in cart?"
+msgstr "在购物车中启用内联编辑？"
+
+#: includes/settings/class-uni-cpo-setting-cpo-enable-cartedit.php:24
+msgid ""
+"Enables/disables a possibility to edit this option inline in the cart. Such "
+"possibility must also be enabled globally for this product."
+msgstr ""
+"启用/禁用在购物车中内联编辑此选项的可能性。此产品还必须在全球范围内启用这种可"
+"能性。"
+
+#: includes/settings/class-uni-cpo-setting-cpo-enable-cartedit.php:27
+#: includes/settings/class-uni-cpo-setting-cpo-is-changeimage.php:25
+#: includes/settings/class-uni-cpo-setting-cpo-is-datepicker-disabled.php:25
+#: includes/settings/class-uni-cpo-setting-cpo-is-fc.php:25
+#: includes/settings/class-uni-cpo-setting-cpo-is-imagify.php:25
+#: includes/settings/class-uni-cpo-setting-cpo-is-required.php:25
+#: includes/settings/class-uni-cpo-setting-cpo-is-resetbutton.php:28
+#: includes/settings/class-uni-cpo-setting-cpo-is-sc.php:25
+#: includes/settings/class-uni-cpo-setting-cpo-is-timepicker.php:25
+#: includes/settings/class-uni-cpo-setting-cpo-is-tooltip.php:25
+#: includes/settings/class-uni-cpo-setting-cpo-is-vc.php:25
+#: includes/settings/class-uni-cpo-setting-cpo-order-visibility.php:27
+#: includes/settings/class-uni-cpo-setting-cpo-range-grid.php:25
+#: includes/settings/class-uni-cpo-setting-cpo-range-input.php:25
+#: includes/settings/class-uni-cpo-setting-cpo-timepicker-type.php:25
+#: includes/settings/class-uni-cpo-setting-rel.php:24
+#, fuzzy
+msgid "No"
+msgstr "否"
+
+#: includes/settings/class-uni-cpo-setting-cpo-enable-cartedit.php:28
+#: includes/settings/class-uni-cpo-setting-cpo-is-changeimage.php:26
+#: includes/settings/class-uni-cpo-setting-cpo-is-datepicker-disabled.php:26
+#: includes/settings/class-uni-cpo-setting-cpo-is-fc.php:26
+#: includes/settings/class-uni-cpo-setting-cpo-is-imagify.php:26
+#: includes/settings/class-uni-cpo-setting-cpo-is-required.php:26
+#: includes/settings/class-uni-cpo-setting-cpo-is-resetbutton.php:29
+#: includes/settings/class-uni-cpo-setting-cpo-is-sc.php:26
+#: includes/settings/class-uni-cpo-setting-cpo-is-timepicker.php:26
+#: includes/settings/class-uni-cpo-setting-cpo-is-tooltip.php:26
+#: includes/settings/class-uni-cpo-setting-cpo-is-vc.php:26
+#: includes/settings/class-uni-cpo-setting-cpo-order-visibility.php:28
+#: includes/settings/class-uni-cpo-setting-cpo-range-grid.php:26
+#: includes/settings/class-uni-cpo-setting-cpo-range-input.php:26
+#: includes/settings/class-uni-cpo-setting-cpo-timepicker-type.php:26
+#: includes/settings/class-uni-cpo-setting-rel.php:25
+msgid "Yes"
+msgstr "是"
+
+#: includes/settings/class-uni-cpo-setting-cpo-encoded-image.php:21
+msgid "Base64 Encoded Image"
+msgstr "Base64编码图像"
+
+#: includes/settings/class-uni-cpo-setting-cpo-encoded-image.php:23
+msgid ""
+"The code of encoded image. Is used for Colorify functionality. You can use "
+"b64.io web service to perform the encoding."
+msgstr "编码图像的代码。用于着色功能。您可以使用 Web b64.io执行编码。"
+
+#: includes/settings/class-uni-cpo-setting-cpo-fc-default.php:21
+#: includes/settings/class-uni-cpo-setting-cpo-sc-default.php:21
+msgid "Show or hide by default?"
+msgstr "默认情况下显示或隐藏？"
+
+#: includes/settings/class-uni-cpo-setting-cpo-fc-default.php:23
+msgid ""
+"Choose whether this option should be shown or hidden at the beginning,\n"
+"                so its state will be changed to the opposite once the "
+"condition is met."
+msgstr ""
+"选择此选项是否应在开头显示或隐藏，\n"
+"                因此，一旦满足条件，其状态将更改为相反。"
+
+#: includes/settings/class-uni-cpo-setting-cpo-fc-default.php:26
+#: includes/settings/class-uni-cpo-setting-cpo-sc-default.php:26
+msgid "Hide"
+msgstr "隐藏"
+
+#: includes/settings/class-uni-cpo-setting-cpo-fc-default.php:27
+#: includes/settings/class-uni-cpo-setting-cpo-sc-default.php:27
+msgid "Show"
+msgstr "显示"
+
+#: includes/settings/class-uni-cpo-setting-cpo-fc-scheme.php:21
+msgid "Field conditional logic builder"
+msgstr "字段条件逻辑生成器"
+
+#: includes/settings/class-uni-cpo-setting-cpo-fontsampler-id.php:21
+msgid "Fontsampler ID"
+msgstr "字体采样器ID"
+
+#: includes/settings/class-uni-cpo-setting-cpo-fontsampler-id.php:23
+msgid "Add ID of fontsampler you would like to use in this option"
+msgstr "添加要在此选项中使用的字体符号的 ID"
+
+#: includes/settings/class-uni-cpo-setting-cpo-geom-checkbox.php:21
+msgid "Style of checkbox input"
+msgstr "复选框输入的样式"
+
+#: includes/settings/class-uni-cpo-setting-cpo-geom-checkbox.php:23
+#: includes/settings/class-uni-cpo-setting-cpo-geom-radio.php:23
+msgid "Square"
+msgstr "方形"
+
+#: includes/settings/class-uni-cpo-setting-cpo-geom-checkbox.php:24
+#: includes/settings/class-uni-cpo-setting-cpo-geom-radio.php:24
+msgid "Circle"
+msgstr "圆形"
+
+#: includes/settings/class-uni-cpo-setting-cpo-geom-radio.php:21
+msgid "Style of radio input"
+msgstr "无线电输入样式"
+
+#: includes/settings/class-uni-cpo-setting-cpo-is-changeimage.php:21
+msgid "Enable image changing?"
+msgstr "启用映像更改？"
+
+#: includes/settings/class-uni-cpo-setting-cpo-is-changeimage.php:23
+msgid ""
+"Enables the functionality of changing of the product main image upon "
+"selection in this option"
+msgstr "启用在此选项中选择时更改产品主图像的功能"
+
+#: includes/settings/class-uni-cpo-setting-cpo-is-datepicker-disabled.php:21
+msgid "Disable Calendar?"
+msgstr "禁用日历？"
+
+#: includes/settings/class-uni-cpo-setting-cpo-is-datepicker-disabled.php:23
+msgid "Enables/disables datepicker functionality."
+msgstr "启用/禁用日期选择器功能。"
+
+#: includes/settings/class-uni-cpo-setting-cpo-is-fc.php:21
+#: includes/settings/class-uni-cpo-setting-cpo-is-sc.php:21
+msgid "Enable conditional logic?"
+msgstr "启用条件逻辑"
+
+#: includes/settings/class-uni-cpo-setting-cpo-is-fc.php:23
+#: includes/settings/class-uni-cpo-setting-cpo-is-sc.php:23
+msgid "Enables conditional logic for displaying or hiding this module."
+msgstr "启用用于显示或隐藏此模块的条件逻辑。"
+
+#: includes/settings/class-uni-cpo-setting-cpo-is-imagify.php:21
+msgid "Use for Imagify?"
+msgstr "用于想象吗？"
+
+#: includes/settings/class-uni-cpo-setting-cpo-is-imagify.php:23
+msgid "Enables using this option in Imagify functionality."
+msgstr "启用在\"放大\"功能中使用此选项。"
+
+#: includes/settings/class-uni-cpo-setting-cpo-is-required.php:21
+msgid "Required?"
+msgstr "必填？"
+
+#: includes/settings/class-uni-cpo-setting-cpo-is-required.php:23
+msgid "Choose whether the user must fill out this field or not."
+msgstr "选择用户是否必须填写这一字段。"
+
+#: includes/settings/class-uni-cpo-setting-cpo-is-resetbutton.php:21
+msgid "Enable reset button?"
+msgstr "启用重置按钮"
+
+#: includes/settings/class-uni-cpo-setting-cpo-is-resetbutton.php:23
+msgid "Enabling reset button for this option"
+msgstr "为此选项启用重置按钮"
+
+#: includes/settings/class-uni-cpo-setting-cpo-is-timepicker.php:21
+msgid "Enable Timepicker?"
+msgstr "启用时间选择器？"
+
+#: includes/settings/class-uni-cpo-setting-cpo-is-timepicker.php:23
+msgid "Enables/disables timepicker functionality."
+msgstr "启用/禁用时间选择器功能。"
+
+#: includes/settings/class-uni-cpo-setting-cpo-is-tooltip.php:21
+msgid "Enable tooltip?"
+msgstr "启用提示"
+
+#: includes/settings/class-uni-cpo-setting-cpo-is-tooltip.php:23
+msgid "Enables/disables displaying of the tooltip"
+msgstr "启用/禁用工具提示的显示"
+
+#: includes/settings/class-uni-cpo-setting-cpo-is-vc.php:21
+msgid "Enable validation logic?"
+msgstr "启用验证逻辑？"
+
+#: includes/settings/class-uni-cpo-setting-cpo-is-vc.php:23
+msgid "Enables validation conditional logic for this option."
+msgstr "为此选项启用验证条件逻辑。"
+
+#: includes/settings/class-uni-cpo-setting-cpo-label-tag.php:21
+msgid "Type of tag for label"
+msgstr "标签的标签类型"
+
+#: includes/settings/class-uni-cpo-setting-cpo-label.php:21
+msgid "Label text"
+msgstr "標籤文字"
+
+#: includes/settings/class-uni-cpo-setting-cpo-label.php:23
+msgid ""
+"Custom text that will be used for this field as its title on the product "
+"page and as the cart/order item's option's title. Leave it blank and there "
+"will not be a title for this field and the option's slug will be used as a "
+"title for cart / order item"
+msgstr ""
+"将用于此字段的自定义文本作为产品页面上的标题和购物车/订单项目选项的标题。将它"
+"留空， 此字段将没有标题， 选项的 slug 将用作购物车 / 订单项目的标题"
+
+#: includes/settings/class-uni-cpo-setting-cpo-map-center.php:21
+msgid "Map center coordinates"
+msgstr "中心坐标"
+
+#: includes/settings/class-uni-cpo-setting-cpo-map-center.php:23
+msgid "Add coordinates for the center of the map"
+msgstr "为地图中心添加坐标"
+
+#: includes/settings/class-uni-cpo-setting-cpo-map-zoom.php:21
+msgid "Map zoom level"
+msgstr "地图缩放级别"
+
+#: includes/settings/class-uni-cpo-setting-cpo-map-zoom.php:23
+msgid "Add zoom level for the map"
+msgstr "为地图添加缩放级别"
+
+#: includes/settings/class-uni-cpo-setting-cpo-matrix-data.php:21
+msgid "Matrix data"
+msgstr "矩阵数据"
+
+#: includes/settings/class-uni-cpo-setting-cpo-matrix-data.php:42
+msgid "# in cols"
+msgstr "# in cols"
+
+#: includes/settings/class-uni-cpo-setting-cpo-matrix-data.php:43
+msgid "Values in columns. Syntax: \"slug : Name|slug2 : Name2\""
+msgstr "列中的值。语法：\"slug ： name=slug2 ： Name2\""
+
+#: includes/settings/class-uni-cpo-setting-cpo-matrix-data.php:56
+msgid "# in rows"
+msgstr "# in rows"
+
+#: includes/settings/class-uni-cpo-setting-cpo-matrix-data.php:57
+msgid "Values in rows. Syntax: \"slug : Name|slug2 : Name2\""
+msgstr "行中的值。语法：\"slug ： name=slug2 ： Name2\""
+
+#: includes/settings/class-uni-cpo-setting-cpo-matrix-data.php:70
+msgid "Template"
+msgstr "模板"
+
+#: includes/settings/class-uni-cpo-setting-cpo-matrix-data.php:71
+msgid ""
+"Custom template to output Matrix value. Use &#123;&#123;&#123;row&#125;&#125;"
+"&#125; and &#123;&#123;&#123;col&#125;&#125;&#125; to get names of the row "
+"and the column chosen."
+msgstr "自定义模板以输出矩阵值。使用 {}行} 和 {col} 获取所选行和列的名称。"
+
+#: includes/settings/class-uni-cpo-setting-cpo-max-chars.php:21
+msgid "Max. number of characters"
+msgstr "最大字符数"
+
+#: includes/settings/class-uni-cpo-setting-cpo-max-chars.php:23
+msgid "Add the maximum allowed number of characters for this field."
+msgstr "添加此字段允许的最大字符数。"
+
+#: includes/settings/class-uni-cpo-setting-cpo-max-filesize.php:23
+msgid "This setting overrides similar global setting for this option only."
+msgstr "此设置仅覆盖此选项的类似全局设置。"
+
+#: includes/settings/class-uni-cpo-setting-cpo-max-val.php:21
+msgid "Maximum value"
+msgstr "最大值"
+
+#: includes/settings/class-uni-cpo-setting-cpo-max-val.php:23
+msgid ""
+"Add the maximum allowed value for this field. Only integer or float number."
+msgstr "添加此字段的允许最大值。仅整数或浮点数。"
+
+#: includes/settings/class-uni-cpo-setting-cpo-mime-types.php:23
+msgid ""
+"A comma separated list of allowed mime types. This setting overrides similar "
+"global setting for this option only."
+msgstr "允许哑剧类型的逗号分隔列表。此设置仅覆盖此选项的类似全局设置。"
+
+#: includes/settings/class-uni-cpo-setting-cpo-min-chars.php:21
+msgid "Min. number of characters"
+msgstr "最小字符数"
+
+#: includes/settings/class-uni-cpo-setting-cpo-min-chars.php:23
+msgid "Add the minimum allowed number of characters for this field."
+msgstr "添加此字段允许的最小字符数。"
+
+#: includes/settings/class-uni-cpo-setting-cpo-min-val.php:21
+msgid "Minimum value"
+msgstr "最小值"
+
+#: includes/settings/class-uni-cpo-setting-cpo-min-val.php:23
+msgid ""
+"Add the minimum allowed value for this field. Only integer or float number."
+msgstr "添加此字段的允许最大值。仅整数或浮点数。"
+
+#: includes/settings/class-uni-cpo-setting-cpo-minute-step.php:21
+msgid "Minute increment"
+msgstr "分钟增量"
+
+#: includes/settings/class-uni-cpo-setting-cpo-minute-step.php:23
+msgid "Adjusts the step for the minute input"
+msgstr "调整分钟输入的步骤"
+
+#: includes/settings/class-uni-cpo-setting-cpo-mode-checkbox.php:21
+msgid "Type of checkbox input"
+msgstr "复选框输入的类型"
+
+#: includes/settings/class-uni-cpo-setting-cpo-mode-checkbox.php:23
+#: includes/settings/class-uni-cpo-setting-cpo-mode-radio.php:24
+#: includes/settings/class-uni-cpo-setting-cpo-mode-radio.php:36
+#: includes/settings/class-uni-cpo-setting-cpo-tooltip-type.php:26
+msgid "Classic"
+msgstr "经典"
+
+#: includes/settings/class-uni-cpo-setting-cpo-mode-checkbox.php:25
+#: includes/settings/class-uni-cpo-setting-cpo-mode-radio.php:26
+msgid "Colour"
+msgstr "颜色"
+
+#: includes/settings/class-uni-cpo-setting-cpo-mode-checkbox.php:26
+#: includes/settings/class-uni-cpo-setting-cpo-mode-radio.php:27
+msgid "Text"
+msgstr "文本"
+
+#: includes/settings/class-uni-cpo-setting-cpo-mode-radio.php:22
+#: includes/settings/class-uni-cpo-setting-cpo-mode-radio.php:34
+msgid "Type of radio input"
+msgstr "无线电输入类型"
+
+#: includes/settings/class-uni-cpo-setting-cpo-notice-text.php:21
+msgid "Notice text"
+msgstr "通知文本"
+
+#: includes/settings/class-uni-cpo-setting-cpo-notice-text.php:23
+msgid "Custom text for this field. Simple HTML tags can be used here."
+msgstr "此字段的自定义文本。此处可以使用简单的 HTML 标记。"
+
+#: includes/settings/class-uni-cpo-setting-cpo-notice-text.php:50
+msgid "Available variables"
+msgstr "可用变量"
+
+#: includes/settings/class-uni-cpo-setting-cpo-order-label.php:21
+msgid "Label text in cart/order meta"
+msgstr "在购物车/订单元中标记文本"
+
+#: includes/settings/class-uni-cpo-setting-cpo-order-label.php:24
+msgid ""
+"Custom text that will be used as a title for this option in cart/order item "
+"meta"
+msgstr "自定义文本，将在购物车/订单商品元数据中用作此选项的标题"
+
+#: includes/settings/class-uni-cpo-setting-cpo-order-visibility.php:21
+msgid "Hide meta in cart/order details?"
+msgstr "在购物车/订单详细信息中隐藏元？"
+
+#: includes/settings/class-uni-cpo-setting-cpo-order-visibility.php:24
+msgid "Hides this option related meta in cart/order details."
+msgstr "在购物车/订单详细信息中隐藏此选项相关的元。"
+
+#: includes/settings/class-uni-cpo-setting-cpo-origin-postcode.php:21
+msgid "Origin Postcode"
+msgstr "原点 邮政编码"
+
+#: includes/settings/class-uni-cpo-setting-cpo-origin-postcode.php:24
+msgid ""
+"Base postcode. In single mode serves as origin postcode. It is ignored in "
+"dual mode."
+msgstr "基本邮政编码。在单模式下用作原点邮政编码。在双模式下忽略它。"
+
+#: includes/settings/class-uni-cpo-setting-cpo-postcode-country.php:21
+msgid "Country name"
+msgstr "国家名称"
+
+#: includes/settings/class-uni-cpo-setting-cpo-postcode-country.php:24
+msgid ""
+"Country name for Google maps API. Example: Italy. If set - used for both "
+"origin and destination. Otherwise customer MUST input country for "
+"destination or in both fields if dual mode is on!"
+msgstr ""
+"谷歌地图 API 的国家名称。示例：意大利。如果设置 - 用于原点和目的地。否则，如"
+"果双模式处于打开状态，客户必须输入目的地或两个字段中的国家/地区！"
+
+#: includes/settings/class-uni-cpo-setting-cpo-postcode-type.php:21
+msgid "Single or dual mode"
+msgstr "单模式或双模式"
+
+#: includes/settings/class-uni-cpo-setting-cpo-postcode-type.php:23
+msgid ""
+"In \"single\" mode displays only one input field. In dual mode displays two, "
+"so user can set origin and destination postcodes."
+msgstr ""
+"在\"单\"模式下，仅显示一个输入字段。在双模式显示两个，以便用户可以设置源码和"
+"目标邮政编码。"
+
+#: includes/settings/class-uni-cpo-setting-cpo-postcode-type.php:26
+msgid "Dual"
+msgstr "双"
+
+#: includes/settings/class-uni-cpo-setting-cpo-radio-options.php:21
+#: includes/settings/class-uni-cpo-setting-cpo-select-options.php:21
+msgid "Sub options"
+msgstr "子选项"
+
+#: includes/settings/class-uni-cpo-setting-cpo-radio-options.php:23
+msgid ""
+"Add some sub options for this option and, please, keep unique slugs for "
+"them. These slugs might be used in a formula conditional rules (e.g. when "
+"you use operators \"equal\", \"not equal\" etc)."
+msgstr ""
+"为此选项添加一些子选项，请保留它们的唯一 slug。这些 slug 可用于公式条件规则"
+"（例如，当您使用运算符\"相等\"，\"不相等\"等）。"
+
+#: includes/settings/class-uni-cpo-setting-cpo-radio-options.php:46
+#: includes/settings/class-uni-cpo-setting-cpo-select-options.php:48
+msgid "Add"
+msgstr "添加"
+
+#: includes/settings/class-uni-cpo-setting-cpo-radio-options.php:64
+#: includes/settings/class-uni-cpo-setting-cpo-radio-options.php:77
+#: includes/settings/class-uni-cpo-setting-cpo-radio-options.php:272
+#: includes/settings/class-uni-cpo-setting-cpo-radio-options.php:284
+#: includes/settings/class-uni-cpo-setting-cpo-select-options.php:66
+#: includes/settings/class-uni-cpo-setting-cpo-select-options.php:168
+msgid "Make default?"
+msgstr "存为默认"
+
+#: includes/settings/class-uni-cpo-setting-cpo-radio-options.php:92
+#: includes/settings/class-uni-cpo-setting-cpo-radio-options.php:298
+#: includes/settings/class-uni-cpo-setting-cpo-select-options.php:80
+#: includes/settings/class-uni-cpo-setting-cpo-select-options.php:181
+msgid "Exclude?"
+msgstr "排除"
+
+#: includes/settings/class-uni-cpo-setting-cpo-radio-options.php:102
+#: includes/settings/class-uni-cpo-setting-cpo-radio-options.php:308
+msgid "Label"
+msgstr "标签"
+
+#: includes/settings/class-uni-cpo-setting-cpo-radio-options.php:121
+#: includes/settings/class-uni-cpo-setting-cpo-radio-options.php:327
+#: includes/settings/class-uni-cpo-setting-cpo-select-options.php:109
+#: includes/settings/class-uni-cpo-setting-cpo-select-options.php:210
+msgid "Value"
+msgstr "值"
+
+#: includes/settings/class-uni-cpo-setting-cpo-radio-options.php:140
+#: includes/settings/class-uni-cpo-setting-cpo-radio-options.php:346
+msgid "Price / Rate (optional)"
+msgstr "价格/价格（可选）"
+
+#: includes/settings/class-uni-cpo-setting-cpo-radio-options.php:158
+#: includes/settings/class-uni-cpo-setting-cpo-radio-options.php:364
+msgid "CSS Class (optional)"
+msgstr "CSS类（可选）"
+
+#: includes/settings/class-uni-cpo-setting-cpo-radio-options.php:171
+#: includes/settings/class-uni-cpo-setting-cpo-radio-options.php:375
+msgid "Description (optional)"
+msgstr "描述（可选）"
+
+#: includes/settings/class-uni-cpo-setting-cpo-radio-options.php:184
+#: includes/settings/class-uni-cpo-setting-cpo-radio-options.php:387
+msgid "Colour (optional)"
+msgstr "颜色（可选）"
+
+#: includes/settings/class-uni-cpo-setting-cpo-radio-options.php:200
+#: includes/settings/class-uni-cpo-setting-cpo-radio-options.php:403
+msgid ""
+"Optional! Is used as a suboption image as well as can be used as the one "
+"that replaces the main product image"
+msgstr "选！用作子选项映像，也可以用作替换主产品映像的图像"
+
+#: includes/settings/class-uni-cpo-setting-cpo-radio-options.php:225
+#: includes/settings/class-uni-cpo-setting-cpo-radio-options.php:428
+msgid "Alt Image"
+msgstr "备用图片"
+
+#: includes/settings/class-uni-cpo-setting-cpo-radio-options.php:226
+#: includes/settings/class-uni-cpo-setting-cpo-radio-options.php:429
+msgid "Optional! Is used ONLY as the one that replaces the main product image"
+msgstr "选！仅用作替换主产品映像的映像"
+
+#: includes/settings/class-uni-cpo-setting-cpo-range-from.php:21
+msgid "Default from"
+msgstr "默认\"从\""
+
+#: includes/settings/class-uni-cpo-setting-cpo-range-from.php:23
+msgid "Default value on the left"
+msgstr "左侧的默认值"
+
+#: includes/settings/class-uni-cpo-setting-cpo-range-grid.php:21
+msgid "Enable grid?"
+msgstr "启用网格布局"
+
+#: includes/settings/class-uni-cpo-setting-cpo-range-grid.php:23
+#, fuzzy
+msgid "Enables/disables displaying of the numbered grid"
+msgstr "启用/禁用编号网格的显示"
+
+#: includes/settings/class-uni-cpo-setting-cpo-range-input.php:21
+msgid "Show input?"
+msgstr "显示输入？"
+
+#: includes/settings/class-uni-cpo-setting-cpo-range-input.php:23
+msgid "Enables/disables displaying of the text input"
+msgstr "启用/禁用显示文本输入"
+
+#: includes/settings/class-uni-cpo-setting-cpo-range-postfix.php:21
+msgid "Postfix"
+msgstr "后缀"
+
+#: includes/settings/class-uni-cpo-setting-cpo-range-prefix.php:21
+msgid "Prefix"
+msgstr "前缀"
+
+#: includes/settings/class-uni-cpo-setting-cpo-range-to.php:21
+msgid "Default to"
+msgstr "默认"
+
+#: includes/settings/class-uni-cpo-setting-cpo-range-to.php:23
+msgid "Default value on the right"
+msgstr "右侧的默认值"
+
+#: includes/settings/class-uni-cpo-setting-cpo-range-type.php:21
+msgid "Type of range slider"
+msgstr "范围滑块的类型"
+
+#: includes/settings/class-uni-cpo-setting-cpo-range-type.php:24
+msgid "Choose the type of range slider"
+msgstr "选择范围滑块的类型"
+
+#: includes/settings/class-uni-cpo-setting-cpo-rate.php:21
+#: includes/settings/class-uni-cpo-setting-cpo-select-options.php:128
+#: includes/settings/class-uni-cpo-setting-cpo-select-options.php:229
+msgid "Price / Rate"
+msgstr "价格/费率"
+
+#: includes/settings/class-uni-cpo-setting-cpo-rate.php:24
+msgid ""
+"Enter the price (or rate) for this field. This value can be used in a "
+"formula. \n"
+"                Or leave it blank if you need just an information added by "
+"the user."
+msgstr ""
+"输入此字段的价格（或费率）。此值可用于公式。\n"
+"                或者，如果您只需要用户添加的信息，请把它留空。"
+
+#: includes/settings/class-uni-cpo-setting-cpo-resetbutton-text.php:21
+msgid "Reset button text"
+msgstr "重置按钮文本"
+
+#: includes/settings/class-uni-cpo-setting-cpo-resetbutton-text.php:23
+msgid "Custom text for reset button"
+msgstr "重置按钮的自定义文本"
+
+#: includes/settings/class-uni-cpo-setting-cpo-samples-mode.php:21
+msgid "\"Free sample\" Mode"
+msgstr "\"免费样品\"模式"
+
+#: includes/settings/class-uni-cpo-setting-cpo-samples-mode.php:23
+msgid ""
+"Choose between adding \"sample\" with calculated price or set its price to "
+"zero regarding price calculation rules."
+msgstr ""
+"在添加具有计算价格的\"样本\"或将其价格设置为零有关价格计算规则之间进行选择。"
+
+#: includes/settings/class-uni-cpo-setting-cpo-samples-mode.php:25
+msgid "Calc price"
+msgstr "计算价格"
+
+#: includes/settings/class-uni-cpo-setting-cpo-samples-mode.php:26
+msgid "Zero price"
+msgstr "零价格"
+
+#: includes/settings/class-uni-cpo-setting-cpo-sc-default.php:23
+msgid ""
+"Choose whether these suboptions should be shown or hidden at the beginning,\n"
+"                so its state will be changed to the opposite once the "
+"condition is met."
+msgstr ""
+"选择这些子选项是否应在开头显示或隐藏，\n"
+"                因此，一旦满足条件，其状态将更改为相反。"
+
+#: includes/settings/class-uni-cpo-setting-cpo-sc-scheme.php:21
+msgid "Suboptions conditional rules"
+msgstr "子选项条件规则"
+
+#: includes/settings/class-uni-cpo-setting-cpo-sc-scheme.php:23
+msgid "Conditionally displaying suboptions"
+msgstr "有条件地显示子选项"
+
+#: includes/settings/class-uni-cpo-setting-cpo-sc-scheme.php:88
+#: includes/settings/class-uni-cpo-setting-cpo-sc-scheme.php:138
+msgid ""
+"It seems this option is not saved to DB/does not have slug/suboptions yet"
+msgstr "似乎此选项尚未保存到 DB/尚未有 slug/子选项"
+
+#: includes/settings/class-uni-cpo-setting-cpo-select-options.php:23
+msgid ""
+"Add some sub options for select and, please, keep unique slugs for them. "
+"These slugs might be used in a formula conditional rules (e.g. when you use "
+"operators \"equal\", \"not equal\" etc)."
+msgstr ""
+"添加一些子选项进行选择，请保留它们的唯一 slug。这些 slug 可用于公式条件规则"
+"（例如，当您使用运算符\"相等\"，\"不相等\"等）。"
+
+#: includes/settings/class-uni-cpo-setting-cpo-select-options.php:90
+#: includes/settings/class-uni-cpo-setting-cpo-select-options.php:191
+msgid "Title"
+msgstr "标题"
+
+#: includes/settings/class-uni-cpo-setting-cpo-slug.php:21
+msgid "Field slug"
+msgstr "字段别名"
+
+#: includes/settings/class-uni-cpo-setting-cpo-slug.php:25
+msgid ""
+"Enter a unique slug name for this field (only lowercase latin letters, "
+"digits and underscore!). This will be used as a name of the formula variable "
+"connected with this field!"
+msgstr ""
+"输入此字段的唯一 slug 名称（仅小写拉丁字母、数字和下划线！这将用作与此字段关"
+"联的公式变量的名称！"
+
+#: includes/settings/class-uni-cpo-setting-cpo-step-val.php:21
+msgid "Step value"
+msgstr "步进值"
+
+#: includes/settings/class-uni-cpo-setting-cpo-step-val.php:23
+msgid "Add the step value for this field. Only integer or float number."
+msgstr "添加此字段的步骤值。仅整数或浮点数。"
+
+#: includes/settings/class-uni-cpo-setting-cpo-time-max.php:21
+msgid "Maximum time"
+msgstr "最大的时间"
+
+#: includes/settings/class-uni-cpo-setting-cpo-time-max.php:23
+msgid ""
+"Add the maximum/latest time (inclusively) allowed for selection. You can use "
+"only 24-h format. For example: 09:00 or 19:00."
+msgstr ""
+"添加允许选择的最大/最新时间（包括）。您只能使用 24 小时格式。例如：09：00 或 "
+"19：00。"
+
+#: includes/settings/class-uni-cpo-setting-cpo-time-min.php:21
+msgid "Minimum time"
+msgstr "最短时间"
+
+#: includes/settings/class-uni-cpo-setting-cpo-time-min.php:23
+msgid ""
+"Add the minimum/earliest time (inclusively) allowed for selection. You can "
+"use only 24-h format. For example: 09:00 or 19:00."
+msgstr ""
+"添加允许选择的最小/最早时间（包括）。您只能使用 24 小时格式。例如：09：00 或 "
+"19：00。"
+
+#: includes/settings/class-uni-cpo-setting-cpo-timepicker-type.php:21
+msgid "24-hour Time Picker?"
+msgstr "24 小时时间选取器？"
+
+#: includes/settings/class-uni-cpo-setting-cpo-timepicker-type.php:23
+msgid "Enables/disables calendar functionality."
+msgstr "启用/禁用日历功能。"
+
+#: includes/settings/class-uni-cpo-setting-cpo-tooltip-class.php:21
+msgid "Class name"
+msgstr "类名"
+
+#: includes/settings/class-uni-cpo-setting-cpo-tooltip-class.php:23
+msgid "Extra selector from Popup Maker"
+msgstr "来自弹出制造商的额外选择器"
+
+#: includes/settings/class-uni-cpo-setting-cpo-tooltip-image.php:21
+msgid "Tooltip Image"
+msgstr "工具提示图像"
+
+#: includes/settings/class-uni-cpo-setting-cpo-tooltip-type.php:21
+msgid "Type of tooltip"
+msgstr "工具提示的类型"
+
+#: includes/settings/class-uni-cpo-setting-cpo-tooltip-type.php:27
+msgid "Lightbox"
+msgstr "灯箱"
+
+#: includes/settings/class-uni-cpo-setting-cpo-tooltip-type.php:28
+msgid "Popup Maker"
+msgstr "弹出窗口生成器"
+
+#: includes/settings/class-uni-cpo-setting-cpo-tooltip.php:21
+msgid "Text for tooltip"
+msgstr "弹出窗口和工具提示设置"
+
+#: includes/settings/class-uni-cpo-setting-cpo-tooltip.php:23
+msgid "Custom text that will be used in tooltip."
+msgstr "将在工具提示中使用的自定义文本。"
+
+#: includes/settings/class-uni-cpo-setting-cpo-type.php:23
+msgid ""
+"Choose the type based on type of data you are expecting from users. For "
+"instance, \n"
+"                if you expect some text or don't mind about type of data at "
+"all, choose type \"string\"."
+msgstr ""
+"根据用户要获得的数据类型选择类型。例如，\n"
+"                如果您希望收到一些文本或对数据类型一点也不介意，请选择\"字符"
+"串\"类型。"
+
+#: includes/settings/class-uni-cpo-setting-cpo-type.php:26
+msgid "String"
+msgstr "字符串"
+
+#: includes/settings/class-uni-cpo-setting-cpo-type.php:27
+msgid "Integer"
+msgstr "整数"
+
+#: includes/settings/class-uni-cpo-setting-cpo-type.php:28
+msgid "Decimals"
+msgstr "小数点"
+
+#: includes/settings/class-uni-cpo-setting-cpo-upload-mode.php:21
+msgid "Uploading mode"
+msgstr "上传模式"
+
+#: includes/settings/class-uni-cpo-setting-cpo-upload-mode.php:23
+msgid ""
+"Choose whether it will be possible to upload only one file per option or "
+"many."
+msgstr "选择是每个选项只能上载一个文件还是多个文件。"
+
+#: includes/settings/class-uni-cpo-setting-cpo-validation-msg.php:21
+msgid "Custom validation messages"
+msgstr "自定义验证消息"
+
+#: includes/settings/class-uni-cpo-setting-cpo-validation-msg.php:23
+msgid ""
+"Enables an opportunity to set custom validation message for certain "
+"validation event. In case of the last field the format is: \"data-parsley-"
+"`constraint`-message=\"my msg\""
+msgstr ""
+"启用为某些验证事件设置自定义验证消息的机会。如果最后一个字段，格式是：\"数据-"
+"欧斯莱-约束\"-消息=\"我的 msg\""
+
+#: includes/settings/class-uni-cpo-setting-cpo-validation-msg.php:46
+msgid "when is required"
+msgstr "何时需要"
+
+#: includes/settings/class-uni-cpo-setting-cpo-validation-msg.php:56
+msgid "when type is invalid"
+msgstr "当类型无效时"
+
+#: includes/settings/class-uni-cpo-setting-cpo-validation-msg.php:66
+msgid "for any custom validation"
+msgstr "用于任何自定义验证"
+
+#: includes/settings/class-uni-cpo-setting-cpo-vc-extra.php:21
+msgid "Extra validation rules"
+msgstr "额外的验证规则"
+
+#: includes/settings/class-uni-cpo-setting-cpo-vc-extra.php:23
+msgid "Add new validation rules for this option"
+msgstr "为此选项添加新的验证规则"
+
+#: includes/settings/class-uni-cpo-setting-cpo-vc-scheme.php:21
+msgid "Conditional validation scheme"
+msgstr "条件验证方案"
+
+#: includes/settings/class-uni-cpo-setting-float.php:21
+msgid "Float"
+msgstr "浮动"
+
+#: includes/settings/class-uni-cpo-setting-font-family.php:21
+msgid "Font Family"
+msgstr "字体"
+
+#: includes/settings/class-uni-cpo-setting-font-family.php:25
+msgid "Helvetica"
+msgstr "Helvetica"
+
+#: includes/settings/class-uni-cpo-setting-font-family.php:26
+msgid "Verdana"
+msgstr "Verdana"
+
+#: includes/settings/class-uni-cpo-setting-font-family.php:27
+msgid "Arial"
+msgstr "Arial"
+
+#: includes/settings/class-uni-cpo-setting-font-family.php:28
+msgid "Georgia"
+msgstr "格鲁吉亚"
+
+#: includes/settings/class-uni-cpo-setting-font-family.php:29
+msgid "Courier"
+msgstr "快递员"
+
+#: includes/settings/class-uni-cpo-setting-font-size-desc.php:21
+#: includes/settings/class-uni-cpo-setting-font-size-label.php:21
+#: includes/settings/class-uni-cpo-setting-font-size-px.php:21
+#: includes/settings/class-uni-cpo-setting-font-size.php:21
+msgid "Font Size"
+msgstr "字体大小"
+
+#: includes/settings/class-uni-cpo-setting-font-style.php:21
+msgid "Font Style"
+msgstr "字体样式"
+
+#: includes/settings/class-uni-cpo-setting-font-style.php:25
+msgid "Normal"
+msgstr "正常"
+
+#: includes/settings/class-uni-cpo-setting-font-style.php:26
+msgid "Italic"
+msgstr "斜体"
+
+#: includes/settings/class-uni-cpo-setting-font-weight.php:21
+msgid "Font Weight"
+msgstr "字体粗细"
+
+#: includes/settings/class-uni-cpo-setting-font-weight.php:25
+msgid "Light 300"
+msgstr "细体 300"
+
+#: includes/settings/class-uni-cpo-setting-font-weight.php:26
+msgid "Normal 400"
+msgstr "標準 400"
+
+#: includes/settings/class-uni-cpo-setting-font-weight.php:27
+msgid "Semi-Bold 600"
+msgstr "半粗 600"
+
+#: includes/settings/class-uni-cpo-setting-font-weight.php:28
+msgid "Bold 700"
+msgstr "粗體 700"
+
+#: includes/settings/class-uni-cpo-setting-font-weight.php:29
+msgid "Extra-Bold 800"
+msgstr "特粗 800"
+
+#: includes/settings/class-uni-cpo-setting-gap-px.php:21
+msgid "Space Between"
+msgstr "间距"
+
+#: includes/settings/class-uni-cpo-setting-height-type.php:21
+msgid "Height Type"
+msgstr "高度类型"
+
+#: includes/settings/class-uni-cpo-setting-height-type.php:26
+#: includes/settings/class-uni-cpo-setting-width-type.php:27
+msgid "Auto"
+msgstr "自动"
+
+#: includes/settings/class-uni-cpo-setting-height-type.php:27
+msgid "Full Height"
+msgstr "全高"
+
+#: includes/settings/class-uni-cpo-setting-height-type.php:28
+#: includes/settings/class-uni-cpo-setting-width-type.php:28
+msgid "Custom"
+msgstr "自定义"
+
+#: includes/settings/class-uni-cpo-setting-href.php:21
+msgid "URL"
+msgstr "網址"
+
+#: includes/settings/class-uni-cpo-setting-id-name.php:21
+msgid "ID"
+msgstr "ID"
+
+#: includes/settings/class-uni-cpo-setting-letter-spacing.php:21
+msgid "Letter Spacing"
+msgstr "字母间距"
+
+#: includes/settings/class-uni-cpo-setting-line-height.php:21
+msgid "Line Height"
+msgstr "线高度"
+
+#: includes/settings/class-uni-cpo-setting-margin.php:22
+msgid "Margins"
+msgstr "边距"
+
+#: includes/settings/class-uni-cpo-setting-offset-px.php:21
+msgid "Offset"
+msgstr "偏移"
+
+#: includes/settings/class-uni-cpo-setting-padding.php:22
+msgid "Paddings"
+msgstr "内边距"
+
+#: includes/settings/class-uni-cpo-setting-radius.php:21
+#, fuzzy
+msgid "Radius"
+msgstr "按钮半径 (px)"
+
+#: includes/settings/class-uni-cpo-setting-rel.php:21
+msgid "Link No Follow"
+msgstr "链接否关注"
+
+#: includes/settings/class-uni-cpo-setting-sync.php:43
+msgid "Synced, ID#{{- data.pid }}"
+msgstr "已同步，ID#[-数据.pid]"
+
+#: includes/settings/class-uni-cpo-setting-sync.php:47
+msgid "Unsync"
+msgstr "取消同步"
+
+#: includes/settings/class-uni-cpo-setting-sync.php:51
+msgid "Not synced"
+msgstr "未同步"
+
+#: includes/settings/class-uni-cpo-setting-sync.php:60
+msgid "Connect"
+msgstr "连接"
+
+#: includes/settings/class-uni-cpo-setting-sync.php:88
+msgid "Save data"
+msgstr "保存数据"
+
+#: includes/settings/class-uni-cpo-setting-target.php:21
+msgid "Link Target"
+msgstr "链接目标"
+
+#: includes/settings/class-uni-cpo-setting-target.php:24
+msgid "New Window"
+msgstr "新窗口"
+
+#: includes/settings/class-uni-cpo-setting-target.php:25
+msgid "Same Window"
+msgstr "相同視窗"
+
+#: includes/settings/class-uni-cpo-setting-text-align-label.php:21
+#: includes/settings/class-uni-cpo-setting-text-align.php:21
+msgid "Text Align"
+msgstr "文本对齐"
+
+#: includes/settings/class-uni-cpo-setting-vertical-align.php:21
+msgid "Vertical Align"
+msgstr "垂直对齐"
+
+#: includes/settings/class-uni-cpo-setting-vertical-align.php:25
+msgid "Center"
+msgstr "居中"
+
+#: includes/settings/class-uni-cpo-setting-width-type.php:21
+msgid "Width Type"
+msgstr "宽度类型"
+
+#: includes/uni-cpo-core-functions.php:122
+msgid "Invalid model type"
+msgstr "无效模型类型"
+
+#: includes/uni-cpo-core-functions.php:126
+msgid "Invalid builder model object type"
+msgstr "无效的生成器模型对象类型"
+
+#: includes/uni-cpo-core-functions.php:144
+msgid "Invalid model"
+msgstr "无效的模型"
+
+#: includes/uni-cpo-core-functions.php:203
+#, fuzzy
+msgid "Unsupported element type"
+msgstr "不支持的元素类型"
+
+#: includes/uni-cpo-core-functions.php:1223
+#, php-format
+msgid "%1$s(Saved %2$s%%!)%3$s"
+msgstr "%1$s（保存%2$s%%！%3$s"
+
+#: includes/uni-cpo-core-functions.php:1226
+#, fuzzy, php-format
+msgid "%1$s(Saved %2$s!)%3$s"
+msgstr "%1$s（%2$s保存！%3$s"
+
+#: includes/uni-cpo-core-functions.php:1313
+msgid "Select options"
+msgstr "选择选项"
+
+#: includes/uni-cpo-core-functions.php:1315
+msgid "Out of stock / See details"
+msgstr "库存问题 / 查看详细信息"
+
+#: includes/uni-cpo-core-functions.php:1396
+msgid "Calculate"
+msgstr "计算"
+
+#: includes/uni-cpo-core-functions.php:1414
+msgid "Reset form"
+msgstr "重置窗体"
+
+#: includes/uni-cpo-core-functions.php:1722
+msgid "Sorry, this product cannot be added to the cart in this way"
+msgstr "抱歉，无法以这样的方式将本产品添加到购物车中"
+
+#: includes/uni-cpo-core-functions.php:1943
+msgid "View cart"
+msgstr "查看购物车"
+
+#: includes/uni-cpo-core-functions.php:2626
+msgid "Item"
+msgstr "项目"
+
+#: includes/uni-cpo-core-functions.php:2628
+#, php-format
+msgid "%s duplicated."
+msgstr "%s 已复制"
+
+#: includes/uni-cpo-functions.php:438
+msgid "Edit"
+msgstr "编辑"
+
+#: includes/uni-cpo-functions.php:443
+msgid "Edit (inline)"
+msgstr "编辑（内联）"
+
+#: uni-cpo.php:173
+#, php-format
+msgid "Uni CPO requires PHP version %s+. It is activated but NOT FUNCTIONAL!"
+msgstr "Uni CPO 需要 PHP 版本%s+。它已激活， 但不起作用！"
+
+#: uni-cpo.php:185
+#, php-format
+msgid ""
+"Uni CPO requires WordPress version %s+. It is activated but NOT FUNCTIONAL!"
+msgstr "Uni CPO 需要 WordPress 版本%s+。它已激活， 但不起作用！"
+
+#: uni-cpo.php:197
+#, php-format
+msgid ""
+"Uni CPO requires WooCommerce version %s+. It is activated but NOT FUNCTIONAL"
+msgstr "Uni CPO 要求 WooCommerce 版本 %s+。已激活，但不起作用"

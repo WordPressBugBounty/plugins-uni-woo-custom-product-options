@@ -2,10 +2,10 @@
 Contributors: moomooagency, mrpsiho, andriimatenka, freemius
 Tags: custom options, extra options, product visual builder, woocommerce plugins, price calculation, maths formula, conditional logic, wholesale
 Requires at least: 5.6
-Tested up to: 6.5
+Tested up to: 6.6
 Requires PHP: 7.4
-WC requires at least: 7.1.0
-WC tested up to: 8.9.2
+WC requires at least: 8.1.0
+WC tested up to: 9.4.3
 Stable tag: trunk
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -101,6 +101,25 @@ A: Yes, always and ever! Back up your files as well as database. Always test new
 7. screenshot-7.png
 
 == Changelog ==
+
+= 4.9.46 =
+* Fixed: fixed fatal error related to checking gutenberg block in checkout
+* Fixed: correct version of datepicker dependency
+
+= 4.9.45 =
+* Updated: Freemius SDK
+* Updated: flatpickr datepicker JS library 4.6.13
+* Improved: added select2 script for setting "sync" to implement search functionality
+
+= 4.9.44 =
+* Fixed: removed deprecated DOMSubtreeModified event listener
+
+= 4.9.43 =
+* Fixed: a bug with the new Cart page built on blocks
+
+= 4.9.42 =
+* Fixed: Issues with conditional logic for Row
+* Added: file uploads are displayed as links to the attachment in order meta
 
 = 4.9.41 =
 * Fixed: Appearance of PHP warnings on the product page

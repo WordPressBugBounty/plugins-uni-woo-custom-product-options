@@ -174,6 +174,12 @@ class Uni_Cpo_Module extends Uni_Cpo_Data {
 
 	public static function conditional_rules( $data ) {
 		$id        = $data['id'];
+        $selectors = $data['settings']['advanced']['selectors'];
+        $css_id    = 'uni_row_' . $id;
+
+        if ( ! empty( $selectors['id_name'] ) ) {
+            $css_id    = $selectors['id_name'];
+        }
 
         if (!empty($data['settings']['cpo_conditional'])) {
             $rules_data = $data['settings']['cpo_conditional']['main'];
@@ -193,12 +199,12 @@ class Uni_Cpo_Module extends Uni_Cpo_Data {
 		if ( is_array( $scheme ) && ! empty( $scheme ) ) {
 			$condition = uni_cpo_option_js_condition_prepare( $scheme );
 
-			$slide_down   = '$uni_row_' . esc_attr( $id ) . '.slideDown(300).addClass("cpo-visible-field");' . "\n";
-			$slide_up     = '$uni_row_' . esc_attr( $id ) . '.slideUp(300).removeClass("cpo-visible-field");' . "\n";
-			$add_class    = '$uni_row_' . esc_attr( $id ) . '_fields.each(function( index ) {' . "\n";
+			$slide_down   = '$' . esc_attr( $css_id ) . '.slideDown(300).addClass("cpo-visible-field");' . "\n";
+			$slide_up     = '$' . esc_attr( $css_id ) . '.slideUp(300).removeClass("cpo-visible-field");' . "\n";
+			$add_class    = '$' . esc_attr( $css_id ) . '_fields.each(function( index ) {' . "\n";
 			$add_class    .= '$(this).addClass( extraClass );' . "\n";
 			$add_class    .= '});' . "\n";
-			$remove_class = '$uni_row_' . esc_attr( $id ) . '_fields.each(function( index ) {' . "\n";
+			$remove_class = '$' . esc_attr( $css_id ) . '_fields.each(function( index ) {' . "\n";
 			$remove_class .= '$(this).removeClass( extraClass );' . "\n";
 			$remove_class .= '});' . "\n";
 
@@ -226,23 +232,23 @@ class Uni_Cpo_Module extends Uni_Cpo_Data {
                     'use strict';
 
                     $(document.body).on('uni_cpo_options_data_ajax_success', function() {
-						<?php echo "uni_row_" . esc_attr( $id ) ?>_fields_conditional_func(unicpo.formatted_vars);
+						<?php echo esc_attr( $css_id ) ?>_fields_conditional_func(unicpo.formatted_vars);
                     });
                     $(document.body).on('uni_cpo_options_data_for_conditional', function(e, fields) {
                         var variables = $.extend({}, unicpo.formatted_vars, fields);
-						<?php echo "uni_row_" . esc_attr( $id ) ?>_fields_conditional_func(variables);
+						<?php echo esc_attr( $css_id ) ?>_fields_conditional_func(variables);
                     });
 
-                    function <?php echo "uni_row_" . esc_attr( $id ) ?>_fields_conditional_func(formData) {
+                    function <?php echo esc_attr( $css_id ) ?>_fields_conditional_func(formData) {
                         try {
-                            var $uni_row_<?php echo esc_attr( $id ) ?>        = $('#uni_row_<?php echo esc_attr( $id ) ?>');
-                            var $uni_row_<?php echo esc_attr( $id ) ?>_fields = $uni_row_<?php echo esc_attr( $id ) ?>.find('input, select, textarea');
+                            var $<?php echo esc_attr( $css_id ) ?>        = $('#<?php echo esc_attr( $css_id ) ?>');
+                            var $<?php echo esc_attr( $css_id ) ?>_fields = $<?php echo esc_attr( $css_id ) ?>.find('input, select, textarea');
                             var extraClass = 'uni-cpo-excluded-field';
 
 			                <?php
 			                if ( $is_hidden ) {
-				                $is_hidden_html = 'if ( ! $uni_row_' . esc_attr( $id ) . '.hasClass("cpo-visible-field") ) {' . "\n";
-				                $is_hidden_html .= '$uni_row_' . $id . '.hide();' . "\n";
+				                $is_hidden_html = 'if ( ! $' . esc_attr( $css_id ) . '.hasClass("cpo-visible-field") ) {' . "\n";
+				                $is_hidden_html .= '$' . $css_id . '.hide();' . "\n";
 				                $is_hidden_html .= $add_class;
 				                $is_hidden_html .= '}' . "\n";
 				                echo $is_hidden_html;

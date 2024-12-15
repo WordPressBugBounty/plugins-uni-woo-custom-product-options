@@ -12,7 +12,7 @@ final class Uni_Cpo {
      *
      * @var string
      */
-    public $version = '4.9.41';
+    public $version = '4.9.46';
 
     /**
      * The single instance of the class.
@@ -518,7 +518,7 @@ final class Uni_Cpo {
                 'flatpickr',
                 $this->plugin_url() . '/includes/vendors/flatpickr/flatpickr.js',
                 array(),
-                '4.3.2'
+                '4.6.13'
             );
             wp_register_script(
                 'parsleyjs',

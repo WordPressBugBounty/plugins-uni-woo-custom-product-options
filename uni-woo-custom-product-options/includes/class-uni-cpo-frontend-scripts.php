@@ -548,7 +548,7 @@ class Uni_Cpo_Frontend_Scripts {
             'flatpickr',
             $vendors_path . 'flatpickr/flatpickr.js',
             array('jquery'),
-            '4.3.2'
+            '4.6.13'
         );
         self::register_script(
             'rangeSlider',
@@ -600,7 +600,8 @@ class Uni_Cpo_Frontend_Scripts {
                 'moment',
                 'flatpickr',
                 'rangeSlider',
-                'uni-cpo-utils'
+                'uni-cpo-utils',
+                'select2'
             ),
             UNI_CPO_VERSION
         );
@@ -876,6 +877,7 @@ class Uni_Cpo_Frontend_Scripts {
                 }
             }
             wp_enqueue_style( 'wp-color-picker' );
+            wp_enqueue_style( 'select2' );
             // CSS Styles to be used in builder
             if ( $enqueue_styles = self::get_styles() ) {
                 foreach ( $enqueue_styles as $handle => $args ) {
@@ -1044,13 +1046,31 @@ class Uni_Cpo_Frontend_Scripts {
         // JS scripts and styles to be used in Cart page
         if ( function_exists( 'is_cart' ) && is_cart() ) {
             wp_localize_script( 'parsleyjs', 'uni_parsley_loc', $localizations['parsleyjs'] );
+            $cart_content = WC()->cart->get_cart();
+            $keys_array = array_keys( $cart_content );
+            $settings_data = array();
+            foreach ( $keys_array as $key ) {
+                $cart_item = $cart_content[$key];
+                $settings_data[$key] = array(
+                    'cpo_on'                => ( isset( $cart_item['_cpo_enable'] ) ? $cart_item['_cpo_enable'] : null ),
+                    'product_id'            => ( isset( $cart_item['_cpo_data']['cpo_product_id'] ) ? $cart_item['_cpo_data']['cpo_product_id'] : null ),
+                    'cart_duplicate_enable' => ( isset( $cart_item['_cart_duplicate_enable'] ) ? $cart_item['_cart_duplicate_enable'] : null ),
+                    'cart_edit_full_enable' => ( isset( $cart_item['_cart_edit_full_enable'] ) ? $cart_item['_cart_edit_full_enable'] : null ),
+                    'cart_edit_enable'      => ( isset( $cart_item['_cart_edit_enable'] ) ? $cart_item['_cart_edit_enable'] : null ),
+                );
+            }
             $uni_cpo_cart = apply_filters( 'uni_cpo_cart_frontend_strings', array(
-                'cart_url' => apply_filters( 'woocommerce_add_to_cart_redirect', wc_get_cart_url(), null ),
+                'cart_url'            => apply_filters( 'woocommerce_add_to_cart_redirect', wc_get_cart_url(), null ),
+                'nonce'               => wp_create_nonce( 'woocommerce-cart' ),
+                'items_settings_data' => $settings_data,
             ) );
             wp_localize_script( 'uni-cpo-cart', 'unicpo_cart', $uni_cpo_cart );
             $uni_cpo_i18n = apply_filters( 'uni_cpo_cart_i18n_frontend_strings', array(
                 'flatpickr'       => $localizations['flatpickr'],
                 'saveChangesText' => __( 'Save changes', 'uni-cpo' ),
+                'duplicateText'   => __( 'Duplicate', 'uni-cpo' ),
+                'editText'        => __( 'Edit', 'uni-cpo' ),
+                'editInlineText'  => __( 'Edit (inline)', 'uni-cpo' ),
             ) );
             wp_localize_script( 'uni-cpo-cart', 'unicpo_cart_i18n', $uni_cpo_i18n );
             self::enqueue_script( 'uni-cpo-cart' );

@@ -45,6 +45,22 @@ function uni_cpo_help_tip(  $tip, $allow_html = false, $args = array()  ) {
 }
 
 /**
+ * Conditional function that check if Cart page use Cart Blocks
+ *
+ * @return boolean
+ * @since  4.0.0
+ *
+ */
+function uni_cpo_is_checkout_block() {
+    if ( class_exists( 'WC_Blocks_Utils' ) ) {
+        return WC_Blocks_Utils::has_block_in_page( wc_get_page_id( 'cart' ), 'woocommerce/cart' );
+    } else {
+        $post = get_post( get_option( 'woocommerce_checkout_page_id' ) );
+        return false !== strpos( $post->post_content, '<!-- wp:woocommerce/checkout' );
+    }
+}
+
+/**
  * Serialize and encode
  *
  * @return    string
@@ -1150,6 +1166,10 @@ function uni_cpo_add_cart_item_data(  $cart_item_data, $product_id  ) {
             $form_data = wc_clean( $_POST );
         }
         if ( 'on' === $product_data['settings_data']['cpo_enable'] ) {
+            $cart_item_data['_cpo_enable'] = ( 'on' === $product_data['settings_data']['cpo_enable'] ? true : false );
+            $cart_item_data['_cart_duplicate_enable'] = ( 'on' === $product_data['settings_data']['cart_duplicate_enable'] ? true : false );
+            $cart_item_data['_cart_edit_full_enable'] = ( 'on' === $product_data['settings_data']['cart_edit_full_enable'] ? true : false );
+            $cart_item_data['_cart_edit_enable'] = ( 'on' === $product_data['settings_data']['cart_edit_enable'] ? true : false );
             $cart_item_data['_cpo_calc_option'] = ( 'on' === $product_data['settings_data']['calc_enable'] ? true : false );
             $cart_item_data['_cpo_cart_item_id'] = ( !empty( $form_data['cpo_cart_item_id'] ) ? $form_data['cpo_cart_item_id'] : '' );
             $cart_item_data['_cpo_product_image'] = ( $plugin_settings['change_product_image_in_cart'] === 'on' && !empty( $form_data['cpo_product_image'] ) ? $form_data['cpo_product_image'] : '' );
@@ -1236,6 +1256,7 @@ function uni_cpo_get_cart_item_from_session(  $session_data, $values, $key  ) {
 }
 
 function uni_cpo_add_cart_item(  $cart_item_data  ) {
+    $plugin_settings = UniCpo()->get_settings();
     $product_id = $cart_item_data['product_id'];
     $is_calc_enabled = ( isset( $cart_item_data['_cpo_calc_option'] ) ? boolval( $cart_item_data['_cpo_calc_option'] ) : false );
     // price calc
@@ -1255,6 +1276,9 @@ function uni_cpo_add_cart_item(  $cart_item_data  ) {
                 }
             }
         }
+    }
+    if ( uni_cpo_is_checkout_block() && $plugin_settings['change_product_image_in_cart'] === 'on' && isset( $cart_item_data['_cpo_product_image'] ) && !empty( $cart_item_data['_cpo_product_image'] ) ) {
+        $cart_item_data['data']->set_image_id( $cart_item_data['_cpo_product_image'] );
     }
     return $cart_item_data;
 }

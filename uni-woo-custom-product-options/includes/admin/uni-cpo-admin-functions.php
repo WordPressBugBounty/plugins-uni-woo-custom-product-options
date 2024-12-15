@@ -151,6 +151,7 @@ function uni_cpo_order_formatted_meta_data(  $formatted_meta, $item  ) {
                 $post = uni_cpo_get_post_by_slug( $slug );
                 if ( $post ) {
                     $option = uni_cpo_get_option( $post->ID );
+                    $option_type = $option::get_type();
                     if ( is_object( $option ) ) {
                         $display_key = uni_cpo_sanitize_label( $option->cpo_order_label() );
                         if ( 'matrix' === $option::get_type() ) {
@@ -185,10 +186,20 @@ function uni_cpo_order_formatted_meta_data(  $formatted_meta, $item  ) {
                                         }, $v['order_meta'] );
                                         $display_value = implode( ', ', $v['order_meta'] );
                                     } else {
-                                        if ( !is_numeric( $v['order_meta'] ) ) {
-                                            $display_value = esc_html__( $v['order_meta'] );
+                                        if ( 'file_upload' === $option_type && !empty( $v['cart_meta'] ) ) {
+                                            $attachment_url = get_attachment_link( $v['cart_meta'] );
+                                            $file_name = $v['order_meta'];
+                                            if ( !empty( $attachment_url ) ) {
+                                                $display_value = "<a href='{$attachment_url}' target='_blank'>{$file_name}</a>";
+                                            } else {
+                                                $display_value = esc_html__( $v['order_meta'] );
+                                            }
                                         } else {
-                                            $display_value = $v['order_meta'];
+                                            if ( !is_numeric( $v['order_meta'] ) ) {
+                                                $display_value = esc_html__( $v['order_meta'] );
+                                            } else {
+                                                $display_value = $v['order_meta'];
+                                            }
                                         }
                                     }
                                     break;
