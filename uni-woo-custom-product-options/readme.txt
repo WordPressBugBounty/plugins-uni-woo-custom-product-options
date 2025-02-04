@@ -1,5 +1,5 @@
 === Product Options and Price Calculation Formulas for WooCommerce – Uni CPO ===
-Contributors: moomooagency, mrpsiho, andriimatenka, freemius
+Contributors: moomooagency, mrpsiho, andriimatenka
 Tags: custom options, extra options, product visual builder, woocommerce plugins, price calculation, maths formula, conditional logic, wholesale
 Requires at least: 5.6
 Tested up to: 6.6
@@ -101,6 +101,10 @@ A: Yes, always and ever! Back up your files as well as database. Always test new
 7. screenshot-7.png
 
 == Changelog ==
+
+= 4.9.47 =
+* Updated: Plugin internal dependencies. No breaking changes, nothing to worry about.
+* Added: output of weight default or calculated to be displayed in Dynamic Notice
 
 = 4.9.46 =
 * Fixed: fixed fatal error related to checking gutenberg block in checkout

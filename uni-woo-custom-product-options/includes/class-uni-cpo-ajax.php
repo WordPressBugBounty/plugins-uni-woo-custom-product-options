@@ -489,6 +489,7 @@ class Uni_Cpo_Ajax {
                 'order_product' => 'enabled',
             );
             $is_calc_disabled = false;
+            $is_calc_weight = false;
             $options_eval_result = array();
             $formatted_vars = array();
             $errors_in_options = array();
@@ -625,6 +626,33 @@ class Uni_Cpo_Ajax {
                             $price_vars['total_discounted'] = uni_cpo_price( $price_vars['raw_total_discounted'] );
                         }
                         $price_vars['price_tax_rev'] = '';
+                        $weight_unit = get_option( 'woocommerce_weight_unit' );
+                        $weight = $product->get_weight();
+                        $price_vars['weight'] = "{$weight} {$weight_unit}";
+                        $price_vars['raw_weight'] = $weight;
+                        if ( unicpo_fs()->can_use_premium_code__premium_only() && $is_calc_weight ) {
+                            $main_weight_formula = $product_data['weight_data']['main_weight_formula'];
+                            // cart discounts rules
+                            if ( 'on' === $product_data['weight_data']['weight_rules_enable'] && !empty( $product_data['weight_data']['weight_scheme'] ) && is_array( $product_data['weight_data']['weight_scheme'] ) ) {
+                                $weight_conditional_formula = uni_cpo_process_formula_scheme( $formatted_vars, $product_data, 'weight' );
+                                if ( $weight_conditional_formula ) {
+                                    $main_weight_formula = $weight_conditional_formula;
+                                }
+                            }
+                            if ( !empty( $main_weight_formula ) ) {
+                                $main_weight_formula = uni_cpo_process_formula_with_vars( $main_weight_formula, $variables );
+                                $weight = uni_cpo_calculate_formula( $main_weight_formula );
+                                // filter, so 3rd party scripts can hook up
+                                $weight = apply_filters(
+                                    'uni_cpo_in_cart_calculated_weight',
+                                    $weight,
+                                    $product,
+                                    $filtered_form_data
+                                );
+                                $price_vars['weight'] = "{$weight} {$weight_unit}";
+                                $price_vars['raw_weight'] = $weight;
+                            }
+                        }
                         if ( $product->is_taxable() ) {
                             if ( get_option( 'woocommerce_prices_include_tax' ) === 'yes' ) {
                                 $price_vars['price_tax_rev'] = uni_cpo_price( wc_get_price_excluding_tax( $product, array(
