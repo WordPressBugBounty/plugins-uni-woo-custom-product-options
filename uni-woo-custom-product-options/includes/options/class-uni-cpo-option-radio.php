@@ -873,6 +873,9 @@ class Uni_Cpo_Option_Radio extends Uni_Cpo_Option implements Uni_Cpo_Option_Inte
                     $selected_chosen = true;
                 }
             }
+            if ( !empty( $suboption['suboption_redirect_uri'] ) ) {
+                $attributes_new['data-redirect-uri'] = $suboption['suboption_redirect_uri'];
+            }
             ?>
             <input
                     class="<?php 

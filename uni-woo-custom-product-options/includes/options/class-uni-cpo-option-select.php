@@ -612,7 +612,7 @@ class Uni_Cpo_Option_Select extends Uni_Cpo_Option implements Uni_Cpo_Option_Int
 		<?php echo self::get_custom_attribute_html( $wrapper_attributes ); ?>>
 		<?php
 		if ( ! empty( $cpo_general_advanced['cpo_label'] ) ) { ?>
-            <<?php echo esc_attr( $cpo_label_tag ); ?> class="uni-cpo-module-<?php echo esc_attr( $type ); ?>-label <?php if ( $is_required ) { ?> uni_cpo_field_required <?php } ?>">
+            <<?php echo esc_attr( $cpo_label_tag ); ?> for="<?php echo esc_attr( $slug ); ?>-field" class="uni-cpo-module-<?php echo esc_attr( $type ); ?>-label <?php if ( $is_required ) { ?> uni_cpo_field_required <?php } ?>">
 			<?php esc_html_e( uni_cpo_get_proper_option_label_sp( $cpo_general_advanced['cpo_label'] ) ); ?>
 			<?php if ( $is_tooltip && $cpo_general_advanced['cpo_tooltip'] !== '' && $cpo_tooltip_type === 'classic' ) { ?>
                 <span
@@ -642,19 +642,22 @@ class Uni_Cpo_Option_Select extends Uni_Cpo_Option implements Uni_Cpo_Option_Int
 				if ( isset( $suboption['excl'] ) && ! empty( $suboption['excl'] ) ) {
 					continue;
 				}
+                $option_attrs = [];
 				if ( ! $selected_chosen && ! empty( $default_value ) && $suboption['slug'] === $default_value ) {
-					$selected        = 'selected="selected" data-selected="1"';
+                    $option_attrs['selected'] = 'selected';
+                    $option_attrs['data-selected'] = '1';
 					$selected_chosen = true;
 				} elseif ( ! $selected_chosen && empty( $default_value ) && $suboption['def'] === 'checked' ) {
-					$selected        = 'selected="selected" data-selected="1"';
+                    $option_attrs['selected'] = 'selected';
+                    $option_attrs['data-selected'] = '1';
 					$selected_chosen = true;
-				} else {
-					$selected = '';
 				}
+                if(!empty($suboption['suboption_redirect_uri'])) {
+                    $option_attrs['data-redirect-uri'] = $suboption['suboption_redirect_uri'];
+                }
 				?>
-                <option
-                        value="<?php echo esc_attr( $suboption['slug'] ); ?>"
-					<?php echo esc_attr( $selected ); ?>>
+                <option value="<?php echo esc_attr( $suboption['slug'] ); ?>"
+                    <?php echo self::get_custom_attribute_html( $option_attrs ); ?>>
 					<?php esc_html_e( uni_cpo_get_proper_option_label_sp( $suboption['label'] ) ); ?>
                 </option>
 			<?php endforeach; ?>
@@ -666,19 +669,23 @@ class Uni_Cpo_Option_Select extends Uni_Cpo_Option implements Uni_Cpo_Option_Int
                     if ( isset( $suboption['excl'] ) && ! empty( $suboption['excl'] ) ) {
                         continue;
                     }
+                    $option_attrs = [];
+
                     if ( ! $selected_chosen && ! empty( $default_value ) && $suboption['slug'] === $default_value ) {
-                        $selected        = 'selected="selected" data-selected="1"';
+                        $option_attrs['selected'] = 'selected';
+                        $option_attrs['data-selected'] = '1';
                         $selected_chosen = true;
                     } elseif ( ! $selected_chosen && empty( $default_value ) && $suboption['def'] === 'checked' ) {
-                        $selected        = 'selected="selected" data-selected="1"';
+                        $option_attrs['selected'] = 'selected';
+                        $option_attrs['data-selected'] = '1';
                         $selected_chosen = true;
-                    } else {
-                        $selected = '';
+                    }
+                    if(!empty($suboption['suboption_redirect_uri'])) {
+                        $option_attrs['data-redirect-uri'] = $suboption['suboption_redirect_uri'];
                     }
                     ?>
-                    <option
-                            value="<?php echo esc_attr( $suboption['slug'] ); ?>"
-                        <?php echo esc_attr( $selected ); ?>>
+                    <option value="<?php echo esc_attr( $suboption['slug'] ); ?>"
+                        <?php echo self::get_custom_attribute_html( $option_attrs ); ?>>
                         <?php esc_html_e( uni_cpo_get_proper_option_label_sp( $suboption['label'] ) ); ?>
                     </option>
                 <?php endforeach; ?>

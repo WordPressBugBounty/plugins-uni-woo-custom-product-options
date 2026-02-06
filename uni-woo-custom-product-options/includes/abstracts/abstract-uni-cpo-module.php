@@ -270,8 +270,13 @@ class Uni_Cpo_Module extends Uni_Cpo_Data {
 		$custom_attributes = array();
 
 		if ( ! empty( $attributes ) && is_array( $attributes ) ) {
+			// Apply filter to allow modification/merging of attributes before processing
+			$attributes = apply_filters( 'uni_cpo_custom_attributes', $attributes );
+
+			// Build attributes array using keys to ensure uniqueness
+			// Later attributes with same key will overwrite earlier ones
 			foreach ( $attributes as $attribute => $attribute_value ) {
-				$custom_attributes[] = esc_attr( $attribute ) . '="' . esc_attr( $attribute_value ) . '"';
+				$custom_attributes[ $attribute ] = esc_attr( $attribute ) . '="' . esc_attr( $attribute_value ) . '"';
 			}
 		}
 

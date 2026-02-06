@@ -24,6 +24,7 @@ class Uni_Cpo_Plugin_Settings {
             'display_dimensions_in_cart',
             'range_slider_style',
             'file_upload',
+            'multi_file_upload',
             'sample_feature',
             'gmap_api_key',
             'csv_delimiter'
@@ -111,7 +112,7 @@ class Uni_Cpo_Plugin_Settings {
         ] );
         $settings['standard'] = array(
             'title'       => __( 'Standard', 'uni-cpo' ),
-            'description' => '',
+            'description' => __( 'All standard/general plugin settings', 'uni-cpo' ) . '<span id="standard"></span>',
             'fields'      => array(
                 array(
                     'id'          => 'ajax_add_to_cart',
@@ -222,7 +223,7 @@ class Uni_Cpo_Plugin_Settings {
         );
         $settings['file_upload'] = array(
             'title'       => __( 'File upload settings', 'uni-cpo' ),
-            'description' => '',
+            'description' => __( 'Settings related to file upload functionality', 'uni-cpo' ) . '<span id="file_upload"></span>',
             'fields'      => array(
                 array(
                     'id'          => 'max_file_size',
@@ -248,6 +249,7 @@ class Uni_Cpo_Plugin_Settings {
                     'options'     => array(
                         'local'   => __( 'Local', 'uni-cpo' ),
                         'dropbox' => __( 'Dropbox', 'uni-cpo' ),
+                        'gdrive'  => __( 'Google Drive', 'uni-cpo' ),
                     ),
                     'default'     => 'local',
                 ),
@@ -269,19 +271,62 @@ class Uni_Cpo_Plugin_Settings {
                     'dependency'  => '#file_storage:is(local)',
                 ),
                 array(
-                    'id'          => 'dropbox_token',
-                    'label'       => __( 'Dropbox Access Token', 'uni-cpo' ),
-                    'description' => __( 'This access token makes it possible to upload files uploaded by customers to a separate folder in your Dropbox account. Attention: current limitation is 150 mb file! So, if you choose "dropbox" as storage option, make sure that your file uploads are limited to 150 mb!', 'uni-cpo' ),
+                    'id'          => 'dropbox_app_key',
+                    'label'       => __( 'Dropbox App Key', 'uni-cpo' ),
+                    'description' => __( 'Your Dropbox app key. You can find this in your Dropbox app console. Required for OAuth authentication.', 'uni-cpo' ),
                     'type'        => 'text',
                     'default'     => '',
-                    'placeholder' => '',
+                    'placeholder' => __( 'Enter your Dropbox App Key', 'uni-cpo' ),
                     'dependency'  => '#file_storage:is(dropbox)',
+                ),
+                array(
+                    'id'          => 'dropbox_app_secret',
+                    'label'       => __( 'Dropbox App Secret', 'uni-cpo' ),
+                    'description' => __( 'Your Dropbox app secret. You can find this in your Dropbox app console. Required for OAuth authentication.', 'uni-cpo' ),
+                    'type'        => 'password',
+                    'default'     => '',
+                    'placeholder' => __( 'Enter your Dropbox App Secret', 'uni-cpo' ),
+                    'dependency'  => '#file_storage:is(dropbox)',
+                ),
+                array(
+                    'id'          => 'dropbox_auth_status',
+                    'label'       => __( 'Authorization Status', 'uni-cpo' ),
+                    'description' => __( 'Current OAuth authorization status and controls for managing Dropbox access.', 'uni-cpo' ),
+                    'type'        => 'custom',
+                    'callback'    => array($this, 'render_dropbox_auth_status'),
+                    'dependency'  => '#file_storage:is(dropbox)',
+                ),
+                array(
+                    'id'          => 'gdrive_client_id',
+                    'label'       => __( 'Google Drive Client ID', 'uni-cpo' ),
+                    'description' => __( 'Enter your Google Drive OAuth2 Client ID from Google Cloud Console.', 'uni-cpo' ),
+                    'type'        => 'text',
+                    'default'     => '',
+                    'placeholder' => __( 'Enter your Google Drive Client ID', 'uni-cpo' ),
+                    'dependency'  => '#file_storage:is(gdrive)',
+                ),
+                array(
+                    'id'          => 'gdrive_client_secret',
+                    'label'       => __( 'Google Drive Client Secret', 'uni-cpo' ),
+                    'description' => __( 'Enter your Google Drive OAuth2 Client Secret from Google Cloud Console.', 'uni-cpo' ),
+                    'type'        => 'password',
+                    'default'     => '',
+                    'placeholder' => __( 'Enter your Google Drive Client Secret', 'uni-cpo' ),
+                    'dependency'  => '#file_storage:is(gdrive)',
+                ),
+                array(
+                    'id'          => 'gdrive_auth_status',
+                    'label'       => __( 'Authorization Status', 'uni-cpo' ),
+                    'description' => __( 'Current OAuth authorization status and controls for managing Google Drive access.', 'uni-cpo' ),
+                    'type'        => 'custom',
+                    'callback'    => array($this, 'render_gdrive_auth_status'),
+                    'dependency'  => '#file_storage:is(gdrive)',
                 )
             ),
         );
         $settings['sample_feature'] = array(
             'title'       => __( 'Free sample functionality', 'uni-cpo' ),
-            'description' => '',
+            'description' => __( 'Extra functionality "free sample"', 'uni-cpo' ) . '<span id="sample_feature"></span>',
             'fields'      => array(array(
                 'id'          => 'free_sample_enable',
                 'label'       => __( 'Enable "Free sample" functionality', 'uni-cpo' ),
@@ -306,6 +351,8 @@ class Uni_Cpo_Plugin_Settings {
      * @return void
      */
     public function register_settings() {
+        // Register the settings group once
+        register_setting( 'general_settings', $this->settings_base, array($this, 'validate_settings') );
         if ( is_array( $this->settings ) ) {
             foreach ( $this->settings as $section => $data ) {
                 if ( unicpo_fs()->is_not_paying() ) {
@@ -326,13 +373,6 @@ class Uni_Cpo_Plugin_Settings {
                             continue;
                         }
                     }
-                    // Validation callback for field
-                    $validation = '';
-                    if ( isset( $field['callback'] ) ) {
-                        $validation = $field['callback'];
-                    }
-                    // Register field
-                    register_setting( 'general_settings', $this->settings_base, $validation );
                     // Add field to page
                     add_settings_field(
                         $field['id'],
@@ -347,6 +387,18 @@ class Uni_Cpo_Plugin_Settings {
                 }
             }
         }
+    }
+
+    /**
+     * Validate settings input
+     * 
+     * @param array $input Input data from form
+     * @return array Sanitized input data
+     */
+    public function validate_settings( $input ) {
+        // Return the input as-is for now
+        // Individual fields can have their own validation if needed
+        return $input;
     }
 
     public function settings_section( $section ) {
@@ -462,6 +514,12 @@ class Uni_Cpo_Plugin_Settings {
                 </div>
                 <?php 
                 break;
+            case 'custom':
+                // Call the custom callback function
+                if ( isset( $field['callback'] ) && is_callable( $field['callback'] ) ) {
+                    call_user_func( $field['callback'], $field );
+                }
+                break;
         }
         switch ( $field['type'] ) {
             case 'checkbox_multi':
@@ -567,6 +625,183 @@ class Uni_Cpo_Plugin_Settings {
         $html .= '<p>' . esc_html__( 'This section is dedicated to import/export functionality for suboptions of the following option types: Radio, Checkboxes and Select', 'uni-cpo' ) . '</p>';
         $html .= '<p><strong>' . esc_html__( 'This functionality is included in PRO version of the plugin', 'uni-cpo' ) . '</strong></p>';
         echo $html;
+    }
+
+    /**
+     * Render Dropbox authorization status and button
+     *
+     * @param array $field Field configuration
+     * @return void
+     */
+    public function render_dropbox_auth_status( $field ) {
+        // Display success/error messages
+        if ( isset( $_GET['success'] ) ) {
+            switch ( $_GET['success'] ) {
+                case 'authorized':
+                    echo '<div class="notice notice-success is-dismissible"><p>' . __( '✓ Dropbox authorization successful!', 'uni-cpo' ) . '</p></div>';
+                    break;
+                case 'revoked':
+                    echo '<div class="notice notice-success is-dismissible"><p>' . __( '✓ Dropbox authorization revoked successfully.', 'uni-cpo' ) . '</p></div>';
+                    break;
+            }
+        }
+        if ( isset( $_GET['error'] ) ) {
+            $error = sanitize_text_field( $_GET['error'] );
+            switch ( $error ) {
+                case 'missing_credentials':
+                    echo '<div class="notice notice-error is-dismissible"><p>' . __( '❌ Please configure your Dropbox App Key and App Secret first.', 'uni-cpo' ) . '</p></div>';
+                    break;
+                case 'no_code':
+                    echo '<div class="notice notice-error is-dismissible"><p>' . __( '❌ Authorization failed: No authorization code received from Dropbox.', 'uni-cpo' ) . '</p></div>';
+                    break;
+                default:
+                    echo '<div class="notice notice-error is-dismissible"><p>' . sprintf( __( '❌ Dropbox Error: %s', 'uni-cpo' ), esc_html( $error ) ) . '</p></div>';
+                    break;
+            }
+        }
+        $settings = UniCpo()->get_settings();
+        $app_key = ( isset( $settings['dropbox_app_key'] ) ? $settings['dropbox_app_key'] : '' );
+        $app_secret = ( isset( $settings['dropbox_app_secret'] ) ? $settings['dropbox_app_secret'] : '' );
+        $access_token = get_option( 'uni_cpo_dropbox_access_token', '' );
+        $refresh_token = get_option( 'uni_cpo_dropbox_refresh_token', '' );
+        $expires_at = get_option( 'uni_cpo_dropbox_expires_at', 0 );
+        $is_configured = !empty( $app_key ) && !empty( $app_secret );
+        $is_authorized = !empty( $access_token ) && !empty( $refresh_token );
+        $is_expired = $is_authorized && time() > $expires_at;
+        // Generate and display the redirect URI that needs to be configured in Dropbox app
+        $redirect_uri = admin_url( 'admin-post.php?action=uni_cpo_dropbox_callback' );
+        echo '<div id="dropbox_auth_status" style="background: #f0f6fc; border: 1px solid #0073aa; padding: 15px; margin-bottom: 15px; border-radius: 4px;">';
+        echo '<h4 style="margin-top: 0; color: #0073aa;">' . __( '📋 Dropbox App Configuration Required', 'uni-cpo' ) . '</h4>';
+        echo '<p>' . __( 'Before authorizing, you must add this Redirect URI to your Dropbox app settings:', 'uni-cpo' ) . '</p>';
+        echo '<div style="background: #fff; padding: 10px; border: 1px solid #ddd; border-radius: 3px; font-family: monospace; font-size: 13px; margin: 10px 0; word-break: break-all;">';
+        echo '<strong>' . esc_html( $redirect_uri ) . '</strong>';
+        echo '</div>';
+        echo '<p><small>' . __( '👆 Copy this URL and add it to the "Redirect URIs" section in your Dropbox app console at <a href="https://www.dropbox.com/developers/apps" target="_blank">https://www.dropbox.com/developers/apps</a>', 'uni-cpo' ) . '</small></p>';
+        echo '</div>';
+        echo '<div id="dropbox-auth-status">';
+        if ( !$is_configured ) {
+            echo '<div class="notice notice-warning inline">';
+            echo '<p>' . __( 'Please enter your Dropbox App Key and App Secret above, then save settings before authorizing.', 'uni-cpo' ) . '</p>';
+            echo '</div>';
+        } elseif ( $is_authorized ) {
+            echo '<div class="notice notice-success inline">';
+            echo '<p>' . __( '✓ Authorized and ready to use.', 'uni-cpo' ) . '</p>';
+            echo '</div>';
+            echo '<button type="button" id="dropbox-revoke-btn" class="button button-secondary">' . __( 'Revoke Authorization', 'uni-cpo' ) . '</button>';
+        } else {
+            echo '<div class="notice notice-error inline">';
+            echo '<p>' . __( 'Not authorized. Click the button below to authorize with Dropbox.', 'uni-cpo' ) . '</p>';
+            echo '</div>';
+            echo '<button type="button" id="dropbox-authorize-btn" class="button button-primary">' . __( 'Authorize with Dropbox', 'uni-cpo' ) . '</button>';
+        }
+        echo '</div>';
+        // Add JavaScript for authorization handling
+        echo '<script type="text/javascript">
+        jQuery(document).ready(function($) {
+            $("#dropbox-authorize-btn").click(function() {
+                var app_key = $("#dropbox_app_key").val();
+                var app_secret = $("#dropbox_app_secret").val();
+                
+                if (!app_key || !app_secret) {
+                    alert("' . esc_js( __( 'Please save your App Key and App Secret first.', 'uni-cpo' ) ) . '");
+                    return;
+                }
+                
+                window.location.href = "' . admin_url( 'admin-post.php?action=uni_cpo_dropbox_auth' ) . '";
+            });
+            
+            $("#dropbox-revoke-btn").click(function() {
+                if (confirm("' . esc_js( __( 'Are you sure you want to revoke Dropbox authorization?', 'uni-cpo' ) ) . '")) {
+                    window.location.href = "' . admin_url( 'admin-post.php?action=uni_cpo_dropbox_revoke' ) . '";
+                }
+            });
+        });
+        </script>';
+    }
+
+    /**
+     * Render Google Drive authorization status and button
+     *
+     * @param array $field Field configuration
+     * @return void
+     */
+    public function render_gdrive_auth_status( $field ) {
+        // Display success/error messages
+        if ( isset( $_GET['success'] ) ) {
+            switch ( $_GET['success'] ) {
+                case 'gdrive_authorized':
+                    echo '<div class="notice notice-success is-dismissible"><p>' . __( '✓ Google Drive authorization successful!', 'uni-cpo' ) . '</p></div>';
+                    break;
+                case 'gdrive_revoked':
+                    echo '<div class="notice notice-success is-dismissible"><p>' . __( '✓ Google Drive authorization revoked successfully.', 'uni-cpo' ) . '</p></div>';
+                    break;
+            }
+        }
+        if ( isset( $_GET['error'] ) ) {
+            $error = sanitize_text_field( $_GET['error'] );
+            switch ( $error ) {
+                case 'gdrive_missing_credentials':
+                    echo '<div class="notice notice-error is-dismissible"><p>' . __( '❌ Please configure your Google Drive Client ID and Client Secret first.', 'uni-cpo' ) . '</p></div>';
+                    break;
+                case 'gdrive_no_code':
+                    echo '<div class="notice notice-error is-dismissible"><p>' . __( '❌ Google Drive Authorization failed: No authorization code received from Google.', 'uni-cpo' ) . '</p></div>';
+                    break;
+                case 'gdrive_invalid_state':
+                    echo '<div class="notice notice-error is-dismissible"><p>' . __( '❌ Google Drive Authorization failed: Invalid security token. This could be due to:<br>1. The authorization took too long (token expired after 5 minutes)<br>2. Multiple authorization attempts<br>3. Browser session issues<br><br>Please try authorizing again.', 'uni-cpo' ) . '</p></div>';
+                    break;
+                default:
+                    echo '<div class="notice notice-error is-dismissible"><p>' . sprintf( __( '❌ Google Drive Error: %s', 'uni-cpo' ), esc_html( $error ) ) . '</p></div>';
+                    break;
+            }
+        }
+        $settings = UniCpo()->get_settings();
+        $client_id = ( isset( $settings['gdrive_client_id'] ) ? $settings['gdrive_client_id'] : '' );
+        $client_secret = ( isset( $settings['gdrive_client_secret'] ) ? $settings['gdrive_client_secret'] : '' );
+        $access_token = get_option( 'uni_cpo_gdrive_access_token', '' );
+        $refresh_token = get_option( 'uni_cpo_gdrive_refresh_token', '' );
+        $is_configured = !empty( $client_id ) && !empty( $client_secret );
+        $is_authorized = !empty( $access_token ) && !empty( $refresh_token );
+        // Generate and display the redirect URI that needs to be configured in Google Cloud Console
+        $redirect_uri = admin_url( 'admin.php?page=uni-cpo-settings&tab=file_uploads&gdrive_callback=1' );
+        echo '<div id="gdrive_auth_status" style="background: #f0f6fc; border: 1px solid #4285f4; padding: 15px; margin-bottom: 15px; border-radius: 4px;">';
+        echo '<h4 style="margin-top: 0; color: #4285f4;">' . __( '📋 Google Cloud Console Configuration Required', 'uni-cpo' ) . '</h4>';
+        echo '<p>' . __( 'Before authorizing, you must add this Redirect URI to your Google Cloud Console OAuth2 settings:', 'uni-cpo' ) . '</p>';
+        echo '<div style="background: #fff; padding: 10px; border: 1px solid #ddd; border-radius: 3px; font-family: monospace; font-size: 13px; margin: 10px 0; word-break: break-all;">';
+        echo '<strong>' . esc_html( $redirect_uri ) . '</strong>';
+        echo '</div>';
+        echo '<p><small>' . __( '👆 Copy this URL and add it to the "Authorized redirect URIs" section in your Google Cloud Console at <a href="https://console.cloud.google.com/apis/credentials" target="_blank">https://console.cloud.google.com/apis/credentials</a>', 'uni-cpo' ) . '</small></p>';
+        echo '</div>';
+        echo '<div id="gdrive-auth-status">';
+        if ( !$is_configured ) {
+            echo '<div class="notice notice-warning inline">';
+            echo '<p>' . __( 'Please enter your Google Drive Client ID and Client Secret above, then save settings before authorizing.', 'uni-cpo' ) . '</p>';
+            echo '</div>';
+        } elseif ( $is_authorized ) {
+            echo '<div class="notice notice-success inline">';
+            echo '<p>' . __( '✓ Authorized and ready to use.', 'uni-cpo' ) . '</p>';
+            echo '</div>';
+            echo '<button type="button" id="gdrive-revoke-btn" class="button button-secondary">' . __( 'Revoke Authorization', 'uni-cpo' ) . '</button>';
+        } else {
+            echo '<div class="notice notice-error inline">';
+            echo '<p>' . __( 'Not authorized. Click the button below to authorize with Google Drive.', 'uni-cpo' ) . '</p>';
+            echo '</div>';
+            echo '<button type="button" id="gdrive-authorize-btn" class="button button-primary">' . __( 'Authorize with Google Drive', 'uni-cpo' ) . '</button>';
+        }
+        echo '</div>';
+        // Add JavaScript for authorization handling
+        echo '<script type="text/javascript">
+        jQuery(document).ready(function($) {
+            $("#gdrive-authorize-btn").click(function() {
+                window.location.href = "' . admin_url( 'admin-post.php?action=uni_cpo_gdrive_authorize' ) . '";
+            });
+            
+            $("#gdrive-revoke-btn").click(function() {
+                if (confirm("' . __( 'Are you sure you want to revoke Google Drive authorization?', 'uni-cpo' ) . '")) {
+                    window.location.href = "' . admin_url( 'admin-post.php?action=uni_cpo_gdrive_revoke' ) . '";
+                }
+            });
+        });
+        </script>';
     }
 
 }

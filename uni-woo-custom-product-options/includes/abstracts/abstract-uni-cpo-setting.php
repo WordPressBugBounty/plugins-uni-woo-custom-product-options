@@ -41,11 +41,14 @@ abstract class Uni_Cpo_Setting {
 			$data['custom_attributes']['data-parsley-trigger'] = 'change focusout submit';
 		}
 
-		$data['custom_attributes'] = array_unique( $data['custom_attributes'] );
-
 		if ( ! empty( $data['custom_attributes'] ) && is_array( $data['custom_attributes'] ) ) {
+			// Apply filter to allow modification/merging of attributes before processing
+			$data['custom_attributes'] = apply_filters( 'uni_cpo_custom_attributes', $data['custom_attributes'] );
+
+			// Build attributes array using keys to ensure uniqueness
+			// Later attributes with same key will overwrite earlier ones
 			foreach ( $data['custom_attributes'] as $attribute => $attribute_value ) {
-				$custom_attributes[] = esc_attr( $attribute ) . '="' . esc_attr( $attribute_value ) . '"';
+				$custom_attributes[ $attribute ] = esc_attr( $attribute ) . '="' . esc_attr( $attribute_value ) . '"';
 			}
 		}
 

@@ -502,7 +502,7 @@ function uni_cpo_process_formula_scheme(  $variables, $product_data, $purpose = 
         return false;
     }
     foreach ( $scheme_data as $scheme_key => $scheme_item ) {
-        $formula_block = $scheme_item['formula'];
+        $formula_block = ( isset( $scheme_item['formula'] ) ? $scheme_item['formula'] : '' );
         $rules_block = json_decode( $scheme_item['rule'], true );
         $block_condition = $rules_block['condition'];
         $is_passed_block = false;
@@ -1129,6 +1129,24 @@ add_action(
     10,
     4
 );
+// Process cloud uploads at order creation - covers both classic and block checkout
+add_action(
+    'woocommerce_checkout_order_created',
+    'uni_cpo_process_order_cloud_uploads_by_id_single_block',
+    10,
+    1
+);
+add_action(
+    'woocommerce_store_api_checkout_order_processed',
+    'uni_cpo_process_order_cloud_uploads_by_id_single_block',
+    10,
+    1
+);
+// Wrapper function for block checkout hook
+function uni_cpo_process_order_cloud_uploads_by_id_single_block(  $order  ) {
+    uni_cpo_process_order_cloud_uploads_by_id_single( $order->get_id() );
+}
+
 // adds custom option data to the cart
 function uni_cpo_add_cart_item_data(  $cart_item_data, $product_id  ) {
     $product = wc_get_product( $product_id );
@@ -1177,6 +1195,8 @@ function uni_cpo_add_cart_item_data(  $cart_item_data, $product_id  ) {
                 $cart_item_data['_cpo_product_image'] = uni_cpo_upload_base64_image( $form_data['cpo_product_layered_image'], 'product_' . $form_data['cpo_product_id'] . '_image_' . time() );
             }
             $cart_item_data['_cpo_data'] = ( isset( $form_data['cpo_data'] ) ? $form_data['cpo_data'] : $form_data );
+            // values to be unset
+            $cart_item_data = apply_filters( 'uni_cpo_raw_cart_item_data', $cart_item_data, $product_id );
             // values to be unset
             $unset_values = apply_filters(
                 'uni_cpo_add_to_cart_values_to_be_unset',
@@ -1396,6 +1416,430 @@ function uni_cpo_checkout_create_order_line_item(
         foreach ( $additional_data as $k => $v ) {
             $item->add_meta_data( $k, $v );
         }
+    }
+    // Cloud uploads will be processed after order creation via woocommerce_checkout_update_order_meta hook
+}
+
+/**
+ * Process cloud uploads for all order items after order is fully created (by order ID)
+ * 
+ * @param int   $order_id Order ID
+ * @param array $data     Posted checkout data (not used)
+ */
+function uni_cpo_process_order_cloud_uploads_by_id(  $order_id, $data = null, $order = null  ) {
+    $hook_name = current_action();
+    uni_cpo_log_cloud_operation( "=== HOOK TRIGGERED: {$hook_name} for order {$order_id} ===", 'info' );
+    if ( !$order ) {
+        $order = wc_get_order( $order_id );
+    }
+    if ( !$order ) {
+        uni_cpo_log_cloud_operation( "ERROR: Could not load order {$order_id}", 'error' );
+        return;
+    }
+    uni_cpo_process_order_cloud_uploads( $order );
+}
+
+function uni_cpo_process_order_cloud_uploads_by_id_single(  $order_id  ) {
+    uni_cpo_log_cloud_operation( "=== HOOK TRIGGERED: Order creation hook for order {$order_id} ===", 'info' );
+    uni_cpo_process_order_cloud_uploads_by_id( $order_id );
+}
+
+/**
+ * Process cloud uploads for all order items after order is fully created
+ * 
+ * @param WC_Order $order WooCommerce order object
+ */
+function uni_cpo_process_order_cloud_uploads(  $order  ) {
+    $plugin_settings = UniCpo()->get_settings();
+    // Check if premium features are available
+    $has_premium = unicpo_fs()->can_use_premium_code__premium_only();
+    uni_cpo_log_cloud_operation( "Processing order {$order->get_id()} - Premium: " . (( $has_premium ? 'YES' : 'NO' )), 'info' );
+    if ( !$has_premium ) {
+        uni_cpo_log_cloud_operation( "Skipping cloud upload - premium features not available", 'warning' );
+        return;
+    }
+    // Process each order item
+    $any_uploads = false;
+    $order_items = $order->get_items();
+    uni_cpo_log_cloud_operation( "Order {$order->get_id()} has " . count( $order_items ) . " items to process", 'info' );
+    foreach ( $order_items as $item_id => $item ) {
+        uni_cpo_log_cloud_operation( "Processing order item {$item_id} for order {$order->get_id()}", 'info' );
+        $result = uni_cpo_process_order_item_cloud_uploads( $item, $order->get_id(), $plugin_settings );
+        uni_cpo_log_cloud_operation( "Item {$item_id} processing result: " . var_export( $result, true ), 'info' );
+        if ( $result ) {
+            $any_uploads = true;
+        }
+    }
+    uni_cpo_log_cloud_operation( "Finished processing all items for order {$order->get_id()}. Any uploads: " . (( $any_uploads ? 'YES' : 'NO' )), 'info' );
+    // Mark as processed to prevent duplicate processing
+    if ( $any_uploads ) {
+        update_post_meta( $order->get_id(), '_uni_cpo_cloud_processed', current_time( 'mysql' ) );
+        uni_cpo_log_cloud_operation( "Marked order {$order->get_id()} as cloud processed", 'info' );
+    }
+}
+
+/**
+ * Process cloud uploads for order item file upload fields
+ * 
+ * @param WC_Order_Item_Product $item            Order item
+ * @param int                   $order_id        Order ID
+ * @param array                 $plugin_settings Plugin settings
+ */
+function uni_cpo_process_order_item_cloud_uploads(  $item, $order_id, $plugin_settings  ) {
+    uni_cpo_log_cloud_operation( "=== STARTING cloud upload process for order {$order_id} ===", 'info' );
+    $file_storage = ( isset( $plugin_settings['file_storage'] ) ? $plugin_settings['file_storage'] : 'local' );
+    uni_cpo_log_cloud_operation( "File storage setting: {$file_storage}", 'info' );
+    // Only process if not using local storage
+    if ( $file_storage === 'local' ) {
+        uni_cpo_log_cloud_operation( "Skipping cloud upload - using local storage", 'info' );
+        return;
+    }
+    // Load cloud storage factory
+    require_once UNI_CPO_ABSPATH . 'includes/class-uni-cpo-cloud-storage-factory.php';
+    uni_cpo_log_cloud_operation( "Loaded cloud storage factory", 'info' );
+    // Initialize cloud storage factory if not already done
+    if ( !did_action( 'uni_cpo_cloud_storage_factory_init' ) ) {
+        uni_cpo_log_cloud_operation( "Initializing cloud storage factory", 'info' );
+        Uni_Cpo_Cloud_Storage_Factory::init();
+        do_action( 'uni_cpo_cloud_storage_factory_init' );
+    } else {
+        uni_cpo_log_cloud_operation( "Cloud storage factory already initialized", 'info' );
+    }
+    $provider = Uni_Cpo_Cloud_Storage_Factory::get_provider( $file_storage, $plugin_settings );
+    uni_cpo_log_cloud_operation( "Retrieved provider: " . (( $provider ? get_class( $provider ) : 'null' )), 'info' );
+    if ( !$provider ) {
+        uni_cpo_log_cloud_operation( "ERROR: Cloud provider '{$file_storage}' not available for order {$order_id}", 'error' );
+        return;
+    }
+    $is_configured = $provider->is_configured();
+    uni_cpo_log_cloud_operation( "Provider configured: " . (( $is_configured ? 'YES' : 'NO' )), 'info' );
+    if ( !$is_configured ) {
+        uni_cpo_log_cloud_operation( "ERROR: Cloud provider '{$file_storage}' not configured for order {$order_id}", 'error' );
+        return;
+    }
+    // Get all order item meta to find file upload options
+    $item_meta = $item->get_meta_data();
+    $file_meta_keys = [];
+    // Find meta keys that start with _uni_cpo_
+    foreach ( $item_meta as $meta ) {
+        $key = $meta->key;
+        if ( strpos( $key, '_uni_cpo_' ) === 0 ) {
+            // The full option slug includes the uni_cpo_ prefix (remove leading underscore only)
+            $option_slug = substr( $key, 1 );
+            // Remove only the leading underscore: _uni_cpo_test_fileupload -> uni_cpo_test_fileupload
+            $file_meta_keys[$option_slug] = $key;
+        }
+    }
+    if ( empty( $file_meta_keys ) ) {
+        uni_cpo_log_cloud_operation( "No UniCPO meta fields found in order item", 'info' );
+        return false;
+    }
+    uni_cpo_log_cloud_operation( "Found UniCPO meta keys: " . implode( ', ', array_keys( $file_meta_keys ) ), 'info' );
+    // Get posts by slugs to check their types
+    $posts = uni_cpo_get_posts_by_slugs( array_keys( $file_meta_keys ) );
+    if ( empty( $posts ) ) {
+        uni_cpo_log_cloud_operation( "No UniCPO option posts found for slugs: " . implode( ', ', array_keys( $file_meta_keys ) ), 'info' );
+        return false;
+    }
+    $posts_ids = wp_list_pluck( $posts, 'ID' );
+    $file_upload_options = [];
+    foreach ( $posts_ids as $post_id ) {
+        $option = uni_cpo_get_option( $post_id );
+        if ( !$option ) {
+            continue;
+        }
+        $type = $option->get_type();
+        if ( in_array( $type, ['file_upload', 'multi_file_upload'] ) ) {
+            $slug = $option->get_slug();
+            $file_upload_options[$slug] = $file_meta_keys[$slug];
+            // Keep the original meta key mapping
+            uni_cpo_log_cloud_operation( "Found file upload option: {$slug} (type: {$type})", 'info' );
+        }
+    }
+    if ( empty( $file_upload_options ) ) {
+        uni_cpo_log_cloud_operation( "No file upload type options found", 'info' );
+        return false;
+    }
+    uni_cpo_log_cloud_operation( "Found " . count( $file_upload_options ) . " file upload options: " . implode( ', ', array_keys( $file_upload_options ) ), 'info' );
+    $updated = false;
+    try {
+        // Process each file upload option
+        foreach ( $file_upload_options as $option_slug => $meta_key ) {
+            $value = $item->get_meta( $meta_key, true );
+            if ( empty( $value ) ) {
+                uni_cpo_log_cloud_operation( "No value found for file upload option {$meta_key}", 'info' );
+                continue;
+            }
+            uni_cpo_log_cloud_operation( "Processing file upload option {$meta_key} = " . (( is_string( $value ) ? $value : json_encode( $value ) )), 'info' );
+            // Parse attachment IDs
+            $attachment_ids = uni_cpo_parse_attachment_ids( $value );
+            if ( empty( $attachment_ids ) ) {
+                uni_cpo_log_cloud_operation( "Could not parse attachment IDs from {$meta_key}: " . $value, 'warning' );
+                continue;
+            }
+            uni_cpo_log_cloud_operation( "Processing " . count( $attachment_ids ) . " attachments for {$meta_key}: " . implode( ', ', $attachment_ids ), 'info' );
+            $cloud_urls = uni_cpo_upload_attachments_to_cloud(
+                $attachment_ids,
+                $order_id,
+                $provider,
+                $meta_key
+            );
+            if ( !empty( $cloud_urls ) ) {
+                // Update order item meta with cloud URLs instead of attachment IDs
+                $new_value = ( count( $cloud_urls ) === 1 ? $cloud_urls[0] : json_encode( $cloud_urls ) );
+                $item->update_meta_data( $meta_key, $new_value );
+                $updated = true;
+                uni_cpo_log_cloud_operation( "Updated meta {$meta_key} with cloud URLs: " . $new_value, 'info' );
+            } else {
+                uni_cpo_log_cloud_operation( "No cloud URLs returned for field {$meta_key}", 'warning' );
+            }
+        }
+    } catch ( Exception $e ) {
+        uni_cpo_log_cloud_operation( "ERROR processing order item cloud uploads: " . $e->getMessage(), 'error' );
+        return false;
+    }
+    if ( $updated ) {
+        $item->save_meta_data();
+        uni_cpo_log_cloud_operation( "=== COMPLETED: Updated order item meta for order {$order_id} with cloud URLs ===", 'info' );
+    } else {
+        uni_cpo_log_cloud_operation( "=== COMPLETED: No updates made for order {$order_id} ===", 'info' );
+    }
+    return $updated;
+}
+
+/**
+ * Get file upload option slugs from product data
+ * 
+ * @param array $product_data Product configuration data
+ * @return array Array of file upload option slugs
+ */
+function uni_cpo_get_file_upload_options_from_product_data(  $product_data  ) {
+    $file_upload_options = array();
+    if ( !isset( $product_data['content'] ) || !is_array( $product_data['content'] ) ) {
+        return $file_upload_options;
+    }
+    foreach ( $product_data['content'] as $row ) {
+        if ( !isset( $row['columns'] ) || !is_array( $row['columns'] ) ) {
+            continue;
+        }
+        foreach ( $row['columns'] as $column ) {
+            if ( !isset( $column['options'] ) || !is_array( $column['options'] ) ) {
+                continue;
+            }
+            foreach ( $column['options'] as $option ) {
+                if ( !isset( $option['type'], $option['slug'] ) ) {
+                    continue;
+                }
+                // Check if this is a file upload option type
+                if ( in_array( $option['type'], array('file_upload', 'multi_file_upload') ) ) {
+                    $file_upload_options[] = $option['slug'];
+                    uni_cpo_log_cloud_operation( "Found file upload option: {$option['slug']} (type: {$option['type']})", 'info' );
+                }
+            }
+        }
+    }
+    return $file_upload_options;
+}
+
+/**
+ * Parse attachment IDs from order meta value
+ * 
+ * @param mixed $value Meta value that may contain attachment IDs
+ * @return array Array of attachment IDs
+ */
+function uni_cpo_parse_attachment_ids(  $value  ) {
+    // Handle single numeric attachment ID
+    if ( is_numeric( $value ) && intval( $value ) > 0 ) {
+        $attachment_id = intval( $value );
+        if ( get_post_type( $attachment_id ) === 'attachment' ) {
+            return array($attachment_id);
+        }
+    }
+    // Handle array of attachment IDs
+    if ( is_array( $value ) ) {
+        $attachment_ids = array();
+        foreach ( $value as $item ) {
+            if ( is_numeric( $item ) && intval( $item ) > 0 ) {
+                $attachment_id = intval( $item );
+                if ( get_post_type( $attachment_id ) === 'attachment' ) {
+                    $attachment_ids[] = $attachment_id;
+                }
+            }
+        }
+        return $attachment_ids;
+    }
+    // Handle JSON-encoded array of attachment IDs
+    if ( is_string( $value ) ) {
+        $decoded = json_decode( $value, true );
+        if ( is_array( $decoded ) ) {
+            return uni_cpo_parse_attachment_ids( $decoded );
+            // Recursive call
+        }
+    }
+    return array();
+}
+
+/**
+ * Check if a meta field contains file upload data (attachment IDs)
+ * 
+ * @param string $key   Meta key
+ * @param mixed  $value Meta value
+ * 
+ * @return bool True if this is a file upload field
+ */
+function uni_cpo_is_file_upload_field(  $key, $value  ) {
+    uni_cpo_log_cloud_operation( "DEBUG: Checking if {$key} is file upload field", 'info' );
+    // Skip non-CPO fields
+    if ( strpos( $key, '_' ) !== 0 ) {
+        uni_cpo_log_cloud_operation( "DEBUG: {$key} doesn't start with underscore, skipping", 'info' );
+        return false;
+    }
+    // Handle single numeric value (attachment ID)
+    if ( is_numeric( $value ) && intval( $value ) > 0 ) {
+        $attachment_id = intval( $value );
+        if ( get_post_type( $attachment_id ) === 'attachment' ) {
+            uni_cpo_log_cloud_operation( "DEBUG: {$key} is single attachment ID: {$attachment_id}", 'info' );
+            return true;
+        } else {
+            uni_cpo_log_cloud_operation( "DEBUG: {$key} value {$value} is numeric but not an attachment", 'info' );
+            return false;
+        }
+    }
+    // Try to decode as JSON array of numbers (attachment IDs)
+    $decoded = ( is_array( $value ) ? $value : json_decode( $value, true ) );
+    if ( !is_array( $decoded ) || empty( $decoded ) ) {
+        uni_cpo_log_cloud_operation( "DEBUG: {$key} value is not array or empty after decoding", 'info' );
+        return false;
+    }
+    uni_cpo_log_cloud_operation( "DEBUG: {$key} decoded as array: " . json_encode( $decoded ), 'info' );
+    // Check if all values are numeric (attachment IDs)
+    foreach ( $decoded as $item ) {
+        if ( !is_numeric( $item ) || intval( $item ) <= 0 ) {
+            uni_cpo_log_cloud_operation( "DEBUG: {$key} contains non-numeric or invalid item: {$item}", 'info' );
+            return false;
+        }
+    }
+    // Verify these are actual attachment IDs
+    foreach ( $decoded as $attachment_id ) {
+        if ( get_post_type( $attachment_id ) !== 'attachment' ) {
+            uni_cpo_log_cloud_operation( "DEBUG: {$key} item {$attachment_id} is not an attachment", 'info' );
+            return false;
+        }
+    }
+    uni_cpo_log_cloud_operation( "DEBUG: {$key} is confirmed as file upload field", 'info' );
+    return true;
+}
+
+/**
+ * Upload attachments to cloud storage and delete local copies
+ * 
+ * @param array                           $attachment_ids Array of attachment IDs
+ * @param int                             $order_id       Order ID
+ * @param Uni_Cpo_Cloud_Storage_Interface $provider      Cloud provider
+ * @param string                          $field_key     Field key for logging
+ * 
+ * @return array Array of cloud URLs
+ */
+function uni_cpo_upload_attachments_to_cloud(
+    $attachment_ids,
+    $order_id,
+    $provider,
+    $field_key
+) {
+    uni_cpo_log_cloud_operation( "Starting upload for field {$field_key} with " . count( $attachment_ids ) . " attachments", 'info' );
+    $cloud_urls = array();
+    foreach ( $attachment_ids as $attachment_id ) {
+        $attachment_id = intval( $attachment_id );
+        uni_cpo_log_cloud_operation( "Processing attachment {$attachment_id}", 'info' );
+        $file_path = get_attached_file( $attachment_id );
+        uni_cpo_log_cloud_operation( "File path for attachment {$attachment_id}: " . (( $file_path ?: 'NULL' )), 'info' );
+        if ( !$file_path || !file_exists( $file_path ) ) {
+            uni_cpo_log_cloud_operation( "ERROR: Local file not found for attachment {$attachment_id} in order {$order_id}", 'error' );
+            $cloud_urls[] = $attachment_id;
+            // Fallback to attachment ID
+            continue;
+        }
+        $file_size = filesize( $file_path );
+        $filename = basename( $file_path );
+        $cloud_path = "/order-{$order_id}/{$filename}";
+        uni_cpo_log_cloud_operation( "File details - Size: {$file_size} bytes, Name: {$filename}, Cloud path: {$cloud_path}", 'info' );
+        // Upload to cloud with retry logic
+        uni_cpo_log_cloud_operation( "Starting cloud upload for {$filename}", 'info' );
+        $upload_result = uni_cpo_upload_with_retry(
+            $provider,
+            $file_path,
+            $cloud_path,
+            2
+        );
+        uni_cpo_log_cloud_operation( "Upload result: " . json_encode( $upload_result ), 'info' );
+        if ( $upload_result['success'] ) {
+            $cloud_urls[] = $upload_result['url'];
+            uni_cpo_log_cloud_operation( "SUCCESS: Uploaded {$filename} to {$upload_result['url']}", 'info' );
+            // Delete local attachment after successful upload
+            uni_cpo_log_cloud_operation( "Deleting local attachment {$attachment_id}", 'info' );
+            $delete_result = wp_delete_attachment( $attachment_id, true );
+            if ( $delete_result ) {
+                uni_cpo_log_cloud_operation( "Successfully uploaded and deleted attachment {$attachment_id} for order {$order_id}", 'info' );
+            } else {
+                uni_cpo_log_cloud_operation( "Uploaded attachment {$attachment_id} but failed to delete local copy for order {$order_id}", 'warning' );
+            }
+        } else {
+            $error_msg = ( isset( $upload_result['error'] ) ? $upload_result['error'] : 'Unknown error' );
+            uni_cpo_log_cloud_operation( "ERROR: Failed to upload attachment {$attachment_id} for order {$order_id}: {$error_msg}", 'error' );
+            $cloud_urls[] = $attachment_id;
+            // Fallback to attachment ID
+        }
+    }
+    uni_cpo_log_cloud_operation( "Completed upload for field {$field_key}. Cloud URLs: " . json_encode( $cloud_urls ), 'info' );
+    return $cloud_urls;
+}
+
+/**
+ * Upload file with retry logic
+ * 
+ * @param Uni_Cpo_Cloud_Storage_Interface $provider   Cloud provider
+ * @param string                          $file_path   Local file path
+ * @param string                          $cloud_path  Cloud destination path
+ * @param int                             $max_retries Maximum retry attempts
+ * 
+ * @return array Upload result
+ */
+function uni_cpo_upload_with_retry(
+    $provider,
+    $file_path,
+    $cloud_path,
+    $max_retries = 2
+) {
+    $attempt = 1;
+    $last_result = null;
+    while ( $attempt <= $max_retries ) {
+        $result = $provider->upload_file( $file_path, $cloud_path );
+        if ( $result['success'] ) {
+            if ( $attempt > 1 ) {
+                uni_cpo_log_cloud_operation( "Upload succeeded on attempt {$attempt} for {$cloud_path}", 'info' );
+            }
+            return $result;
+        }
+        $last_result = $result;
+        uni_cpo_log_cloud_operation( "Upload attempt {$attempt} failed for {$cloud_path}: {$result['error']}", 'warning' );
+        $attempt++;
+        if ( $attempt <= $max_retries ) {
+            sleep( 1 );
+            // Brief delay before retry
+        }
+    }
+    return $last_result;
+}
+
+/**
+ * Log cloud storage operations
+ * 
+ * @param string $message Log message
+ * @param string $level   Log level (info, warning, error)
+ */
+function uni_cpo_log_cloud_operation(  $message, $level = 'info'  ) {
+    if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+        error_log( sprintf( '[Uni CPO Cloud Storage] [%s] %s', strtoupper( $level ), $message ) );
     }
 }
 

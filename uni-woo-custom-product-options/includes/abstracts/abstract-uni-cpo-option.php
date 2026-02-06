@@ -301,9 +301,9 @@ class Uni_Cpo_Option extends Uni_Cpo_Data {
             $condition = uni_cpo_option_js_condition_prepare( $scheme );
             $slide_down = '$' . esc_attr( $slug ) . '.slideDown(300, function(){ window.UniCpo.position($' . esc_attr( $slug ) . '); if ("' . esc_attr( $data['type'] ) . '" === "file_upload" ) { var id = $' . esc_attr( $slug ) . '.find(".js-uni-cpo-field-file_upload-el").attr("id"); window.UniCpo.fileUploadEl[id].refresh(); } }).addClass("cpo-visible-field");' . "\n";
             $slide_up = '$' . esc_attr( $slug ) . '.slideUp(300).removeClass("cpo-visible-field");' . "\n";
-            $fade_in = '$("#imagify-layer-' . esc_attr( $slug ) . '").removeClass("uni-cpo-excluded-img").fadeTo(300, 1);' . "\n";
+            $fade_in = 'if ($("#' . esc_attr( $slug ) . ' input:checked").length > 0) { $("#imagify-layer-' . esc_attr( $slug ) . '").removeClass("uni-cpo-excluded-img").fadeTo(300, 1); }' . "\n";
             $fade_out = '$("#imagify-layer-' . esc_attr( $slug ) . '").addClass("uni-cpo-excluded-img").fadeTo(300, 0);' . "\n";
-            $fade_to_1 = '$("#palette-layer-' . esc_attr( $slug ) . '").removeClass("uni-cpo-excluded-img").fadeTo(300, 1);' . "\n";
+            $fade_to_1 = 'if ($("#' . esc_attr( $slug ) . ' input:checked").length > 0) { $("#palette-layer-' . esc_attr( $slug ) . '").removeClass("uni-cpo-excluded-img").fadeTo(300, 1); }' . "\n";
             $fade_to_0 = '$("#palette-layer-' . esc_attr( $slug ) . '").addClass("uni-cpo-excluded-img").fadeTo(300, 0);' . "\n";
             $add_class = '$' . esc_attr( $slug ) . '_fields.each(function( index ) {' . "\n";
             $add_class .= '$(this).addClass( extraClass );' . "\n";
@@ -336,6 +336,7 @@ class Uni_Cpo_Option extends Uni_Cpo_Data {
                 $final_statement .= $remove_class;
             }
             $final_statement .= '}' . "\n";
+            $final_statement .= 'if (window.UniCpo.isImagify) { window.UniCpo.combineImg(); }' . "\n";
             ?>
 			<script>
                 jQuery(document).ready(function($) {
@@ -403,8 +404,12 @@ class Uni_Cpo_Option extends Uni_Cpo_Data {
     public static function get_custom_attribute_html( $attributes = array() ) {
         $custom_attributes = array();
         if ( !empty( $attributes ) && is_array( $attributes ) ) {
+            // Apply filter to allow modification/merging of attributes before processing
+            $attributes = apply_filters( 'uni_cpo_custom_attributes', $attributes );
+            // Build attributes array using keys to ensure uniqueness
+            // Later attributes with same key will overwrite earlier ones
             foreach ( $attributes as $attribute => $attribute_value ) {
-                $custom_attributes[] = esc_attr( $attribute ) . '="' . esc_attr( $attribute_value ) . '"';
+                $custom_attributes[$attribute] = esc_attr( $attribute ) . '="' . esc_attr( $attribute_value ) . '"';
             }
         }
         return implode( ' ', $custom_attributes );

@@ -1,11 +1,11 @@
 === Product Options and Price Calculation Formulas for WooCommerce – Uni CPO ===
-Contributors: moomooagency, mrpsiho, andriimatenka
+Contributors: moomooagency, mrpsiho, andriimatenka, freemius
 Tags: custom options, extra options, product visual builder, woocommerce plugins, price calculation, maths formula, conditional logic, wholesale
 Requires at least: 5.6
-Tested up to: 6.6
-Requires PHP: 7.4
-WC requires at least: 8.1.0
-WC tested up to: 9.4.3
+Tested up to: 6.9
+Requires PHP: 8.2
+WC requires at least: 9.3.0
+WC tested up to: 10.4.3
 Stable tag: trunk
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -24,7 +24,7 @@ Uni CPO stands out with its solid architecture, ensuring extensibility and depen
 
 Uni CPO is the premier modern free WooCommerce Product Addons alternative, offering unique features not found in other similar plugins. Experience unparalleled flexibility and reliability with Uni CPO!
 
-[Demo >>](https://cpo.builderius.io/) | [Documentation >>](https://kb.moomoo.agency/)
+[Demo >>](https://cpo.moomoo.agency/) | [Documentation >>](https://kb.moomoo.agency/)
 
 It takes only 3 minutes to personalize a WC product and implement price calculation based on the extra product options and any maths formula you like:
 [youtube https://www.youtube.com/watch?v=qZHWG9IAD5Q]
@@ -49,18 +49,18 @@ Add extra options to your products, display them conditionally, give a possibili
 
 = Demo and Docs =
 
-[Demo >>](https://cpo.builderius.io/) | [Documentation >>](https://kb.moomoo.agency/)
+[Demo >>](https://cpo.moomoo.agency/) | [Documentation >>](https://kb.moomoo.agency/)
 
 = Demo - Try By Yourself! =
 
-[DEMO site with PRO version installed (unlocked all the features)](https://cpo.builderius.io)
+[DEMO site with PRO version installed (unlocked all the features)](https://cpo.moomoo.agency)
 Use the following credentials to log in and try by yourself:
 * username: `demo`
 * password: `demo`
-[login URL](https://cpo.builderius.io/wp-login.php)
+[login URL](https://cpodemo.moomoo.agency/wp-login.php)
 
-**Pro version of the plugin is [available here](https://builderius.io/cpo)**
-**The official FB group [Builderians](https://www.facebook.com/groups/builderians/)**
+**Pro version of the plugin is [available here](https://moomoo.agency/cpo)**
+**The official FB group [Uni CPO Custom Product Options for WooCommerce](https://www.facebook.com/groups/fooorms)**
 
 **Uni CPO supports ONLY these product type: 'simple'!** But why you ever need any variable products when this plugin exists, right? :)
 
@@ -70,7 +70,7 @@ Use the following credentials to log in and try by yourself:
 
 * WooCommerce 7.1+
 * WordPress 5.9 or greater
-* PHP version 7.4 or greater
+* PHP version 8.2 or greater
 
 = Automatic installation =
 
@@ -101,6 +101,56 @@ A: Yes, always and ever! Back up your files as well as database. Always test new
 7. screenshot-7.png
 
 == Changelog ==
+
+= 4.9.59 =
+* Improved: fixed PHP warnings and deprecations notices
+* Updated: Freemius SDK
+
+= 4.9.59 =
+* Improved: fixed PHP warnings, better compatibility with PHP 8.2+
+* Improved: cloud uploads processing dependent on order status
+
+= 4.9.58 =
+* Updated: PHP version
+
+= 4.9.57 =
+* Updated: new file upload flow in general
+* Updated: new auth method for Dropbox integration
+* Added: integration with Google Drive
+
+= 4.9.56 =
+* Fixed: a security issue related to file uploads
+* Fixed: a bug related to conditions in HTML attributes
+* Updated: freemius SDK
+
+= 4.9.55 =
+* Fixed: a bug related to file uploads
+
+= 4.9.54 =
+* Added: "Date format" setting for the Datepicker option
+* Improved: "Default (initial) value" setting of the Datepicker option — you can now use the "new Date().fp_incr()"" function to define the default value
+* Fixed: a bug in editor mode related to "Enable Timepicker?" setting of the Datepicker option
+* Checked support for WC 9.9.5
+
+= 4.9.53 =
+* Fixed: compatibility with WooCommerce 9.8.2’s new block-based Cart page
+* Improved: accessibility for options
+
+= 4.9.52 =
+* Fixed: Select option setting "Redirect" was not properly saving
+* Checked support for WC 9.7.1
+
+= 4.9.51 =
+* Added: Radio/Select option now has a new optional setting "Redirect" for their suboptions
+
+= 4.9.50 =
+* Fixed: Imagify functionality bug affecting images in the cart.
+
+= 4.9.49 =
+* Fixed: a bug with shipping rate recalculation after AJAX update in checkout
+
+= 4.9.48 =
+* Fixed: a bug in editor mode related to suboptions selection
 
 = 4.9.47 =
 * Updated: Plugin internal dependencies. No breaking changes, nothing to worry about.

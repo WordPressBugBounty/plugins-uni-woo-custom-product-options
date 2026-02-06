@@ -254,6 +254,7 @@ final class Uni_Cpo_Product
 
                 foreach ($product_data['content'] as $row_key => $row_data) {
                     $row_class = UniCpo()->module_factory::get_classname_from_module_type($row_data['type']);
+                    $row_data = apply_filters('uni_cpo_before_render_builder_module', $row_data, $product_data);
                     call_user_func(array($row_class, 'template'), $row_data, $post_data);
                 }
 
@@ -417,7 +418,23 @@ final class Uni_Cpo_Product
                 $count = count($rules);
                 $final_statement = '';
                 foreach ($rules as $rule) {
-                    $scheme = json_decode($rule['rule'], true);
+                    // Handle both JSON string and already decoded data
+                    if (is_string($rule['rule'])) {
+                        $scheme = json_decode($rule['rule'], true);
+                        // Handle invalid JSON
+                        if (json_last_error() !== JSON_ERROR_NONE) {
+                            continue; // Skip this rule if JSON is invalid
+                        }
+                    } elseif (is_object($rule['rule'])) {
+                        // Already a stdClass, convert to array
+                        $scheme = json_decode(json_encode($rule['rule']), true);
+                    } elseif (is_array($rule['rule'])) {
+                        // Already an array, use as-is
+                        $scheme = $rule['rule'];
+                    } else {
+                        // Unknown format, skip this rule
+                        continue;
+                    }
                     $attach_id = $rule['attach_id'];
                     $replacement_attach_id = $attach_id;
                     $image = wp_get_attachment_image_src($replacement_attach_id, $image_size);
@@ -508,10 +525,26 @@ final class Uni_Cpo_Product
                         <?php
                         $arrFields = [];
                         foreach ($rules as $rule) {
-                            $scheme = json_decode($rule['rule'], true);
-                            $arrRules = json_encode($scheme['rules']);
-                            foreach (json_decode($arrRules, true) as $key => $value) {
-                                $arrFields[] = $value['id'];
+                            // Handle both JSON string and already decoded data
+                            if (is_string($rule['rule'])) {
+                                $scheme = json_decode($rule['rule'], true);
+                            } elseif (is_object($rule['rule'])) {
+                                $scheme = json_decode(json_encode($rule['rule']), true);
+                            } elseif (is_array($rule['rule'])) {
+                                $scheme = $rule['rule'];
+                            } else {
+                                continue;
+                            }
+                            if (is_array($scheme) && isset($scheme['rules']) && is_array($scheme['rules'])) {
+                                $arrRules = json_encode($scheme['rules']);
+                                $decodedRules = json_decode($arrRules, true);
+                                if (is_array($decodedRules)) {
+                                    foreach ($decodedRules as $key => $value) {
+                                        if (isset($value['id'])) {
+                                            $arrFields[] = $value['id'];
+                                        }
+                                    }
+                                }
                             }
                         }
                         $uniqueFields = array_unique($arrFields);

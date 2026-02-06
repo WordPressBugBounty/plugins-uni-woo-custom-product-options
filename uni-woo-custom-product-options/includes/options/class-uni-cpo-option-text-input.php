@@ -646,7 +646,7 @@ class Uni_Cpo_Option_Text_Input extends Uni_Cpo_Option implements Uni_Cpo_Option
 		<?php echo self::get_custom_attribute_html( $wrapper_attributes ); ?>>
 		<?php
 		if ( ! empty( $cpo_general_advanced['cpo_label'] ) ) { ?>
-            <<?php echo esc_attr( $cpo_label_tag ); ?> class="uni-cpo-module-<?php echo esc_attr( $type ); ?>-label <?php if ( $is_required ) { ?> uni_cpo_field_required <?php } ?>">
+            <<?php echo esc_attr( $cpo_label_tag ); ?> for="<?php echo esc_attr( $slug ); ?>-field" class="uni-cpo-module-<?php echo esc_attr( $type ); ?>-label <?php if ( $is_required ) { ?> uni_cpo_field_required <?php } ?>">
 			<?php esc_html_e( uni_cpo_get_proper_option_label_sp( $cpo_general_advanced['cpo_label'] ) ); ?>
 			<?php if ( $is_tooltip && $cpo_general_advanced['cpo_tooltip'] !== '' && $cpo_tooltip_type === 'classic' ) { ?>
                 <span class="uni-cpo-tooltip" data-tip="<?php echo uni_cpo_sanitize_tooltip( $cpo_general_advanced['cpo_tooltip'] ); ?>"></span>

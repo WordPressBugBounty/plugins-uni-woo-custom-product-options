@@ -171,9 +171,26 @@ class Uni_Cpo_Setting_Cpo_Radio_Options extends Uni_Cpo_Setting implements Uni_C
         ) );
         ?>
                                         </div>
-                                        <div class="uni-select-option-content-field-wrapper-item uni-select-option-content-field-wrapper-colour uni-clear">
+                                        <div class="uni-select-option-content-field-wrapper-item uni-clear">
                                         	<label>
 												<?php 
+        echo esc_html__( 'Redirect (optional)', 'uni-cpo' );
+        ?>
+                                            </label>
+                                            <?php 
+        echo $this->generate_text_html( $this->setting_key . '[<%row-count%>][suboption_redirect_uri]', array(
+            'no_init_class' => true,
+        ) );
+        ?>
+                                        </div>
+                                    </div>
+                                    <div class="uni-clear"></div>
+                                    <div class="uni-select-option-content-field-wrapper uni-clear<?php 
+        echo ' uni-premium-content';
+        ?>">
+                                        <div class="uni-select-option-content-field-wrapper-item uni-select-option-content-field-wrapper-colour uni-clear">
+                                            <label>
+                                                <?php 
         echo esc_html__( 'Colour (optional)', 'uni-cpo' );
         ?>
                                             </label>
@@ -184,7 +201,6 @@ class Uni_Cpo_Setting_Cpo_Radio_Options extends Uni_Cpo_Setting implements Uni_C
         ) );
         ?>
                                         </div>
-                                        <div class="uni-clear"></div>
                                         <div class="uni-select-option-content-field-wrapper-item uni-select-option-content-field-wrapper-image uni-clear uni-clear">
                                             <label>
 												<?php 
@@ -235,7 +251,6 @@ class Uni_Cpo_Setting_Cpo_Radio_Options extends Uni_Cpo_Setting implements Uni_C
         ) );
         ?>
                                         </div>
-
                                     </div>
                                 </div>
                                 <div class="uni-select-option-content-field-wrapper uni-select-option-remove-wrapper">
@@ -342,7 +357,6 @@ class Uni_Cpo_Setting_Cpo_Radio_Options extends Uni_Cpo_Setting implements Uni_C
                                     <div class="uni-select-option-content-field-wrapper uni-clear<?php 
         echo ' uni-premium-content';
         ?>">
-
                                         <div class="uni-select-option-content-field-wrapper-item uni-clear">
                                             <label><?php 
         echo esc_html__( 'CSS Class (optional)', 'uni-cpo' );
@@ -363,6 +377,21 @@ class Uni_Cpo_Setting_Cpo_Radio_Options extends Uni_Cpo_Setting implements Uni_C
         ) );
         ?>
                                         </div>
+                                        <div class="uni-select-option-content-field-wrapper-item uni-clear">
+                                            <label><?php 
+        echo esc_html__( 'Redirect (optional)', 'uni-cpo' );
+        ?></label>
+                                            <?php 
+        echo $this->generate_text_html( $this->setting_key . '[{{- i }}][suboption_redirect_uri]', array(
+            'value' => '{{- obj.suboption_redirect_uri }}',
+        ) );
+        ?>
+                                        </div>
+                                    </div>
+                                    <div class="uni-clear"></div>
+                                    <div class="uni-select-option-content-field-wrapper uni-clear<?php 
+        echo ' uni-premium-content';
+        ?>">
                                         <div class="uni-select-option-content-field-wrapper-item uni-select-option-content-field-wrapper-colour uni-clear">
                                         	<label>
 												<?php 
@@ -376,7 +405,6 @@ class Uni_Cpo_Setting_Cpo_Radio_Options extends Uni_Cpo_Setting implements Uni_C
         ) );
         ?>
                                         </div>
-                                        <div class="uni-clear"></div>
                                         <div class="uni-select-option-content-field-wrapper-item uni-select-option-content-field-wrapper-image uni-clear">
                                             <label>
 												<?php 
@@ -427,7 +455,6 @@ class Uni_Cpo_Setting_Cpo_Radio_Options extends Uni_Cpo_Setting implements Uni_C
         ) );
         ?>
                                         </div>
-
                                     </div>
                                 </div>
                                 <div class="uni-select-option-content-field-wrapper uni-select-option-remove-wrapper">

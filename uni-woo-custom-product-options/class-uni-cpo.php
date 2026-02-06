@@ -12,7 +12,7 @@ final class Uni_Cpo {
      *
      * @var string
      */
-    public $version = '4.9.47';
+    public $version = '4.9.60';
 
     /**
      * The single instance of the class.
@@ -170,6 +170,10 @@ final class Uni_Cpo {
      *  Includes
      */
     public function includes() {
+        if ( $this->is_pro() ) {
+            // Initialize composer autoloader
+            $this->init_autoloader();
+        }
         //
         include_once UNI_CPO_ABSPATH . 'includes/abstracts/abstract-uni-cpo-data.php';
         include_once UNI_CPO_ABSPATH . 'includes/abstracts/abstract-uni-cpo-option.php';
@@ -209,6 +213,7 @@ final class Uni_Cpo {
             if ( $this->is_pro() ) {
                 include_once UNI_CPO_ABSPATH . 'includes/options/class-uni-cpo-option-checkbox.php';
                 include_once UNI_CPO_ABSPATH . 'includes/options/class-uni-cpo-option-file-upload.php';
+                include_once UNI_CPO_ABSPATH . 'includes/options/class-uni-cpo-option-multi-file-upload.php';
                 include_once UNI_CPO_ABSPATH . 'includes/options/class-uni-cpo-option-datepicker.php';
                 include_once UNI_CPO_ABSPATH . 'includes/options/class-uni-cpo-option-range-slider.php';
                 include_once UNI_CPO_ABSPATH . 'includes/options/class-uni-cpo-option-dynamic-notice.php';
@@ -321,6 +326,7 @@ final class Uni_Cpo {
             include_once UNI_CPO_ABSPATH . 'includes/settings/class-uni-cpo-setting-cpo-geom-radio.php';
             include_once UNI_CPO_ABSPATH . 'includes/settings/class-uni-cpo-setting-cpo-upload-mode.php';
             include_once UNI_CPO_ABSPATH . 'includes/settings/class-uni-cpo-setting-cpo-max-filesize.php';
+            include_once UNI_CPO_ABSPATH . 'includes/settings/class-uni-cpo-setting-cpo-max-files.php';
             include_once UNI_CPO_ABSPATH . 'includes/settings/class-uni-cpo-setting-cpo-mime-types.php';
             include_once UNI_CPO_ABSPATH . 'includes/settings/class-uni-cpo-setting-cpo-mode-checkbox.php';
             include_once UNI_CPO_ABSPATH . 'includes/settings/class-uni-cpo-setting-cpo-geom-checkbox.php';
@@ -357,6 +363,7 @@ final class Uni_Cpo {
                 include_once UNI_CPO_ABSPATH . 'includes/settings/class-uni-cpo-setting-cpo-disabled-dates.php';
                 include_once UNI_CPO_ABSPATH . 'includes/settings/class-uni-cpo-setting-cpo-date-rules.php';
                 include_once UNI_CPO_ABSPATH . 'includes/settings/class-uni-cpo-setting-cpo-first-day-of-week.php';
+                include_once UNI_CPO_ABSPATH . 'includes/settings/class-uni-cpo-setting-cpo-date-format.php';
                 // range slider
                 include_once UNI_CPO_ABSPATH . 'includes/settings/class-uni-cpo-setting-cpo-range-type.php';
                 include_once UNI_CPO_ABSPATH . 'includes/settings/class-uni-cpo-setting-cpo-range-grid.php';
@@ -419,6 +426,15 @@ final class Uni_Cpo {
         $this->module_factory = new Uni_Cpo_Module_Factory();
         $this->settings_scheme = new Uni_Cpo_Plugin_Settings(__FILE__);
         add_action( 'admin_enqueue_scripts', array($this, 'admin_scripts'), 10 );
+        // Dropbox OAuth actions
+        add_action( 'admin_post_uni_cpo_dropbox_auth', array($this, 'handle_dropbox_auth') );
+        add_action( 'admin_post_uni_cpo_dropbox_callback', array($this, 'handle_dropbox_callback') );
+        add_action( 'admin_post_uni_cpo_dropbox_revoke', array($this, 'handle_dropbox_revoke') );
+        // Google Drive OAuth actions
+        add_action( 'admin_post_uni_cpo_gdrive_authorize', array($this, 'handle_gdrive_authorize') );
+        add_action( 'admin_post_uni_cpo_gdrive_revoke', array($this, 'handle_gdrive_revoke') );
+        // Google Drive OAuth callback (handled in admin page)
+        add_action( 'admin_init', array($this, 'handle_gdrive_callback') );
         // Init action.
         do_action( 'uni_cpo_init' );
         if ( isset( $_GET['order_again'] ) ) {
@@ -669,7 +685,8 @@ final class Uni_Cpo {
             'file_storage'                 => 'local',
             'custom_path_enable'           => '',
             'custom_path'                  => '',
-            'dropbox_token'                => '',
+            'dropbox_app_key'              => '',
+            'dropbox_app_secret'           => '',
             'free_sample_enable'           => '',
             'free_samples_limit'           => '',
         );
@@ -680,6 +697,10 @@ final class Uni_Cpo {
      */
     function get_settings() {
         $settings = get_option( 'uni_cpo_settings_general', $this->default_settings() );
+        // Ensure $settings is an array to prevent array_merge() errors
+        if ( !is_array( $settings ) ) {
+            $settings = $this->default_settings();
+        }
         return array_merge( $this->default_settings(), $settings );
     }
 
@@ -716,6 +737,362 @@ final class Uni_Cpo {
      * cpo_activation()
      */
     public function activation( $plugin ) {
+    }
+
+    /**
+     * Initialize composer autoloader for dependencies
+     */
+    private function init_autoloader() {
+        static $autoloader_loaded = false;
+        if ( !$autoloader_loaded ) {
+            $autoloader_path = UNI_CPO_ABSPATH . 'vendor/autoload.php';
+            if ( file_exists( $autoloader_path ) ) {
+                require_once $autoloader_path;
+                $autoloader_loaded = true;
+                if ( function_exists( 'uni_cpo_log_cloud_operation' ) ) {
+                    uni_cpo_log_cloud_operation( "Composer autoloader loaded successfully from: {$autoloader_path}", 'info' );
+                }
+            } else {
+                if ( function_exists( 'uni_cpo_log_cloud_operation' ) ) {
+                    uni_cpo_log_cloud_operation( "Composer autoloader not found at: {$autoloader_path}. Please run composer install.", 'error' );
+                }
+                error_log( "Uni CPO: Composer autoloader not found at: {$autoloader_path}" );
+            }
+        }
+    }
+
+    /**
+     * Load composer dependencies (backward compatibility method)
+     */
+    private function load_dropbox_sdk() {
+        $this->init_autoloader();
+    }
+
+    /**
+     * Handle Dropbox authorization redirect
+     */
+    public function handle_dropbox_auth() {
+        if ( $this->is_pro() ) {
+            // Check if user can manage options
+            if ( !current_user_can( 'manage_options' ) ) {
+                wp_die( __( 'Unauthorized', 'uni-cpo' ) );
+            }
+            $settings = $this->get_settings();
+            $app_key = ( isset( $settings['dropbox_app_key'] ) ? $settings['dropbox_app_key'] : '' );
+            $app_secret = ( isset( $settings['dropbox_app_secret'] ) ? $settings['dropbox_app_secret'] : '' );
+            if ( empty( $app_key ) || empty( $app_secret ) ) {
+                wp_redirect( admin_url( 'admin.php?page=uni-cpo-settings&error=missing_credentials' ) );
+                exit;
+            }
+            try {
+                // Include the new Dropbox SDK and all required dependencies
+                $this->load_dropbox_sdk();
+                // Include our custom WordPress-compatible persistent data store
+                require_once UNI_CPO_ABSPATH . 'includes/cloud-storage/class-uni-cpo-wordpress-persistent-data-store.php';
+                // Create Dropbox app instance with custom persistent data store
+                $app = new \Kunnu\Dropbox\DropboxApp($app_key, $app_secret);
+                $persistentDataStore = new Uni_Cpo_WordPress_Persistent_Data_Store();
+                $config = [
+                    'persistent_data_store' => $persistentDataStore,
+                ];
+                $dropbox = new \Kunnu\Dropbox\Dropbox($app, $config);
+                $authHelper = $dropbox->getAuthHelper();
+                // Get authorization URL (CSRF token will be auto-generated and stored by the SDK)
+                $redirectUri = admin_url( 'admin-post.php?action=uni_cpo_dropbox_callback' );
+                $authUrl = $authHelper->getAuthUrl(
+                    $redirectUri,
+                    [],
+                    null,
+                    'offline'
+                );
+                // Redirect to Dropbox authorization
+                wp_redirect( $authUrl );
+                exit;
+            } catch ( Exception $e ) {
+                wp_redirect( admin_url( 'admin.php?page=uni-cpo-settings&error=' . urlencode( $e->getMessage() ) ) );
+                exit;
+            }
+        }
+    }
+
+    /**
+     * Handle Dropbox OAuth callback
+     */
+    public function handle_dropbox_callback() {
+        if ( $this->is_pro() ) {
+            // Check if user can manage options
+            if ( !current_user_can( 'manage_options' ) ) {
+                wp_die( __( 'Unauthorized', 'uni-cpo' ) );
+            }
+            $code = ( isset( $_GET['code'] ) ? $_GET['code'] : '' );
+            $state = ( isset( $_GET['state'] ) ? $_GET['state'] : '' );
+            if ( empty( $code ) ) {
+                wp_redirect( admin_url( 'admin.php?page=uni-cpo-settings&error=no_code' ) );
+                exit;
+            }
+            $settings = $this->get_settings();
+            $app_key = ( isset( $settings['dropbox_app_key'] ) ? $settings['dropbox_app_key'] : '' );
+            $app_secret = ( isset( $settings['dropbox_app_secret'] ) ? $settings['dropbox_app_secret'] : '' );
+            try {
+                // Include the new Dropbox SDK and all required dependencies
+                $this->load_dropbox_sdk();
+                // Include our custom WordPress-compatible persistent data store
+                require_once UNI_CPO_ABSPATH . 'includes/cloud-storage/class-uni-cpo-wordpress-persistent-data-store.php';
+                // Create Dropbox app instance with the same persistent data store
+                $app = new \Kunnu\Dropbox\DropboxApp($app_key, $app_secret);
+                $persistentDataStore = new Uni_Cpo_WordPress_Persistent_Data_Store();
+                $config = [
+                    'persistent_data_store' => $persistentDataStore,
+                ];
+                $dropbox = new \Kunnu\Dropbox\Dropbox($app, $config);
+                $authHelper = $dropbox->getAuthHelper();
+                // Get access token (CSRF token validation will happen automatically)
+                $redirectUri = admin_url( 'admin-post.php?action=uni_cpo_dropbox_callback' );
+                $accessToken = $authHelper->getAccessToken( $code, $state, $redirectUri );
+                // Store tokens
+                update_option( 'uni_cpo_dropbox_access_token', $accessToken->getToken() );
+                update_option( 'uni_cpo_dropbox_refresh_token', $accessToken->getRefreshToken() );
+                update_option( 'uni_cpo_dropbox_expires_at', time() + $accessToken->getExpiryTime() );
+                update_option( 'uni_cpo_dropbox_account_id', $accessToken->getAccountId() );
+                wp_redirect( admin_url( 'admin.php?page=uni-cpo-settings&success=authorized' ) );
+                exit;
+            } catch ( Exception $e ) {
+                wp_redirect( admin_url( 'admin.php?page=uni-cpo-settings&error=' . urlencode( $e->getMessage() ) ) );
+                exit;
+            }
+        }
+    }
+
+    /**
+     * Handle Dropbox authorization revocation
+     */
+    public function handle_dropbox_revoke() {
+        // Check if user can manage options
+        if ( !current_user_can( 'manage_options' ) ) {
+            wp_die( __( 'Unauthorized', 'uni-cpo' ) );
+        }
+        try {
+            $settings = $this->get_settings();
+            $app_key = ( isset( $settings['dropbox_app_key'] ) ? $settings['dropbox_app_key'] : '' );
+            $app_secret = ( isset( $settings['dropbox_app_secret'] ) ? $settings['dropbox_app_secret'] : '' );
+            $access_token = get_option( 'uni_cpo_dropbox_access_token', '' );
+            if ( !empty( $app_key ) && !empty( $app_secret ) && !empty( $access_token ) ) {
+                // Load Dropbox SDK via composer autoloader
+                $this->load_dropbox_sdk();
+                // Create Dropbox app instance
+                $app = new \Kunnu\Dropbox\DropboxApp($app_key, $app_secret, $access_token);
+                $dropbox = new \Kunnu\Dropbox\Dropbox($app);
+                $authHelper = $dropbox->getAuthHelper();
+                // Revoke access token
+                $authHelper->revokeAccessToken();
+            }
+        } catch ( Exception $e ) {
+            // Log the error but don't fail the revocation
+            error_log( 'Dropbox revocation error: ' . $e->getMessage() );
+        }
+        // Clear stored tokens regardless of API call success
+        delete_option( 'uni_cpo_dropbox_access_token' );
+        delete_option( 'uni_cpo_dropbox_refresh_token' );
+        delete_option( 'uni_cpo_dropbox_expires_at' );
+        delete_option( 'uni_cpo_dropbox_account_id' );
+        wp_redirect( admin_url( 'admin.php?page=uni-cpo-settings&success=revoked' ) );
+        exit;
+    }
+
+    /**
+     * Handle Google Drive authorization
+     */
+    public function handle_gdrive_authorize() {
+        if ( $this->is_pro() ) {
+            uni_cpo_log_cloud_operation( "=== GOOGLE DRIVE AUTHORIZATION STARTED ===", 'info' );
+            // Check if user can manage options
+            if ( !current_user_can( 'manage_options' ) ) {
+                uni_cpo_log_cloud_operation( "GOOGLE DRIVE: Authorization denied - user lacks manage_options capability", 'error' );
+                wp_die( __( 'Unauthorized', 'uni-cpo' ) );
+            }
+            // Check if we have the necessary credentials
+            $settings = $this->get_settings();
+            $client_id = ( isset( $settings['gdrive_client_id'] ) ? $settings['gdrive_client_id'] : '' );
+            $client_secret = ( isset( $settings['gdrive_client_secret'] ) ? $settings['gdrive_client_secret'] : '' );
+            uni_cpo_log_cloud_operation( "GOOGLE DRIVE: Client ID configured: " . (( !empty( $client_id ) ? 'YES' : 'NO' )), 'info' );
+            uni_cpo_log_cloud_operation( "GOOGLE DRIVE: Client Secret configured: " . (( !empty( $client_secret ) ? 'YES' : 'NO' )), 'info' );
+            if ( empty( $client_id ) || empty( $client_secret ) ) {
+                uni_cpo_log_cloud_operation( "GOOGLE DRIVE: Missing credentials - redirecting with error", 'error' );
+                wp_redirect( admin_url( 'admin.php?page=uni-cpo-settings&tab=file_uploads&error=gdrive_missing_credentials' ) );
+                exit;
+            }
+            try {
+                // Initialize autoloader
+                $this->init_autoloader();
+                // Check if Google\Auth\OAuth2 class is available
+                if ( !class_exists( 'Google\\Auth\\OAuth2' ) ) {
+                    throw new Exception('Google Auth library is not installed. Please run composer install.');
+                }
+                $redirect_uri = admin_url( 'admin.php?page=uni-cpo-settings&tab=file_uploads&gdrive_callback=1' );
+                uni_cpo_log_cloud_operation( "GOOGLE DRIVE: Redirect URI: " . $redirect_uri, 'info' );
+                // Generate and store state for CSRF protection
+                $state = wp_generate_password( 32, false );
+                set_transient( 'uni_cpo_gdrive_oauth_state', $state, 300 );
+                // 5 minutes
+                uni_cpo_log_cloud_operation( "GOOGLE DRIVE: Generated state token: " . $state, 'info' );
+                uni_cpo_log_cloud_operation( "GOOGLE DRIVE: State token stored in transient (expires in 300 seconds)", 'info' );
+                // Build authorization URL manually
+                $auth_params = [
+                    'client_id'     => $client_id,
+                    'redirect_uri'  => $redirect_uri,
+                    'response_type' => 'code',
+                    'scope'         => 'https://www.googleapis.com/auth/drive.file',
+                    'access_type'   => 'offline',
+                    'prompt'        => 'consent',
+                    'state'         => $state,
+                ];
+                $authUrl = 'https://accounts.google.com/o/oauth2/v2/auth?' . http_build_query( $auth_params );
+                uni_cpo_log_cloud_operation( "GOOGLE DRIVE: Redirecting to Google authorization URL", 'info' );
+                uni_cpo_log_cloud_operation( "GOOGLE DRIVE: Auth URL: " . $authUrl, 'info' );
+                wp_redirect( $authUrl );
+                exit;
+            } catch ( Exception $e ) {
+                wp_redirect( admin_url( 'admin.php?page=uni-cpo-settings&tab=file_uploads&error=' . urlencode( $e->getMessage() ) ) );
+                exit;
+            }
+        }
+    }
+
+    /**
+     * Handle Google Drive OAuth callback
+     */
+    public function handle_gdrive_callback() {
+        if ( $this->is_pro() ) {
+            // Only process on settings page with callback parameter
+            if ( !is_admin() || !isset( $_GET['page'] ) || $_GET['page'] !== 'uni-cpo-settings' || !isset( $_GET['gdrive_callback'] ) ) {
+                return;
+            }
+            uni_cpo_log_cloud_operation( "=== GOOGLE DRIVE CALLBACK RECEIVED ===", 'info' );
+            uni_cpo_log_cloud_operation( "GOOGLE DRIVE CALLBACK: Request URI: " . $_SERVER['REQUEST_URI'], 'info' );
+            // Log all GET parameters (sanitized)
+            $get_params = array_map( 'sanitize_text_field', $_GET );
+            uni_cpo_log_cloud_operation( "GOOGLE DRIVE CALLBACK: GET parameters: " . json_encode( $get_params ), 'info' );
+            // Check if user can manage options
+            if ( !current_user_can( 'manage_options' ) ) {
+                uni_cpo_log_cloud_operation( "GOOGLE DRIVE CALLBACK: Authorization denied - user lacks manage_options capability", 'error' );
+                wp_die( __( 'Unauthorized', 'uni-cpo' ) );
+            }
+            // Check for authorization code
+            if ( !isset( $_GET['code'] ) ) {
+                uni_cpo_log_cloud_operation( "GOOGLE DRIVE CALLBACK: No authorization code received", 'error' );
+                wp_redirect( admin_url( 'admin.php?page=uni-cpo-settings&tab=file_uploads&error=gdrive_no_code' ) );
+                exit;
+            }
+            $code = sanitize_text_field( $_GET['code'] );
+            $state = ( isset( $_GET['state'] ) ? sanitize_text_field( $_GET['state'] ) : '' );
+            uni_cpo_log_cloud_operation( "GOOGLE DRIVE CALLBACK: Authorization code received (length: " . strlen( $code ) . ")", 'info' );
+            uni_cpo_log_cloud_operation( "GOOGLE DRIVE CALLBACK: State from Google: " . $state, 'info' );
+            // Verify CSRF state
+            $stored_state = get_transient( 'uni_cpo_gdrive_oauth_state' );
+            uni_cpo_log_cloud_operation( "GOOGLE DRIVE CALLBACK: Stored state from transient: " . (( $stored_state ? $stored_state : 'NULL/EMPTY' )), 'info' );
+            delete_transient( 'uni_cpo_gdrive_oauth_state' );
+            uni_cpo_log_cloud_operation( "GOOGLE DRIVE CALLBACK: Transient deleted", 'info' );
+            // Detailed state comparison
+            if ( empty( $stored_state ) ) {
+                uni_cpo_log_cloud_operation( "GOOGLE DRIVE CALLBACK: State validation FAILED - stored state is empty (token expired or not found)", 'error' );
+            } elseif ( $stored_state !== $state ) {
+                uni_cpo_log_cloud_operation( "GOOGLE DRIVE CALLBACK: State validation FAILED - states don't match", 'error' );
+                uni_cpo_log_cloud_operation( "GOOGLE DRIVE CALLBACK: Expected: " . $stored_state, 'error' );
+                uni_cpo_log_cloud_operation( "GOOGLE DRIVE CALLBACK: Received: " . $state, 'error' );
+            } else {
+                uni_cpo_log_cloud_operation( "GOOGLE DRIVE CALLBACK: State validation SUCCESS", 'info' );
+            }
+            if ( empty( $stored_state ) || $stored_state !== $state ) {
+                wp_redirect( admin_url( 'admin.php?page=uni-cpo-settings&tab=file_uploads&error=gdrive_invalid_state' ) );
+                exit;
+            }
+            try {
+                uni_cpo_log_cloud_operation( "GOOGLE DRIVE CALLBACK: Starting token exchange", 'info' );
+                $settings = $this->get_settings();
+                $client_id = $settings['gdrive_client_id'];
+                $client_secret = $settings['gdrive_client_secret'];
+                // Initialize autoloader
+                $this->init_autoloader();
+                // Check if Google\Auth\OAuth2 class is available
+                if ( !class_exists( 'Google\\Auth\\OAuth2' ) ) {
+                    throw new Exception('Google Auth library is not installed. Please run composer install.');
+                }
+                $redirect_uri = admin_url( 'admin.php?page=uni-cpo-settings&tab=file_uploads&gdrive_callback=1' );
+                uni_cpo_log_cloud_operation( "GOOGLE DRIVE CALLBACK: Using redirect URI: " . $redirect_uri, 'info' );
+                // Initialize OAuth2 client
+                $oauth2 = new \Google\Auth\OAuth2([
+                    'clientId'           => $client_id,
+                    'clientSecret'       => $client_secret,
+                    'authorizationUri'   => 'https://accounts.google.com/o/oauth2/v2/auth',
+                    'tokenCredentialUri' => 'https://oauth2.googleapis.com/token',
+                    'redirectUri'        => $redirect_uri,
+                    'scope'              => 'https://www.googleapis.com/auth/drive.file',
+                ]);
+                uni_cpo_log_cloud_operation( "GOOGLE DRIVE CALLBACK: Exchanging authorization code for access token", 'info' );
+                // Set authorization code
+                $oauth2->setCode( $code );
+                // Exchange code for access token
+                $token = $oauth2->fetchAuthToken();
+                uni_cpo_log_cloud_operation( "GOOGLE DRIVE CALLBACK: Token response received: " . json_encode( array_keys( $token ) ), 'info' );
+                if ( isset( $token['error'] ) ) {
+                    uni_cpo_log_cloud_operation( "GOOGLE DRIVE CALLBACK: Token exchange error: " . (( isset( $token['error_description'] ) ? $token['error_description'] : $token['error'] )), 'error' );
+                    throw new Exception('Token exchange failed: ' . (( isset( $token['error_description'] ) ? $token['error_description'] : $token['error'] )));
+                }
+                // Add created timestamp
+                $token['created'] = time();
+                // Store tokens
+                uni_cpo_log_cloud_operation( "GOOGLE DRIVE CALLBACK: Storing access token", 'info' );
+                update_option( 'uni_cpo_gdrive_access_token', json_encode( $token ) );
+                if ( isset( $token['refresh_token'] ) ) {
+                    uni_cpo_log_cloud_operation( "GOOGLE DRIVE CALLBACK: Storing refresh token", 'info' );
+                    update_option( 'uni_cpo_gdrive_refresh_token', $token['refresh_token'] );
+                } else {
+                    uni_cpo_log_cloud_operation( "GOOGLE DRIVE CALLBACK: No refresh token in response", 'warning' );
+                }
+                uni_cpo_log_cloud_operation( "GOOGLE DRIVE: OAuth authorization successful", 'info' );
+                wp_redirect( admin_url( 'admin.php?page=uni-cpo-settings&tab=file_uploads&success=gdrive_authorized' ) );
+                exit;
+            } catch ( Exception $e ) {
+                uni_cpo_log_cloud_operation( "GOOGLE DRIVE: OAuth authorization failed: " . $e->getMessage(), 'error' );
+                wp_redirect( admin_url( 'admin.php?page=uni-cpo-settings&tab=file_uploads&error=' . urlencode( $e->getMessage() ) ) );
+                exit;
+            }
+        }
+    }
+
+    /**
+     * Handle Google Drive authorization revocation
+     */
+    public function handle_gdrive_revoke() {
+        // Check if user can manage options
+        if ( !current_user_can( 'manage_options' ) ) {
+            wp_die( __( 'Unauthorized', 'uni-cpo' ) );
+        }
+        try {
+            $access_token = get_option( 'uni_cpo_gdrive_access_token', '' );
+            if ( !empty( $access_token ) ) {
+                $token_data = json_decode( $access_token, true );
+                if ( isset( $token_data['access_token'] ) ) {
+                    // Revoke token with Google using direct HTTP request
+                    $revoke_url = 'https://oauth2.googleapis.com/revoke?token=' . urlencode( $token_data['access_token'] );
+                    $response = wp_remote_post( $revoke_url );
+                    if ( !is_wp_error( $response ) ) {
+                        uni_cpo_log_cloud_operation( "GOOGLE DRIVE: OAuth token revoked with Google", 'info' );
+                    } else {
+                        uni_cpo_log_cloud_operation( "GOOGLE DRIVE: Token revocation request failed: " . $response->get_error_message(), 'warning' );
+                    }
+                }
+            }
+        } catch ( Exception $e ) {
+            uni_cpo_log_cloud_operation( "GOOGLE DRIVE: Token revocation failed: " . $e->getMessage(), 'warning' );
+        }
+        // Clear stored tokens regardless of revocation success
+        delete_option( 'uni_cpo_gdrive_access_token' );
+        delete_option( 'uni_cpo_gdrive_refresh_token' );
+        delete_option( 'uni_cpo_gdrive_upload_folder_id' );
+        uni_cpo_log_cloud_operation( "GOOGLE DRIVE: OAuth tokens cleared locally", 'info' );
+        wp_redirect( admin_url( 'admin.php?page=uni-cpo-settings&tab=file_uploads&success=gdrive_revoked' ) );
+        exit;
     }
 
 }

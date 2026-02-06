@@ -187,12 +187,68 @@ function uni_cpo_order_formatted_meta_data(  $formatted_meta, $item  ) {
                                         $display_value = implode( ', ', $v['order_meta'] );
                                     } else {
                                         if ( 'file_upload' === $option_type && !empty( $v['cart_meta'] ) ) {
-                                            $attachment_url = get_attachment_link( $v['cart_meta'] );
-                                            $file_name = $v['order_meta'];
-                                            if ( !empty( $attachment_url ) ) {
-                                                $display_value = "<a href='{$attachment_url}' target='_blank'>{$file_name}</a>";
+                                            // Check if cart_meta is a cloud URL (starts with / or contains path) or attachment ID
+                                            if ( is_numeric( $v['cart_meta'] ) && !strpos( $v['cart_meta'], '/' ) ) {
+                                                // Still an attachment ID - get WordPress attachment link
+                                                $attachment_url = get_attachment_link( $v['cart_meta'] );
+                                                $file_name = $v['order_meta'];
+                                                if ( !empty( $attachment_url ) ) {
+                                                    $display_value = "<a href='{$attachment_url}' target='_blank'>{$file_name}</a>";
+                                                } else {
+                                                    $display_value = esc_html__( $v['order_meta'] );
+                                                }
                                             } else {
-                                                $display_value = esc_html__( $v['order_meta'] );
+                                                // Cloud URL - create clickable link
+                                                $file_name = $v['order_meta'];
+                                                $cloud_url = $v['cart_meta'];
+                                                $display_value = "<a href='" . esc_url( $cloud_url ) . "' target='_blank'>" . esc_html( $file_name ) . "</a> (stored in cloud)";
+                                            }
+                                        } elseif ( 'multi_file_upload' === $option_type && !empty( $v['cart_meta'] ) ) {
+                                            // Parse value - could be string "[77,78]" or array
+                                            $file_items = ( is_array( $v['cart_meta'] ) ? $v['cart_meta'] : json_decode( $v['cart_meta'] ) );
+                                            if ( is_array( $file_items ) && !empty( $file_items ) ) {
+                                                $links = array();
+                                                // Parse order_meta for filenames (could be string or array)
+                                                $file_names = ( is_array( $v['order_meta'] ) ? $v['order_meta'] : json_decode( $v['order_meta'] ) );
+                                                if ( !is_array( $file_names ) ) {
+                                                    $file_names = array($v['order_meta']);
+                                                }
+                                                foreach ( $file_items as $index => $file_item ) {
+                                                    // Get corresponding filename from order_meta
+                                                    $file_name = ( isset( $file_names[$index] ) ? $file_names[$index] : '' );
+                                                    // If filename is empty or just 'file', try to extract from URL or use better default
+                                                    if ( empty( $file_name ) || $file_name === 'file' ) {
+                                                        if ( is_string( $file_item ) && strpos( $file_item, 'drive.google.com' ) !== false ) {
+                                                            $file_name = 'Download file ' . ($index + 1);
+                                                        } elseif ( is_string( $file_item ) && strpos( $file_item, 'dropbox.com' ) !== false ) {
+                                                            $file_name = 'Download file ' . ($index + 1);
+                                                        } else {
+                                                            $file_name = 'File ' . ($index + 1);
+                                                        }
+                                                    }
+                                                    // Check if this is a cloud URL or attachment ID
+                                                    if ( is_numeric( $file_item ) && !strpos( $file_item, '/' ) ) {
+                                                        // Still an attachment ID - get WordPress attachment
+                                                        $attachment_id = absint( $file_item );
+                                                        if ( get_post( $attachment_id ) && get_post_type( $attachment_id ) === 'attachment' ) {
+                                                            $file_url = wp_get_attachment_url( $attachment_id );
+                                                            $file_name_from_attachment = basename( get_attached_file( $attachment_id ) );
+                                                            if ( $file_url ) {
+                                                                if ( is_admin() ) {
+                                                                    $admin_url = admin_url( 'upload.php?item=' . $attachment_id );
+                                                                    $admin_link = "<a href='{$admin_url}' target='_blank'>attachment #{$attachment_id}</a>";
+                                                                    $links[] = "<a href='{$file_url}' target='_blank'>{$file_name_from_attachment}</a>" . ' (' . $admin_link . ')';
+                                                                } else {
+                                                                    $links[] = "<a href='{$file_url}' target='_blank'>{$file_name_from_attachment}</a>";
+                                                                }
+                                                            }
+                                                        }
+                                                    } else {
+                                                        // Cloud URL - create clickable link
+                                                        $links[] = "<a href='" . esc_url( $file_item ) . "' target='_blank'>" . esc_html( $file_name ) . "</a> (stored in cloud)";
+                                                    }
+                                                }
+                                                $display_value = ( !empty( $links ) ? implode( '<br>', $links ) : esc_html__( $v['order_meta'] ) );
                                             }
                                         } else {
                                             if ( !is_numeric( $v['order_meta'] ) ) {
