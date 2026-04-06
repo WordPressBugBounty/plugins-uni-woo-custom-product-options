@@ -60,6 +60,73 @@ class Uni_Cpo_Ajax {
     }
 
     /**
+     * Get upload session token from cookie if valid.
+     *
+     * @return string|null Token if valid session exists, null otherwise.
+     */
+    private static function get_upload_session_token() {
+        $token = ( isset( $_COOKIE['cpo_upload_session'] ) ? sanitize_text_field( $_COOKIE['cpo_upload_session'] ) : null );
+        if ( $token && get_transient( '_cpo_upload_session_' . $token ) ) {
+            return $token;
+        }
+        return null;
+    }
+
+    /**
+     * Create a new upload session with HttpOnly cookie and transient storage.
+     *
+     * @return string The generated session token.
+     */
+    private static function create_upload_session() {
+        $token = wp_generate_password( 32, false );
+        $session_data = array(
+            'attachment_ids' => array(),
+            'created'        => time(),
+        );
+        set_transient( '_cpo_upload_session_' . $token, $session_data, 24 * HOUR_IN_SECONDS );
+        setcookie( 'cpo_upload_session', $token, array(
+            'expires'  => time() + 24 * 3600,
+            'path'     => '/',
+            'secure'   => is_ssl(),
+            'httponly' => true,
+            'samesite' => 'Strict',
+        ) );
+        return $token;
+    }
+
+    /**
+     * Add an attachment ID to the upload session.
+     *
+     * @param string $token         The session token.
+     * @param int    $attachment_id The attachment ID to add.
+     */
+    private static function add_to_upload_session( $token, $attachment_id ) {
+        $session_data = get_transient( '_cpo_upload_session_' . $token );
+        if ( $session_data ) {
+            $session_data['attachment_ids'][] = $attachment_id;
+            set_transient( '_cpo_upload_session_' . $token, $session_data, 24 * HOUR_IN_SECONDS );
+        }
+    }
+
+    /**
+     * Check if an attachment can be deleted by the current session.
+     *
+     * @param string|null $token         The session token.
+     * @param int         $attachment_id The attachment ID to check.
+     * @return bool True if deletion is allowed, false otherwise.
+     */
+    private static function can_delete_attachment( $token, $attachment_id ) {
+        if ( !$token ) {
+            return false;
+        }
+        $session_data = get_transient( '_cpo_upload_session_' . $token );
+        if ( !$session_data ) {
+            return false;
+        }
+        return in_array( $attachment_id, $session_data['attachment_ids'] );
+    }
+
+    /**
      * Check for CPO Ajax request and fire action.
      */
     public static function do_cpo_ajax() {
@@ -444,7 +511,10 @@ class Uni_Cpo_Ajax {
     }
 
     /**
-     *   uni_cpo_remove_file
+     * Remove an uploaded file with ownership verification.
+     *
+     * Only allows deletion of files that were uploaded in the current session,
+     * verified via server-side session token stored in WordPress transients.
      */
     public static function uni_cpo_remove_file() {
     }

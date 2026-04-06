@@ -102,7 +102,14 @@ A: Yes, always and ever! Back up your files as well as database. Always test new
 
 == Changelog ==
 
-= 4.9.59 =
+= 4.9.62 =
+* Fixed: dynamic notice in block based themes
+* Fixed: deleting files in multi file upload option
+
+= 4.9.61 =
+* Fixed: a bug with file uploads when local (option specific) mime types were ignored during the file validation
+
+= 4.9.60 =
 * Improved: fixed PHP warnings and deprecations notices
 * Updated: Freemius SDK
 

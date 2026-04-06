@@ -364,6 +364,10 @@ function uni_cpo_get_similar_products_ids(  $data  ) {
             'field'    => 'slug',
             'terms'    => 'simple',
         )),
+        'meta_query'     => array(array(
+            'key'   => '_cpo_enable',
+            'value' => 'on',
+        )),
         'posts_per_page' => 500,
         'post__not_in'   => ( !empty( $data['pid'] ) ? array($data['pid']) : array() ),
     ));
