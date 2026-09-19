@@ -37,6 +37,101 @@ class Uni_Cpo_Plugin_Settings {
         add_action( 'admin_menu', array($this, 'add_menu_item') );
         // Add settings link to plugins page
         add_filter( 'plugin_action_links_' . plugin_basename( $this->file ), array($this, 'add_settings_link') );
+        // Hide the CraftForms banner for the current user
+        add_action( 'admin_post_uni_cpo_dismiss_cf_banner', array($this, 'dismiss_craftforms_banner') );
+    }
+
+    /**
+     * Hides the CraftForms banner for the current user for 90 days
+     * @return void
+     */
+    public function dismiss_craftforms_banner() {
+        check_admin_referer( 'uni_cpo_dismiss_cf_banner' );
+        if ( current_user_can( 'manage_woocommerce' ) ) {
+            update_user_meta( get_current_user_id(), 'uni_cpo_cf_banner_dismissed', time() );
+        }
+        wp_safe_redirect( admin_url( 'admin.php?page=uni-cpo-settings' ) );
+        exit;
+    }
+
+    /**
+     * A friendly banner that introduces CraftForms
+     * @return string
+     */
+    private function get_craftforms_banner() {
+        $dismissed = (int) get_user_meta( get_current_user_id(), 'uni_cpo_cf_banner_dismissed', true );
+        if ( $dismissed && time() - $dismissed < 90 * DAY_IN_SECONDS ) {
+            return '';
+        }
+        $demo_url = 'https://demo.craftformswp.com/';
+        $dismiss_url = wp_nonce_url( admin_url( 'admin-post.php?action=uni_cpo_dismiss_cf_banner' ), 'uni_cpo_dismiss_cf_banner' );
+        $features = array(
+            __( 'Live price formulas and Smart Variables - no variations needed', 'uni-cpo' ),
+            __( 'Layered image previews and an image cropper with a print-quality check', 'uni-cpo' ),
+            __( 'Bookings and rentals with inventory, Stripe/PayPal and iCal sync', 'uni-cpo' ),
+            __( 'PDF invoices and quotes, branded emails, all built with WordPress blocks', 'uni-cpo' )
+        );
+        ob_start();
+        ?>
+        <style>
+            .uni-cpo-cf-banner{position:relative;display:flex;flex-wrap:wrap;align-items:center;gap:16px 32px;margin:16px 0 20px;padding:20px 48px 20px 24px;background:linear-gradient(120deg,#f4f1ff 0%,#eef6ff 100%);border:1px solid #dcd6f7;border-left:4px solid #6c4bd8;border-radius:6px;}
+            .uni-cpo-cf-banner__text{flex:1 1 420px;min-width:0;}
+            .uni-cpo-cf-banner__eyebrow{margin:0 0 4px;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#6c4bd8;}
+            .uni-cpo-cf-banner h2{margin:0 0 6px;padding:0;font-size:17px;line-height:1.35;color:#1d2327;}
+            .uni-cpo-cf-banner p{margin:0 0 10px;font-size:13px;color:#3c434a;}
+            .uni-cpo-cf-banner ul{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:4px 24px;margin:0;}
+            .uni-cpo-cf-banner li{position:relative;margin:0;padding-left:20px;font-size:13px;color:#1d2327;}
+            .uni-cpo-cf-banner li:before{content:"\2713";position:absolute;left:0;top:0;color:#6c4bd8;font-weight:700;}
+            .uni-cpo-cf-banner__cta{flex:0 0 auto;text-align:center;}
+            .uni-cpo-cf-banner .button-primary{background:#6c4bd8;border-color:#6c4bd8;}
+            .uni-cpo-cf-banner .button-primary:hover,.uni-cpo-cf-banner .button-primary:focus{background:#5a3cc4;border-color:#5a3cc4;}
+            .uni-cpo-cf-banner__note{display:block;margin-top:6px;font-size:12px;color:#646970;}
+            .uni-cpo-cf-banner__dismiss{position:absolute;top:8px;right:8px;width:28px;height:28px;line-height:28px;text-align:center;text-decoration:none;color:#787c82;border-radius:50%;}
+            .uni-cpo-cf-banner__dismiss:hover,.uni-cpo-cf-banner__dismiss:focus{color:#1d2327;background:rgba(0,0,0,.05);}
+        </style>
+        <div class="uni-cpo-cf-banner">
+            <div class="uni-cpo-cf-banner__text">
+                <p class="uni-cpo-cf-banner__eyebrow"><?php 
+        esc_html_e( 'From the makers of Uni CPO', 'uni-cpo' );
+        ?></p>
+                <h2><?php 
+        esc_html_e( 'Meet CraftForms - the next step for your product options', 'uni-cpo' );
+        ?></h2>
+                <p><?php 
+        esc_html_e( 'Everything you like about Uni CPO, rebuilt on WordPress blocks - and it works with or without WooCommerce. Your existing Uni CPO products can be imported.', 'uni-cpo' );
+        ?></p>
+                <ul>
+                    <?php 
+        foreach ( $features as $feature ) {
+            ?>
+                        <li><?php 
+            echo esc_html( $feature );
+            ?></li>
+                    <?php 
+        }
+        ?>
+                </ul>
+            </div>
+            <div class="uni-cpo-cf-banner__cta">
+                <a class="button button-primary button-hero" href="<?php 
+        echo esc_url( $demo_url );
+        ?>" target="_blank" rel="noopener">
+                    <?php 
+        esc_html_e( 'Try the live demo', 'uni-cpo' );
+        ?>
+                </a>
+                <span class="uni-cpo-cf-banner__note"><?php 
+        esc_html_e( 'Your own free sandbox site in seconds', 'uni-cpo' );
+        ?></span>
+            </div>
+            <a class="uni-cpo-cf-banner__dismiss" href="<?php 
+        echo esc_url( $dismiss_url );
+        ?>" aria-label="<?php 
+        esc_attr_e( 'Dismiss', 'uni-cpo' );
+        ?>">&times;</a>
+        </div>
+        <?php 
+        return ob_get_clean();
     }
 
     /**
@@ -556,6 +651,7 @@ class Uni_Cpo_Plugin_Settings {
         // Build page HTML
         $html = '<div class="wrap" id="plugin_settings">' . "\n";
         $html .= '<h1>' . esc_html__( 'Uni CPO Plugin Settings', 'uni-cpo' ) . '</h1>' . "\n";
+        $html .= $this->get_craftforms_banner();
         $html .= '<p class="uni-cpo-setup-actions">
 						<a class="button button-primary button-large" href="' . esc_url( admin_url( 'post-new.php?post_type=product&cpo-tutorial=true' ) ) . '">' . esc_html__( 'Uni CPO product basic setup tutorial', 'uni-cpo' ) . '</a>
 					</p>';

@@ -179,6 +179,8 @@ class Uni_Cpo_Ajax {
             'uni_cpo_prods_data_update'          => false,
             'uni_cpo_bulk_edit'                  => false,
             'uni_cpo_onboarding_import'          => false,
+            'uni_cpo_get_option_products'        => false,
+            'uni_cpo_update_option_in_products'  => false,
         );
         foreach ( $ajax_events as $ajax_event => $priv ) {
             add_action( 'wp_ajax_' . $ajax_event, array(__CLASS__, $ajax_event) );
@@ -497,6 +499,107 @@ class Uni_Cpo_Ajax {
                     'error' => __( 'No modules', 'uni-cpo' ),
                 ) );
             }
+        } catch ( Exception $e ) {
+            wp_send_json_error( array(
+                'error' => $e->getMessage(),
+            ) );
+        }
+    }
+
+    /**
+     *   uni_cpo_get_option_products
+     */
+    public static function uni_cpo_get_option_products() {
+        try {
+            check_ajax_referer( 'uni_cpo_builder', 'security' );
+            if ( !current_user_can( 'edit_products' ) ) {
+                throw new Exception(__( 'Insufficient permissions', 'uni-cpo' ));
+            }
+            $option_id = absint( $_POST['option_id'] );
+            $current_product_id = absint( $_POST['current_product_id'] );
+            if ( !$option_id ) {
+                throw new Exception(__( 'Option ID is not specified', 'uni-cpo' ));
+            }
+            $product_ids = uni_cpo_get_products_by_option_id( $option_id, $current_product_id );
+            wp_send_json_success( $product_ids );
+        } catch ( Exception $e ) {
+            wp_send_json_error( array(
+                'error' => $e->getMessage(),
+            ) );
+        }
+    }
+
+    /**
+     *   uni_cpo_update_option_in_products
+     */
+    public static function uni_cpo_update_option_in_products() {
+        try {
+            check_ajax_referer( 'uni_cpo_builder', 'security' );
+            if ( !current_user_can( 'edit_products' ) ) {
+                throw new Exception(__( 'Insufficient permissions', 'uni-cpo' ));
+            }
+            $option_id = absint( $_POST['option_id'] );
+            $product_ids = ( isset( $_POST['product_ids'] ) ? array_map( 'absint', (array) $_POST['product_ids'] ) : array() );
+            if ( !$option_id ) {
+                throw new Exception(__( 'Option ID is not specified', 'uni-cpo' ));
+            }
+            if ( empty( $product_ids ) ) {
+                throw new Exception(__( 'No product IDs specified', 'uni-cpo' ));
+            }
+            $option = uni_cpo_get_option( $option_id );
+            if ( !$option ) {
+                throw new Exception(__( 'Option not found', 'uni-cpo' ));
+            }
+            $option_data = $option->formatted_model_data();
+            $option_settings = $option_data['settings'];
+            $updated = 0;
+            $failed = 0;
+            foreach ( $product_ids as $product_id ) {
+                $raw = get_post_meta( $product_id, '_cpo_content', true );
+                if ( !$raw ) {
+                    $failed++;
+                    continue;
+                }
+                $content = uni_cpo_decode( $raw );
+                if ( !is_array( $content ) ) {
+                    $failed++;
+                    continue;
+                }
+                $modified = false;
+                foreach ( $content as &$row ) {
+                    if ( empty( $row['columns'] ) || !is_array( $row['columns'] ) ) {
+                        continue;
+                    }
+                    foreach ( $row['columns'] as &$col ) {
+                        if ( empty( $col['modules'] ) || !is_array( $col['modules'] ) ) {
+                            continue;
+                        }
+                        foreach ( $col['modules'] as &$mod ) {
+                            if ( isset( $mod['pid'] ) && (int) $mod['pid'] === $option_id ) {
+                                $mod['settings'] = $option_settings;
+                                $modified = true;
+                            }
+                        }
+                        unset($mod);
+                    }
+                    unset($col);
+                }
+                unset($row);
+                if ( $modified ) {
+                    $result = Uni_Cpo_Product::save_content( $product_id, $content, false );
+                    if ( $result ) {
+                        $updated++;
+                    } else {
+                        $failed++;
+                    }
+                } else {
+                    $updated++;
+                }
+            }
+            wp_send_json_success( array(
+                'updated' => $updated,
+                'failed'  => $failed,
+            ) );
         } catch ( Exception $e ) {
             wp_send_json_error( array(
                 'error' => $e->getMessage(),

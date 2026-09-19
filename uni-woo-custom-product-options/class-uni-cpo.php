@@ -12,7 +12,7 @@ final class Uni_Cpo {
      *
      * @var string
      */
-    public $version = '4.9.62';
+    public $version = '4.9.67';
 
     /**
      * The single instance of the class.
@@ -297,6 +297,7 @@ final class Uni_Cpo {
             include_once UNI_CPO_ABSPATH . 'includes/settings/class-uni-cpo-setting-sync.php';
             include_once UNI_CPO_ABSPATH . 'includes/settings/class-uni-cpo-setting-cpo-slug.php';
             include_once UNI_CPO_ABSPATH . 'includes/settings/class-uni-cpo-setting-cpo-is-required.php';
+            include_once UNI_CPO_ABSPATH . 'includes/settings/class-uni-cpo-setting-cpo-is-searchable.php';
             include_once UNI_CPO_ABSPATH . 'includes/settings/class-uni-cpo-setting-cpo-is-datepicker-disabled.php';
             include_once UNI_CPO_ABSPATH . 'includes/settings/class-uni-cpo-setting-cpo-is-timepicker.php';
             include_once UNI_CPO_ABSPATH . 'includes/settings/class-uni-cpo-setting-cpo-timepicker-type.php';
@@ -548,15 +549,16 @@ final class Uni_Cpo {
                 array('parsleyjs'),
                 '2.8.0'
             );
+            $order_script_deps = array(
+                'wc-admin-order-meta-boxes',
+                'moment',
+                'flatpickr',
+                'parsleyjs'
+            );
             wp_register_script(
                 'uni-cpo-scripts-order',
                 $this->plugin_url() . '/assets/js/admin-order.js',
-                array(
-                    'wc-admin-order-meta-boxes',
-                    'moment',
-                    'flatpickr',
-                    'parsleyjs'
-                ),
+                $order_script_deps,
                 UNI_CPO_VERSION
             );
             wp_enqueue_script( 'uni-cpo-scripts-order' );

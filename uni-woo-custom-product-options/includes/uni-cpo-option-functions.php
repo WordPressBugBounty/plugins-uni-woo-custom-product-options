@@ -178,6 +178,7 @@ function uni_cpo_get_setting_types() {
 		'sync',
 		'cpo_slug',
 		'cpo_is_required',
+		'cpo_is_searchable',
 		'cpo_type',
 		'cpo_min_val',
 		'cpo_max_val',

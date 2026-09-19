@@ -1,11 +1,11 @@
 === Product Options and Price Calculation Formulas for WooCommerce – Uni CPO ===
 Contributors: moomooagency, mrpsiho, andriimatenka, freemius
 Tags: custom options, extra options, product visual builder, woocommerce plugins, price calculation, maths formula, conditional logic, wholesale
-Requires at least: 5.6
-Tested up to: 6.9
+Requires at least: 6.1
+Tested up to: 7.1
 Requires PHP: 8.2
-WC requires at least: 9.3.0
-WC tested up to: 10.4.3
+WC requires at least: 9.6.0
+WC tested up to: 11.1.0
 Stable tag: trunk
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -101,6 +101,19 @@ A: Yes, always and ever! Back up your files as well as database. Always test new
 7. screenshot-7.png
 
 == Changelog ==
+
+= 4.9.67 =
+* Fixed: JS error on price calculation when a Select option has a suboption labelled "0"
+* Fixed: JS error when image changing is enabled but none of the options has images
+
+= 4.9.66 =
+* Added: new "Searchable?" setting for the Select option (PRO) - turns the dropdown into one with a search field, so customers can filter through a long list of suboptions.
+* Updated: Freemius SDK to 2.13.4
+
+= 4.9.63 =
+* Fixed: zoom for images
+* Fixed: using custom option as qty field
+* Added: new functionality "Update All" - updates all instances of this option in all products
 
 = 4.9.62 =
 * Fixed: dynamic notice in block based themes

@@ -89,6 +89,17 @@ class Uni_Cpo_Setting_Sync extends Uni_Cpo_Setting implements Uni_Cpo_Setting_In
                                 class="uni-btn-1 uni-save-data"><?php esc_attr_e( 'Submit', 'uni-cpo' ) ?></button>
                     </div>
                 </div>
+				{{ if (parseInt(data.pid) > 0) { }}
+                <div class="uni-update-all-wrap">
+                    <button
+                            id="js-update-all-sync"
+                            type="button"
+                            class="uni-btn-1 uni-update-all-btn">
+                        <?php esc_html_e( 'Update All', 'uni-cpo' ) ?>
+                    </button>
+                    <span class="uni-update-all-status"></span>
+                </div>
+				{{ } }}
                 {{ } }}
             </div>
         </script>

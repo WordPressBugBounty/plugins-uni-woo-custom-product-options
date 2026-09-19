@@ -376,6 +376,13 @@ class Uni_Cpo_Frontend_Scripts {
         wp_enqueue_script( $handle );
     }
 
+    private static function declare_tom_select_dependency( $handle ) {
+        $script = wp_scripts()->query( $handle, 'registered' );
+        if ( $script && !in_array( 'tom-select', $script->deps, true ) ) {
+            $script->deps[] = 'tom-select';
+        }
+    }
+
     /**
      * Register a style for use.
      *
@@ -555,6 +562,13 @@ class Uni_Cpo_Frontend_Scripts {
             $vendors_path . 'range-slider/ion.rangeSlider.min.js',
             array('jquery'),
             '2.2.0'
+        );
+        // Standalone UMD global (window.TomSelect), no jQuery dependency on purpose.
+        self::register_script(
+            'tom-select',
+            $vendors_path . 'tom-select/tom-select.complete.min.js',
+            array(),
+            '2.4.3'
         );
         self::register_script(
             'uni-cpo-utils',
@@ -1018,6 +1032,17 @@ class Uni_Cpo_Frontend_Scripts {
                 'current'       => __( 'Current Color', 'uni-cpo' ),
             );
             wp_localize_script( 'wp-color-picker', 'wpColorPickerL10n', $colorpicker_l10n );
+            if ( unicpo_fs()->can_use_premium_code__premium_only() && uni_cpo_content_has_searchable_select( $product_data['content'] ) ) {
+                self::enqueue_script( 'tom-select' );
+                self::declare_tom_select_dependency( 'uni-cpo-frontend' );
+                self::enqueue_style(
+                    'tom-select',
+                    self::get_asset_url( '/includes/vendors/tom-select/tom-select.min.css' ),
+                    '',
+                    '2.4.3',
+                    'all'
+                );
+            }
             self::enqueue_script( 'uni-cpo-frontend' );
             // generated file with css styles
             self::add_generated_styles();

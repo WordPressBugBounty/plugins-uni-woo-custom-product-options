@@ -378,6 +378,50 @@ function uni_cpo_get_similar_products_ids(  $data  ) {
     }
 }
 
+function uni_cpo_get_products_by_option_id(  $option_id, $exclude_product_id = 0  ) {
+    global $wpdb;
+    $enabled_ids = $wpdb->get_col( "SELECT post_id FROM {$wpdb->postmeta}\n         WHERE meta_key = '_cpo_enable' AND meta_value = 'on'" );
+    if ( empty( $enabled_ids ) ) {
+        return array();
+    }
+    if ( $exclude_product_id ) {
+        $enabled_ids = array_diff( $enabled_ids, array((int) $exclude_product_id) );
+    }
+    if ( empty( $enabled_ids ) ) {
+        return array();
+    }
+    $placeholders = implode( ',', array_fill( 0, count( $enabled_ids ), '%d' ) );
+    $rows = $wpdb->get_results( $wpdb->prepare( "SELECT post_id, meta_value FROM {$wpdb->postmeta}\n             WHERE meta_key = '_cpo_content' AND post_id IN ({$placeholders})", $enabled_ids ) );
+    $affected = array();
+    foreach ( $rows as $row ) {
+        $content = uni_cpo_decode( $row->meta_value );
+        if ( !is_array( $content ) ) {
+            continue;
+        }
+        $found = false;
+        foreach ( $content as $r ) {
+            if ( empty( $r['columns'] ) || !is_array( $r['columns'] ) ) {
+                continue;
+            }
+            foreach ( $r['columns'] as $col ) {
+                if ( empty( $col['modules'] ) || !is_array( $col['modules'] ) ) {
+                    continue;
+                }
+                foreach ( $col['modules'] as $mod ) {
+                    if ( isset( $mod['pid'] ) && (int) $mod['pid'] === (int) $option_id ) {
+                        $found = true;
+                        break 3;
+                    }
+                }
+            }
+        }
+        if ( $found ) {
+            $affected[] = (int) $row->post_id;
+        }
+    }
+    return $affected;
+}
+
 function uni_cpo_get_settings_data_sanitized(  $data_data, $data_name  ) {
     $original_data = $data_data;
     $data_data = uni_cpo_clean( $data_data );
@@ -1080,6 +1124,11 @@ function uni_cpo_before_calculate_totals(  $object  ) {
     if ( method_exists( $object, 'get_cart' ) ) {
         foreach ( $object->get_cart() as $cart_item_key => $values ) {
             $product = $values['data'];
+            // Re-apply CPO price before totals are calculated. WC's check_cart_item_sold_individually()
+            // overwrites cart_contents['data'] with a fresh product object, losing set_price().
+            if ( isset( $values['_cpo_price'] ) ) {
+                $product->set_price( $values['_cpo_price'] );
+            }
             if ( $product->is_type( 'simple' ) && !empty( $object->coupons ) ) {
                 foreach ( $object->coupons as $code => $coupon ) {
                     if ( $coupon->is_valid() && ($coupon->is_valid_for_product( $product, $values ) || $coupon->is_valid_for_cart()) ) {
@@ -1995,6 +2044,38 @@ function uni_cpo_re_add_cpo_item_data(
     return $item_data;
 }
 
+/**
+ *
+ * @param array $content Decoded builder content, as in $product_data['content']
+ *
+ * @return bool
+ */
+function uni_cpo_content_has_searchable_select(  $content  ) {
+    if ( !is_array( $content ) || empty( $content ) ) {
+        return false;
+    }
+    foreach ( $content as $row ) {
+        if ( empty( $row['columns'] ) || !is_array( $row['columns'] ) ) {
+            continue;
+        }
+        foreach ( $row['columns'] as $column ) {
+            if ( empty( $column['modules'] ) || !is_array( $column['modules'] ) ) {
+                continue;
+            }
+            foreach ( $column['modules'] as $module ) {
+                if ( empty( $module['type'] ) || 'select' !== $module['type'] ) {
+                    continue;
+                }
+                $is_searchable = $module['settings']['cpo_general']['main']['cpo_is_searchable'] ?? 'no';
+                if ( 'yes' === $is_searchable ) {
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
+}
+
 //
 function uni_cpo_get_options_data(  $product_id, $variables = [], $formatted_vars = []  ) {
     $product_data = Uni_Cpo_Product::get_product_data_by_id( $product_id );
@@ -2035,9 +2116,10 @@ function uni_cpo_get_options_data(  $product_id, $variables = [], $formatted_var
                                 $is_imagify = ( !empty( $module['settings']['cpo_general']['main']['cpo_is_imagify'] ) && 'yes' === $module['settings']['cpo_general']['main']['cpo_is_imagify'] ? true : false );
                                 if ( !empty( $suboptions ) ) {
                                     foreach ( $suboptions as $suboption ) {
-                                        if ( !empty( $suboption['label'] ) && !empty( $suboption['slug'] ) ) {
+                                        // strict checks, so that "0" is accepted as a valid label/slug
+                                        if ( isset( $suboption['label'], $suboption['slug'] ) && '' !== (string) $suboption['label'] && '' !== (string) $suboption['slug'] ) {
                                             $suboptions_formatted[$suboption['slug']]['label'] = __( $suboption['label'] );
-                                            $suboptions_formatted[$suboption['slug']]['rate'] = floatVal( $suboption['rate'] );
+                                            $suboptions_formatted[$suboption['slug']]['rate'] = floatVal( $suboption['rate'] ?? 0 );
                                             if ( !empty( $suboption['attach_id'] ) || !empty( $suboption['attach_id_r'] ) ) {
                                                 $replacement_attach_id = ( !empty( $suboption['attach_id_r'] ) ? $suboption['attach_id_r'] : $suboption['attach_id'] );
                                                 $replacement_attach_uri = ( !empty( $suboption['attach_uri_r'] ) ? $suboption['attach_uri_r'] : $suboption['attach_uri'] );

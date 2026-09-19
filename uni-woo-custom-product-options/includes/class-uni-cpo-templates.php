@@ -536,6 +536,7 @@ final class Uni_Cpo_Templates {
                                     </p>
                                 </div>
 
+	                            {{ if (typeof data.qty_field !== 'undefined' && data.qty_field !== 'wc') { }}
 	                            <div class="uni-form-row uni-form-row-v2 uni-clear <?php echo uni_cpo_pro_content() ?>">
 		                            <h3>
 			                            <?php esc_html_e( 'Custom quantity field', 'uni-cpo' ) ?>
@@ -575,6 +576,7 @@ final class Uni_Cpo_Templates {
 			                            <?php esc_html_e( 'Uni CPO uses WC original "sold individually" setting for hiding WC qty field only. Still, we need a possibility to restrict adding the same product twice to the cart even for Uni CPO enabled products. This is exactly what this setting does!', 'uni-cpo' ) ?>
 		                            </p>
 	                            </div>
+	                            {{ } }}
                                 <div class="uni-form-row uni-form-row__with-checkbox <?php echo uni_cpo_pro_content() ?>">
                                     <label class="uni-main-feature__checkbox" for="uni-reset_form_btn-checkbox">
                                         <input
