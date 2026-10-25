@@ -169,6 +169,7 @@ class Uni_Cpo_Ajax {
             'uni_cpo_cart_item_edit'             => true,
             'uni_cpo_cart_item_edit_inline'      => true,
             'uni_cpo_cart_item_update_inline'    => true,
+            'uni_cpo_cart_item_validation_attrs' => true,
             'uni_cpo_order_item_edit'            => false,
             'uni_cpo_order_item_update'          => false,
             'uni_cpo_product_settings_export'    => false,
@@ -935,6 +936,15 @@ class Uni_Cpo_Ajax {
      *   uni_cpo_cart_item_update_inline
      */
     public static function uni_cpo_cart_item_update_inline() {
+    }
+
+    /**
+     *   uni_cpo_cart_item_validation_attrs
+     *
+     *   Current validation attributes for the options in the inline edit form; the form
+     *   re-requests them on change, so conditional validation rules follow the edited values.
+     */
+    public static function uni_cpo_cart_item_validation_attrs() {
     }
 
     /**

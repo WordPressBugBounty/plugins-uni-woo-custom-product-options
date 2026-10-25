@@ -1278,6 +1278,8 @@ function uni_cpo_add_cart_item_data(  $cart_item_data, $product_id  ) {
                     }
                 }
             }
+            // must run before pricing; throws Uni_Cpo_Data_Exception which is re-thrown below
+            uni_cpo_validate_cart_item_options( $cart_item_data['_cpo_data'], $product_id );
             if ( true === boolval( $cart_item_data['_cpo_calc_option'] ) ) {
                 if ( !empty( $cart_item_data['_cpo_data'] ) ) {
                     $posts = uni_cpo_get_posts_by_slugs( array_keys( $cart_item_data['_cpo_data'] ) );
@@ -1305,12 +1307,216 @@ function uni_cpo_add_cart_item_data(  $cart_item_data, $product_id  ) {
             $cart_item_data['_cpo_price'] = $price;
         }
         return $cart_item_data;
+    } catch ( Uni_Cpo_Data_Exception $e ) {
+        // let WC_Cart::add_to_cart() catch it, add the notice and refuse the item
+        throw $e;
     } catch ( Exception $e ) {
         if ( $e->getMessage() ) {
             wc_add_notice( $e->getMessage(), 'error' );
         }
         return false;
     }
+}
+
+/**
+ * Loads the options for submitted (non-empty) values and builds the values conditional
+ * validation rules are evaluated against - the same as the frontend's formData.
+ *
+ * @param array $form_data
+ *
+ * @return array|null [submitted values by slug, option objects, formatted vars]
+ */
+function uni_cpo_get_submitted_options_context(  $form_data  ) {
+    if ( empty( $form_data ) || !is_array( $form_data ) ) {
+        return null;
+    }
+    $var_slug = UniCpo()->get_var_slug();
+    $submitted = array_filter( $form_data, function ( $v, $k ) use($var_slug) {
+        return 0 === strpos( $k, $var_slug ) && !is_array( $v ) && '' !== trim( (string) $v );
+    }, ARRAY_FILTER_USE_BOTH );
+    if ( empty( $submitted ) ) {
+        return null;
+    }
+    $posts = uni_cpo_get_posts_by_slugs( array_keys( $submitted ) );
+    if ( empty( $posts ) ) {
+        return null;
+    }
+    $options = array();
+    $formatted_vars = array();
+    foreach ( wp_list_pluck( $posts, 'ID' ) as $post_id ) {
+        $option = uni_cpo_get_option( $post_id );
+        if ( !is_object( $option ) ) {
+            continue;
+        }
+        $options[] = $option;
+        $calculate_result = $option->calculate( $form_data );
+        if ( is_array( $calculate_result ) ) {
+            foreach ( $calculate_result as $slug => $value ) {
+                if ( isset( $value['cart_meta'] ) ) {
+                    $formatted_vars[$slug] = $value['cart_meta'];
+                }
+            }
+        }
+    }
+    return array($submitted, $options, $formatted_vars);
+}
+
+/**
+ * Validation attributes per option for the cart inline edit form, so the form applies the
+ * same (incl. conditional) rules uni_cpo_validate_cart_item_options() enforces on save.
+ *
+ * @param array $form_data
+ *
+ * @return array slug => ['attrs' => current attributes, 'keys' => every attribute any rule can set]
+ */
+function uni_cpo_get_cart_item_validation_attributes(  $form_data  ) {
+    $context = uni_cpo_get_submitted_options_context( $form_data );
+    if ( empty( $context ) ) {
+        return array();
+    }
+    list( , $options, $formatted_vars ) = $context;
+    $result = array();
+    foreach ( $options as $option ) {
+        if ( !method_exists( $option, 'get_server_validation_attributes' ) ) {
+            continue;
+        }
+        $result[$option->get_slug()] = array(
+            'attrs' => $option->get_server_validation_attributes( $formatted_vars ),
+            'keys'  => $option->get_server_validation_attribute_keys(),
+        );
+    }
+    return $result;
+}
+
+/**
+ * Server-side validation of submitted option values against the same constraints
+ * Parsley enforces on the product page (type, min/max, length, conditional validation rules).
+ *
+ * @param array $form_data
+ * @param int $product_id
+ *
+ * @throws Uni_Cpo_Data_Exception
+ */
+function uni_cpo_validate_cart_item_options(  $form_data, $product_id  ) {
+    $context = uni_cpo_get_submitted_options_context( $form_data );
+    if ( empty( $context ) ) {
+        return;
+    }
+    list( $submitted, $options, $formatted_vars ) = $context;
+    $errors = array();
+    foreach ( $options as $option ) {
+        if ( !method_exists( $option, 'get_server_validation_attributes' ) ) {
+            continue;
+        }
+        $slug = $option->get_slug();
+        $attributes = $option->get_server_validation_attributes( $formatted_vars );
+        $error = uni_cpo_validate_value_by_parsley_attributes( trim( (string) $submitted[$slug] ), $attributes, $formatted_vars );
+        if ( '' !== $error ) {
+            $errors[] = sprintf( '%s: %s', uni_cpo_get_proper_option_label_sp( uni_cpo_sanitize_label( $option->cpo_order_label() ) ), $error );
+        }
+    }
+    $errors = apply_filters(
+        'uni_cpo_add_to_cart_validation_errors',
+        $errors,
+        $form_data,
+        $product_id
+    );
+    if ( !empty( $errors ) ) {
+        throw new Uni_Cpo_Data_Exception('cpo_invalid_option_value', implode( '<br>', array_map( 'esc_html', $errors ) ));
+    }
+}
+
+/**
+ * Checks a non-empty value against Parsley attributes (as rendered on the field).
+ * Returns an error message or an empty string. Unknown validators are ignored.
+ *
+ * @param string $value
+ * @param array $attributes
+ * @param array $formatted_vars used to resolve requirements like "formData.uni_cpo_width"
+ *
+ * @return string
+ */
+function uni_cpo_validate_value_by_parsley_attributes(  $value, $attributes, $formatted_vars = array()  ) {
+    $get_requirement = function ( $name ) use($attributes, $formatted_vars) {
+        if ( !isset( $attributes['data-parsley-' . $name] ) || '' === $attributes['data-parsley-' . $name] ) {
+            return null;
+        }
+        $requirement = trim( $attributes['data-parsley-' . $name] );
+        if ( preg_match( '/^formData\\.(\\w+)$/', $requirement, $matches ) ) {
+            $requirement = ( isset( $formatted_vars[$matches[1]] ) ? $formatted_vars[$matches[1]] : null );
+        }
+        return $requirement;
+    };
+    $get_message = function ( $name, $default ) use($attributes) {
+        return ( !empty( $attributes['data-parsley-' . $name . '-message'] ) ? $attributes['data-parsley-' . $name . '-message'] : $default );
+    };
+    $is_number = is_numeric( $value ) && preg_match( '/^-?(\\d*\\.)?\\d+(e[-+]?\\d+)?$/i', $value );
+    $type = $get_requirement( 'type' );
+    $type_patterns = array(
+        'integer'  => '/^-?\\d+$/',
+        'digits'   => '/^\\d+$/',
+        'number'   => '/^-?(\\d*\\.)?\\d+(e[-+]?\\d+)?$/i',
+        'alphanum' => '/^\\w+$/i',
+    );
+    if ( isset( $type_patterns[$type] ) && !preg_match( $type_patterns[$type], $value ) ) {
+        return $get_message( 'type', __( 'This value seems to be invalid.', 'uni-cpo' ) );
+    }
+    // Parsley's step check for type "number": no more decimals than step/base allow, and on the step grid
+    $step = $get_requirement( 'type-step' );
+    if ( 'number' === $type && is_numeric( $step ) && floatval( $step ) > 0 ) {
+        $base = $get_requirement( 'type-base' );
+        $base = ( is_numeric( $base ) ? $base : '0' );
+        $decimals = function ( $n ) {
+            $n = strtolower( (string) $n );
+            $exp = ( false !== strpos( $n, 'e' ) ? intval( substr( $n, strpos( $n, 'e' ) + 1 ) ) : 0 );
+            $mantissa = explode( 'e', $n )[0];
+            $fraction = ( false !== strpos( $mantissa, '.' ) ? strlen( explode( '.', $mantissa )[1] ) : 0 );
+            return max( 0, $fraction - $exp );
+        };
+        $precision = max( $decimals( $step ), $decimals( $base ) );
+        $to_int = function ( $n ) use($precision) {
+            return (int) round( floatval( $n ) * pow( 10, $precision ) );
+        };
+        if ( $decimals( $value ) > $precision || 0 !== ($to_int( $value ) - $to_int( $base )) % $to_int( $step ) ) {
+            return $get_message( 'type', __( 'This value seems to be invalid.', 'uni-cpo' ) );
+        }
+    }
+    $pattern = $get_requirement( 'pattern' );
+    if ( null !== $pattern ) {
+        // JS regex literal "/.../flags" or a bare pattern which Parsley anchors
+        if ( preg_match( '/^\\/(.*)\\/([gimy]*)$/s', $pattern, $matches ) ) {
+            $regex = '~' . str_replace( '~', '\\~', $matches[1] ) . '~' . str_replace( array('g', 'y'), '', $matches[2] );
+        } else {
+            $regex = '~^(?:' . str_replace( '~', '\\~', $pattern ) . ')$~';
+        }
+        // an expression PHP can't compile is skipped rather than rejecting valid input
+        if ( 0 === @preg_match( $regex, $value ) ) {
+            return $get_message( 'pattern', __( 'This value seems to be invalid.', 'uni-cpo' ) );
+        }
+    }
+    $min = $get_requirement( 'min' );
+    if ( is_numeric( $min ) && (!$is_number || floatval( $value ) < floatval( $min )) ) {
+        return $get_message( 'min', sprintf( __( 'This value should be greater than or equal to %s.', 'uni-cpo' ), $min ) );
+    }
+    $max = $get_requirement( 'max' );
+    if ( is_numeric( $max ) && (!$is_number || floatval( $value ) > floatval( $max )) ) {
+        return $get_message( 'max', sprintf( __( 'This value should be lower than or equal to %s.', 'uni-cpo' ), $max ) );
+    }
+    $range = $get_requirement( 'range' );
+    $range = ( null !== $range ? json_decode( $range, true ) : null );
+    if ( is_array( $range ) && 2 === count( $range ) && is_numeric( $range[0] ) && is_numeric( $range[1] ) && (!$is_number || floatval( $value ) < floatval( $range[0] ) || floatval( $value ) > floatval( $range[1] )) ) {
+        return $get_message( 'range', sprintf( __( 'This value should be between %1$s and %2$s.', 'uni-cpo' ), $range[0], $range[1] ) );
+    }
+    $length = mb_strlen( $value );
+    $minlength = $get_requirement( 'minlength' );
+    if ( is_numeric( $minlength ) && $length < intval( $minlength ) ) {
+        return $get_message( 'minlength', sprintf( __( 'This value is too short. It should have %s characters or more.', 'uni-cpo' ), $minlength ) );
+    }
+    $maxlength = $get_requirement( 'maxlength' );
+    if ( is_numeric( $maxlength ) && $length > intval( $maxlength ) ) {
+        return $get_message( 'maxlength', sprintf( __( 'This value is too long. It should have %s characters or fewer.', 'uni-cpo' ), $maxlength ) );
+    }
+    return '';
 }
 
 //
